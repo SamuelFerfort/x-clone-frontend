@@ -1,5 +1,8 @@
 import { useOutletContext } from "react-router-dom";
 import Spinner from "../Components/Spinner";
+import useTitle from "../hooks/useTitle";
+
+
 
 export default function Home() {
   const { posts, isPending, error } = useOutletContext();
@@ -11,6 +14,8 @@ export default function Home() {
       </div>
     );
   }
+
+  useTitle("Home / X")
 
   if (error) {
     return (
