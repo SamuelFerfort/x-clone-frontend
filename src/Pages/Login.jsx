@@ -26,13 +26,15 @@ export default function Login() {
 
     if (!isValid) return setError((prev) => ({ ...prev, ...errors }));
     const credentials = { email, password };
-    try {
-      await login(credentials);
-      navigate("/chats", { replace: true });
-    } catch (err) {
+
+    const result = await login(credentials);
+
+    if (result.success) {
+      return navigate("/home", { replace: true });
+    } else {
       setError((prev) => ({
         ...prev,
-        general: err.message || "Failed to log in. Please try again.",
+        general: result.error || "Failed to log in. Please try again.",
       }));
     }
   }

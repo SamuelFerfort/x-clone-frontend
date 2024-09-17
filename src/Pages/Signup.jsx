@@ -37,10 +37,10 @@ export default function SignUp() {
   const validateForm = () => {
     const newErrors = {};
     if (!formData.username.trim()) newErrors.username = "Username is required";
-    if (!formData.handler.trim()) newErrors.username = "Handler is required";
+    if (!formData.handler.trim()) newErrors.handler = "Handler is required";
 
     if (!formData.handler.startsWith("@"))
-      newErrors.username = "Handler has to start with '@'";
+      newErrors.handler = "Handler has to start with '@'";
 
     if (!formData.email.includes("@"))
       newErrors.email = "Invalid email address";
@@ -76,40 +76,40 @@ export default function SignUp() {
 
         <div className="mb-4 flex gap-10">
           <div className="w-1/2">
-            <label htmlFor="firstName" className="block font-bold text-sm">
-              handler
+            <label htmlFor="handler" className="block font-bold text-sm">
+              Handler
             </label>
             <input
               type="text"
-              name="firstName"
-              id="firstName"
+              name="handler"
+              id="handler"
               placeholder="Bob"
               onChange={handleChange}
-              value={formData.firstName}
+              value={formData.handler}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
-            {errors.firstName && (
+            {errors.handler && (
               <span className="text-red-500 text-xs mb-2 italic">
-                {errors.firstName}
+                {errors.handler}
               </span>
             )}
           </div>
           <div className="w-1/2">
-            <label htmlFor="lastName" className="block font-bold text-sm">
-              username
+            <label htmlFor="username" className="block font-bold text-sm">
+              Username
             </label>
             <input
               type="text"
-              name="lastName"
-              id="lastName"
+              name="username"
+              id="username"
               placeholder="Ross"
               onChange={handleChange}
-              value={formData.lastName}
+              value={formData.username}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
-            {errors.lastName && (
+            {errors.username && (
               <span className="text-red-500 text-xs mb-2 italic">
-                {errors.lastName}
+                {errors.username}
               </span>
             )}
           </div>

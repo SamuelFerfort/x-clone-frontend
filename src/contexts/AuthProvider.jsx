@@ -7,6 +7,7 @@ import {
   useCallback,
 } from "react";
 
+const TOKEN = import.meta.env.VITE_TOKEN;
 const API_URL = import.meta.env.VITE_API_URL;
 
 const AuthContext = createContext(null);
@@ -37,7 +38,7 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
   useEffect(() => {
-    const token = localStorage.getItem("x_token");
+    const token = localStorage.getItem(TOKEN);
     if (token) {
       verifyToken(token);
     } else {
@@ -55,20 +56,26 @@ export const AuthProvider = ({ children }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(credentials),
       });
-      if (!response.ok) throw new Error("Login failed");
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.message || "Login failed");
+      }
       const { token, user } = await response.json();
-      localStorage.setItem("token", token);
+      localStorage.setItem(TOKEN, token);
+      console.log(user)
       setUser(user);
+      return { success: true };
     } catch (error) {
       console.error("Login failed:", error);
       setError(error.message);
+      return { success: false, error: error.message };
     } finally {
       setLoading(false);
     }
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem(TOKEN);
     setUser(null);
   };
 
