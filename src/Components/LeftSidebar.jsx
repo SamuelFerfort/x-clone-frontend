@@ -1,32 +1,62 @@
 import { NavLink } from "react-router-dom";
-
+import { Home, User, Bookmark } from "lucide-react";
+import HomeSVG from "./HomeSVG";
 export default function LeftSidebar() {
   return (
     <aside className="max-w-[600px] w-full bg-black  border-r border-white/20 ">
       <nav>
-        <ul className="text-white flex flex-col  my-16 ml-96  text-xl space-y-4 ">
+        <ul className="text-white flex flex-col  mt-16 ml-[350px]  text-xl space-y-8 ">
           <li className=" ">
             <NavLink
-              className={({ isActive }) => (isActive ? "font-bold" : "")}
-              to={"/home"}
+              className={({ isActive }) =>
+                `flex items-center space-x-4 ${isActive ? "font-bold" : ""}`
+              }
+              to="/home"
             >
-              Home
+              {({ isActive }) => (
+                <>
+                  <HomeSVG
+                    size={28}
+                    color={isActive ? "white" : "black"}
+                    isActive={isActive}
+  
+                  />
+                  <span>Home</span>
+                </>
+              )}
             </NavLink>
           </li>
           <li>
             <NavLink
-              className={({ isActive }) => (isActive ? "font-bold" : "")}
-              to={"/profile"}
+              className={({ isActive }) =>
+                `flex items-center space-x-4 ${isActive ? "font-bold" : ""}`
+              }
+              to="/profile"
             >
-              Profile
+              {({ isActive }) => (
+                <>
+                  <User className={isActive ? "fill-white" : ""} size={28} />
+                  <span>Profile</span>
+                </>
+              )}
             </NavLink>
           </li>
           <li>
             <NavLink
-              className={({ isActive }) => (isActive ? "font-bold" : "")}
-              to={"/bookmarks"}
+              className={({ isActive }) =>
+                `flex items-center space-x-4 ${isActive ? "font-bold" : ""}`
+              }
+              to="/bookmarks"
             >
-              Bookmarks
+              {({ isActive }) => (
+                <>
+                  <Bookmark
+                    className={isActive ? "fill-white" : ""}
+                    size={28}
+                  />
+                  <span>Bookmarks</span>
+                </>
+              )}
             </NavLink>
           </li>
         </ul>

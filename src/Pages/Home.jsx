@@ -2,10 +2,9 @@ import { useOutletContext } from "react-router-dom";
 import Spinner from "../Components/Spinner";
 import useTitle from "../hooks/useTitle";
 
-
-
 export default function Home() {
   const { posts, isPending, error } = useOutletContext();
+  useTitle("Home / X");
 
   if (isPending) {
     return (
@@ -15,8 +14,6 @@ export default function Home() {
     );
   }
 
-  useTitle("Home / X")
-
   if (error) {
     return (
       <div className="flex justify-center pt-20 text-white">
@@ -25,9 +22,5 @@ export default function Home() {
     );
   }
 
-  return (
-    <div className="flex justify-center pt-20 text-white">
-      Hello posts section
-    </div>
-  );
+  return <div className="flex justify-center pt-20 text-white"></div>;
 }
