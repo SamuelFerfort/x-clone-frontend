@@ -17,7 +17,7 @@ import NotFound from "./Pages/NotFound";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route element={<ErrorBoundary />}>
+    <Route errorElement={<ErrorBoundary />}>
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
@@ -28,7 +28,6 @@ const router = createBrowserRouter(
           <Route path="home" element={<Home />} />
           <Route path="profile" element={<Profile />} />
           <Route path="bookmarks" element={<Bookmarks />} />
-          <Route />
         </Route>
       </Route>
       <Route path="*" element={<NotFound />} />

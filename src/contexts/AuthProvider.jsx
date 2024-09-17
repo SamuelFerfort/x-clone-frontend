@@ -17,16 +17,6 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   const clearError = useCallback(() => setError(null), []);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      verifyToken(token);
-    } else {
-      setLoading(false);
-    }
-  }, [verifyToken]);
-
   const verifyToken = useCallback(async (token) => {
     try {
       const response = await fetch(`${API_URL}/api/auth/verify-token`, {
@@ -46,6 +36,14 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   }, []);
+  useEffect(() => {
+    const token = localStorage.getItem("x_token");
+    if (token) {
+      verifyToken(token);
+    } else {
+      setLoading(false);
+    }
+  }, [verifyToken]);
 
   const login = async (credentials) => {
     setLoading(true);
