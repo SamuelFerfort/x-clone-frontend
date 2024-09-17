@@ -1,9 +1,14 @@
 import { useAuth } from "../contexts/AuthProvider";
-import { Outlet, Navigate } from "react-router-dom";
+import { Outlet, Navigate, useLocation } from "react-router-dom";
 
 const ProtectedLayout = () => {
   const { user } = useAuth();
-  if (!user) return <Navigate to="/login" replace />;
+  const location = useLocation();
+
+  if (!user) {
+    return <Navigate to="/login" replace state={{ from: location }} />;
+  }
+
   return <Outlet />;
 };
 

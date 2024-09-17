@@ -1,4 +1,9 @@
-export default function Home() {
+import { Link } from "react-router-dom";
 
-    return <h1>Home</h1>
+export default function Home() {
+  return (
+    <>
+      <Link to={"/profile"}>Go to profile</Link>
+    </>
+  );
 }

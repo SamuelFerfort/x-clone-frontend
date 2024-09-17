@@ -18,18 +18,22 @@ import NotFound from "./Pages/NotFound";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route errorElement={<ErrorBoundary />}>
+      {/* Auth Routes */}
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
       </Route>
+
+      {/* Protected Routes */}
       <Route element={<ProtectedLayout />}>
         <Route path="/" element={<X />}>
-          <Route index element={<Navigate to="/home" replace />} />
           <Route path="home" element={<Home />} />
           <Route path="profile" element={<Profile />} />
           <Route path="bookmarks" element={<Bookmarks />} />
         </Route>
       </Route>
+
+      {/* Not Found */}
       <Route path="*" element={<NotFound />} />
     </Route>
   )

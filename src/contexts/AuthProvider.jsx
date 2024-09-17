@@ -29,7 +29,8 @@ export const AuthProvider = ({ children }) => {
       });
       if (!response.ok) throw new Error("Token verification failed");
       const data = await response.json();
-      setUser(data.user);
+      console.log(data)
+      setUser(data);
     } catch (error) {
       console.error("Token verification failed:", error);
       logout();
