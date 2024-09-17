@@ -2,7 +2,6 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  Navigate,
 } from "react-router-dom";
 import Login from "./Pages/Login";
 import SignUp from "./Pages/Signup";

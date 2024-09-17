@@ -1,4 +1,7 @@
-import { Outlet, useLocation, Navigate } from "react-router-dom";
+import { Outlet, useLocation, Navigate, NavLink } from "react-router-dom";
+import LeftSidebar from "../Components/LeftSidebar";
+
+
 
 export default function X() {
   const location = useLocation();
@@ -8,10 +11,12 @@ export default function X() {
   }
 
   return (
-    <>
-      <h1>X</h1>
-
-      <Outlet />
-    </>
+    <main className="flex h-screen border-t border-white/20">
+     <LeftSidebar />
+      <section className="w-[600px] bg-black text-white">
+        <Outlet />
+      </section>
+      <div className="flex-grow bg-black border-l border-white/20"></div>
+    </main>
   );
 }
