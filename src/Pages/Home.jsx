@@ -22,5 +22,5 @@ export default function Home() {
     );
   }
 
-  return <div className="flex justify-center pt-20 text-white"></div>;
+  return <div className="flex justify-center pt-20 text-white">hey</div>;
 }

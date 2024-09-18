@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { Home, User, Bookmark } from "lucide-react";
+import {  User, Bookmark } from "lucide-react";
 import HomeSVG from "./HomeSVG";
 export default function LeftSidebar() {
   return (
