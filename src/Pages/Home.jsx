@@ -85,7 +85,7 @@ export default function Home() {
 
   return (
     <>
-      <section className="flex  p-5 border-y border-white/20 gap-2  text-xl">
+      <section className="flex  p-4 border-y border-white/20 gap-2  text-xl">
         <div className="">
           {user.avatar ? (
             <img src={user.avatar} alt={`${user.username}'s avatar`} />

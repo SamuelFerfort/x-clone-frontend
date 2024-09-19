@@ -1,12 +1,13 @@
 import { NavLink } from "react-router-dom";
-import {  User, Bookmark } from "lucide-react";
+import { User, Bookmark, Mail, Bell } from "lucide-react";
 import HomeSVG from "./HomeSVG";
+
 export default function LeftSidebar() {
   return (
     <aside className="w-[600px]  bg-black  border-r border-white/20 ">
       <nav className="flex">
-        <ul className="text-white flex flex-col  pt-16 pl-[350px]  text-xl space-y-8 flex-end">
-          <li className="">
+        <ul className="text-white flex flex-col  pt-16 pl-[330px]  text-xl space-y-3 flex-end">
+          <li className="hover:bg-gray-hover p-3 rounded-full transition-colors duration-200">
             <NavLink
               className={({ isActive }) =>
                 `flex items-center space-x-4 ${isActive ? "font-bold" : ""}`
@@ -19,14 +20,13 @@ export default function LeftSidebar() {
                     size={28}
                     color={isActive ? "white" : "black"}
                     isActive={isActive}
-  
                   />
                   <span>Home</span>
                 </>
               )}
             </NavLink>
           </li>
-          <li>
+          <li className="hover:bg-gray-hover p-3 rounded-full transition-colors duration-200">
             <NavLink
               className={({ isActive }) =>
                 `flex items-center space-x-4 ${isActive ? "font-bold" : ""}`
@@ -41,7 +41,7 @@ export default function LeftSidebar() {
               )}
             </NavLink>
           </li>
-          <li>
+          <li className="hover:bg-gray-hover p-3 rounded-full transition-colors duration-200">
             <NavLink
               className={({ isActive }) =>
                 `flex items-center space-x-4 ${isActive ? "font-bold" : ""}`
@@ -55,6 +55,36 @@ export default function LeftSidebar() {
                     size={28}
                   />
                   <span>Bookmarks</span>
+                </>
+              )}
+            </NavLink>
+          </li>
+          <li className="hover:bg-gray-hover p-3 rounded-full transition-colors duration-200">
+            <NavLink
+              className={({ isActive }) =>
+                `flex items-center space-x-4 ${isActive ? "font-bold" : ""}`
+              }
+              to="/messages"
+            >
+              {({ isActive }) => (
+                <>
+                  <Mail className={isActive ? "fill-white" : ""} size={28} />
+                  <span>Messages</span>
+                </>
+              )}
+            </NavLink>
+          </li>
+          <li className="hover:bg-gray-hover p-3  rounded-full transition-colors duration-200">
+            <NavLink
+              className={({ isActive }) =>
+                `flex items-center space-x-4 ${isActive ? "font-bold" : ""}`
+              }
+              to="/notifications"
+            >
+              {({ isActive }) => (
+                <>
+                  <Bell className={isActive ? "fill-white" : ""} size={28} />
+                  <span>Notifications</span>
                 </>
               )}
             </NavLink>
