@@ -3,10 +3,10 @@ import {  User, Bookmark } from "lucide-react";
 import HomeSVG from "./HomeSVG";
 export default function LeftSidebar() {
   return (
-    <aside className="max-w-[600px] w-full bg-black  border-r border-white/20 ">
-      <nav>
-        <ul className="text-white flex flex-col  mt-16 ml-[350px]  text-xl space-y-8 ">
-          <li className=" ">
+    <aside className="w-[600px]  bg-black  border-r border-white/20 ">
+      <nav className="flex">
+        <ul className="text-white flex flex-col  pt-16 pl-[350px]  text-xl space-y-8 flex-end">
+          <li className="">
             <NavLink
               className={({ isActive }) =>
                 `flex items-center space-x-4 ${isActive ? "font-bold" : ""}`
