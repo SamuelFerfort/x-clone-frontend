@@ -1,8 +1,15 @@
 /* eslint-disable react/prop-types */
 
-const HomeSVG = ({ size = 24, color = 'black', strokeWidth = 2, className = '', isActive = false, ...props }) => {
-  const activeColor = isActive ? color : 'white';
-  const inactiveColor = isActive ? 'transparent' : 'black';
+const HomeSVG = ({
+  size = 24,
+  color = "black",
+  strokeWidth = 2,
+  className = "",
+  isActive = false,
+  ...props
+}) => {
+  const activeColor = isActive ? color : "white";
+  const inactiveColor = isActive ? "transparent" : "black";
 
   return (
     <svg

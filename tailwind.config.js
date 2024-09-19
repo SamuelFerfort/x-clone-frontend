@@ -5,7 +5,13 @@ export default {
     extend: {
       colors: {
         "btn-blue": "#1A8CD8",
-        "gray-hover": "#181818"
+        "gray-hover": "#181818",
+        "red-like": "#F91880",
+        "red-like-hover": "#200914",
+        "repost-green": "#00BA7C",
+        "repost-hover": "#071A14",
+        "blue-hover": "#0D2739",
+        "blue-bookmark": "#1A8BD6",
       },
     },
   },

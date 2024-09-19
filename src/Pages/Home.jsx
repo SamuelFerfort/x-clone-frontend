@@ -23,6 +23,8 @@ export default function Home() {
     error,
   } = usePostsFeed();
 
+  async function handleLike(postId) {}
+
   const [postContent, setPostContent] = useState("");
   const textareaRef = useRef(null);
 
@@ -109,10 +111,10 @@ export default function Home() {
 
           <div className=" flex justify-between items-center">
             <div className="flex gap-2">
-              <button>
+              <button type="button">
                 <Smile color="#1A8CD8" />
               </button>
-              <button>
+              <button type="button">
                 <ImageIcon color="#1A8CD8" />
               </button>
             </div>

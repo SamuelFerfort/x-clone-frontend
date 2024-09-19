@@ -89,6 +89,9 @@ export default function LeftSidebar() {
               )}
             </NavLink>
           </li>
+          <li className="pt-2">
+            <button className="bg-btn-blue  py-3 rounded-full   w-full text-lg font-bold hover:bg-blue-500 text-center">Post</button>
+          </li>
         </ul>
       </nav>
     </aside>
