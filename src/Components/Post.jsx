@@ -3,6 +3,8 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import { Heart, Repeat2, Bookmark, MessageCircle } from "lucide-react";
 import useInteractionMutation from "../hooks/useInteractionMutation";
+import DeleteBtn from "./DeleteBtn";
+import { useAuth } from "../contexts/AuthProvider";
 
 export default function Post({ post }) {
   const [hover, setHover] = useState({
@@ -11,6 +13,8 @@ export default function Post({ post }) {
     bookmark: false,
     comment: false,
   });
+
+  const { user } = useAuth();
 
   const interactionMutation = useInteractionMutation();
 
@@ -46,6 +50,9 @@ export default function Post({ post }) {
         <span className="flex gap-1">
           <span className="font-bold truncate">{post.author.username}</span>
           <span className="text-gray-500 truncate">{post.author.handler}</span>
+          {post.author.id === user.id && (
+            <DeleteBtn postId={post.id} userId={user.id} />
+          )}
         </span>
         <p className="break-words text-second-gray">{post.content}</p>
         {post.media.length > 0 && (
