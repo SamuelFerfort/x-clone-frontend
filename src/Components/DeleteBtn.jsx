@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { MoreHorizontal, Trash2 } from "lucide-react";
 import usePostDelete from "../hooks/usePostDelete";
+import PropTypes from "prop-types";
 
 export default function DeleteBtn({ postId, userId }) {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -13,7 +14,7 @@ export default function DeleteBtn({ postId, userId }) {
   return (
     <div className="relative ml-auto">
       <button
-        className="p-2 rounded-full hover:bg-gray-hover"
+        className=" p-1 rounded-full hover:bg-gray-hover"
         onClick={() => setShowDropdown(!showDropdown)}
       >
         <MoreHorizontal
@@ -36,3 +37,8 @@ export default function DeleteBtn({ postId, userId }) {
     </div>
   );
 }
+
+DeleteBtn.propTypes = {
+  postId: PropTypes.string,
+  userId: PropTypes.string,
+};

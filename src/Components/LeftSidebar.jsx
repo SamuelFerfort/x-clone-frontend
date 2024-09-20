@@ -1,8 +1,12 @@
 import { NavLink } from "react-router-dom";
-import { User, Bookmark, Mail, Bell } from "lucide-react";
+import { User, Bookmark, Mail, Bell, LogOut } from "lucide-react";
 import HomeSVG from "./HomeSVG";
+import { useAuth } from "../contexts/AuthProvider";
 
 export default function LeftSidebar() {
+
+  const {logout} = useAuth()
+
   return (
     <aside className="w-[600px]  bg-black  border-r border-white/20 fixed h-screen">
       <nav className="flex">
@@ -85,6 +89,22 @@ export default function LeftSidebar() {
                 <>
                   <Bell className={isActive ? "fill-white" : ""} size={28} />
                   <span>Notifications</span>
+                </>
+              )}
+            </NavLink>
+          </li>
+          <li className="hover:bg-gray-hover p-3  rounded-full transition-colors duration-200">
+            <NavLink
+              className={({ isActive }) =>
+                `flex items-center space-x-4 ${isActive ? "font-bold" : ""}`
+              }
+              to="/login"
+              onClick={logout}
+            >
+              {({ isActive }) => (
+                <>
+                  <LogOut className={isActive ? "fill-white" : ""} size={28} />
+                  <span>Logout</span>
                 </>
               )}
             </NavLink>
