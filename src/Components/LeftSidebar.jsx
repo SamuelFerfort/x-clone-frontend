@@ -4,7 +4,7 @@ import HomeSVG from "./HomeSVG";
 
 export default function LeftSidebar() {
   return (
-    <aside className="w-[600px]  bg-black  border-r border-white/20 ">
+    <aside className="w-[600px]  bg-black  border-r border-white/20 fixed h-screen">
       <nav className="flex">
         <ul className="text-second-gray flex flex-col  pt-16 pl-[330px]  text-xl space-y-3 flex-end">
           <li className="hover:bg-gray-hover p-3 rounded-full transition-colors duration-200">

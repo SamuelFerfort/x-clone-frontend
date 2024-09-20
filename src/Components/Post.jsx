@@ -51,7 +51,7 @@ export default function Post({ post }) {
         {post.media.length > 0 && (
           <img
             src={post.media[0].url}
-            className="max-w-full h-auto rounded-2xl mt-4"
+            className="max-w-full h-auto rounded-2xl mt-3"
           />
         )}
         <div className="flex items-center justify-between mt-2">

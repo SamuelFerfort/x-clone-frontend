@@ -14,12 +14,12 @@ export default function X() {
   }
 
   return (
-    <main className="flex h-screen border-t border-white/20">
+    <main className="flex min-h-screen border-t border-white/20 ">
      <LeftSidebar />
-      <section className="max-w-[600px] w-full bg-black text-white">
+      <section className="max-w-[600px] ml-[600px] w-full bg-black text-white">
         <Outlet />
       </section>
-      <div className="flex-grow bg-black border-l border-white/20"></div>
+      <div className="w-[1200px]   bg-black border-l border-white/20 fixed left-[1200px] h-screen">hey</div>
     </main>
   );
 }
