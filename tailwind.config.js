@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        "btn-blue": "#1A8CD8",
+        "btn-blue": "#1D9BF0",
         "gray-hover": "#181818",
         "red-like": "#F91880",
         "red-like-hover": "#200914",

@@ -3,17 +3,18 @@ import { useRef, useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { authenticatedFetch } from "../utils/authenticatedFetch";
 import AvatarIcon from "./Avatar";
-import { Smile, ImageIcon } from "lucide-react";
+import { Smile, ImageIcon, X } from "lucide-react";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 
 export default function CreatePost() {
   const [postContent, setPostContent] = useState("");
-
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const user = useAuth();
   const textareaRef = useRef(null);
+  const fileInputRef = useRef(null);
 
   const queryClient = useQueryClient();
 
@@ -25,14 +26,22 @@ export default function CreatePost() {
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["posts"] }),
-        setPostContent("");
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      setPostContent("");
+      removeSelectedImage();
     },
     onError: (err) => {
       console.error("Failed to create post:", err);
     },
   });
-  const { mutate, isLoading } = createPostMutation;
+
+  useEffect(() => {
+    return () => {
+      if (selectedImage) {
+        URL.revokeObjectURL(selectedImage);
+      }
+    };
+  }, [selectedImage]);
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -47,14 +56,37 @@ export default function CreatePost() {
     setPostContent((prevMessage) => prevMessage + emojiChar);
   };
 
+  const handleImageSelect = (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      if (selectedImage) {
+        URL.revokeObjectURL(selectedImage);
+      }
+      setSelectedImage(URL.createObjectURL(file));
+    }
+  };
+
+  const removeSelectedImage = () => {
+    if (selectedImage) {
+      URL.revokeObjectURL(selectedImage);
+    }
+    setSelectedImage(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
   async function handlePostSubmit(e) {
     e.preventDefault();
 
     const formData = new FormData();
-
     formData.append("content", postContent);
+    if (fileInputRef.current && fileInputRef.current.files[0]) {
+      formData.append("image", fileInputRef.current.files[0]);
+    }
 
-    mutate(formData);
+    createPostMutation.mutate(formData);
   }
 
   const customTheme = {
@@ -65,7 +97,7 @@ export default function CreatePost() {
   };
 
   return (
-    <section className="flex  p-4 border-y border-white/20 gap-2  text-xl">
+    <section className="flex p-4 border-y border-white/20 gap-2 text-xl">
       <div className="">
         {user.avatar ? (
           <img src={user.avatar} alt={`${user.username}'s avatar`} />
@@ -76,21 +108,38 @@ export default function CreatePost() {
 
       <form
         onSubmit={handlePostSubmit}
-        className="flex  flex-col w-full relative"
+        className="flex flex-col w-full relative"
       >
-        <div className="flex-grow ">
+        <div className="flex-grow">
           <textarea
             ref={textareaRef}
             className="w-full bg-transparent text-white resize-none outline-none text-xl mt-2 overflow-hidden"
             rows="2"
             placeholder="¡¿What's happening?!"
             value={postContent}
-            disabled={isLoading}
+            disabled={createPostMutation.isLoading}
             onChange={(e) => setPostContent(e.target.value)}
           />
+
+          {selectedImage && (
+            <div className="relative mt-2 mb-4">
+              <img
+                src={selectedImage}
+                alt="Selected"
+                className="max-w-full h-auto rounded-2xl"
+              />
+              <button
+                type="button"
+                onClick={removeSelectedImage}
+                className="absolute top-2 left-2 bg-gray-900 bg-opacity-75 text-white rounded-full p-1"
+              >
+                <X size={16} />
+              </button>
+            </div>
+          )}
         </div>
 
-        <div className=" flex justify-between items-center">
+        <div className="flex justify-between items-center">
           <div className="flex gap-2">
             <button
               type="button"
@@ -98,15 +147,27 @@ export default function CreatePost() {
             >
               <Smile color="#1A8CD8" />
             </button>
-            <button type="button">
-              <ImageIcon color="#1A8CD8" />
-            </button>
+            <label htmlFor="image-upload" className="cursor-pointer">
+              <ImageIcon color="#1D9BF0" />
+            </label>
+            <input
+              id="image-upload"
+              type="file"
+              ref={fileInputRef}
+              onChange={handleImageSelect}
+              accept="image/*"
+              className="hidden"
+            />
           </div>
+
           <button
-            className="bg-btn-blue px-8 py-1 rounded-full ml-auto text-lg font-bold hover:bg-blue-500"
-            disabled={isLoading || postContent.trim() === ""}
+            className="bg-btn-blue px-8 py-1 rounded-full text-lg font-bold hover:bg-[#1A8CD8] text-white"
+            disabled={
+              createPostMutation.isLoading ||
+              (postContent.trim() === "" && !selectedImage)
+            }
           >
-            {isLoading ? "Posting..." : "Post"}
+            {createPostMutation.isLoading ? "Posting..." : "Post"}
           </button>
         </div>
 
