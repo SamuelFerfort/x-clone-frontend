@@ -18,6 +18,7 @@ export default function Post({ post }) {
     interactionMutation.mutate({ postId: post.id, interactionType });
   };
 
+
   const isLikedByUser = post.likes.length > 0;
   const isRepostedByUser = post.reposts.length > 0;
   const isBookmarkedByUser = post.bookmarks.length > 0;
@@ -42,7 +43,7 @@ export default function Post({ post }) {
           <span className="font-bold truncate">{post.author.username}</span>
           <span className="text-gray-500 truncate">{post.author.handler}</span>
         </span>
-        <p className="break-words ">{post.content}</p>
+        <p className="break-words text-second-gray">{post.content}</p>
         <div className="flex items-center justify-between mt-2">
           <button
             className="flex items-center text-gray-500 gap-1  hover:text-blue-bookmark hover:bg-blue-hover rounded-full p-2 pl-0"
@@ -60,7 +61,7 @@ export default function Post({ post }) {
             <span className="text-sm">{post._count.replies}</span>
           </button>
           <button
-            className="flex items-center gap-1  hover:text-repost-green  hover:bg-repost-hover rounded-full p-2 "
+            className="flex items-center gap-1  hover:text-repost-green group hover:bg-repost-hover rounded-full p-2 "
             onMouseEnter={() => setHover((prev) => ({ ...prev, repost: true }))}
             onMouseLeave={() =>
               setHover((prev) => ({ ...prev, repost: false }))
@@ -71,10 +72,10 @@ export default function Post({ post }) {
               stroke={hover.repost || isRepostedByUser ? "#00BA7C" : "gray"}
               size={19}
             />
-            <span className={`text-sm ${isRepostedByUser ? "text-repost-green" : "text-gray-500"}`}>{post._count.reposts}</span>
+            <span className={`text-sm ${isRepostedByUser ? "text-repost-green" : "text-gray-500"} group-hover:text-repost-green`}>{post._count.reposts}</span>
           </button>
           <button
-            className="flex items-center gap-1  hover:text-red-like hover:bg-red-like-hover rounded-full p-2 "
+            className="flex items-center gap-1  hover:text-red-like hover:bg-red-like-hover rounded-full p-2 group"
             onMouseEnter={() => setHover((prev) => ({ ...prev, like: true }))}
             onMouseLeave={() => setHover((prev) => ({ ...prev, like: false }))}
             onClick={() => handleInteraction("likes")}
@@ -84,11 +85,11 @@ export default function Post({ post }) {
               fill={`${isLikedByUser ? "#F91880" : ""}`}
               size={17}
             />
-            <span className={`text-sm ${isLikedByUser ? "text-red-like" : "text-gray-500"}`} >{post._count.likes}</span>
+            <span className={`text-sm ${isLikedByUser ? "text-red-like" : "text-gray-500"} group-hover:text-red-like`} >{post._count.likes}</span>
           </button>
 
           <button
-            className="flex items-center  gap-1  hover:text-blue-bookmark hover:bg-blue-hover rounded-full p-2 "
+            className="flex items-center  gap-1  hover:text-blue-bookmark group hover:bg-blue-hover rounded-full p-2 "
             onMouseEnter={() =>
               setHover((prev) => ({ ...prev, bookmark: true }))
             }
@@ -103,7 +104,7 @@ export default function Post({ post }) {
               size={18}
               fill={`${isBookmarkedByUser ? "#1A8BD6" : ""}`}
             />
-            <span className={`text-sm ${isBookmarkedByUser ? "text-blue-bookmark" : "text-gray-500"}`}>{post._count.bookmarks}</span>
+            <span className={`text-sm ${isBookmarkedByUser ? "text-blue-bookmark" : "text-gray-500"} group-hover:text-blue-bookmark`}>{post._count.bookmarks}</span>
           </button>
         </div>
       </div>

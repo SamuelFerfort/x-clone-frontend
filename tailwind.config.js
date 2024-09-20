@@ -12,6 +12,7 @@ export default {
         "repost-hover": "#071A14",
         "blue-hover": "#0D2739",
         "blue-bookmark": "#1A8BD6",
+        "second-gray": "#e7e9ea",
       },
     },
   },

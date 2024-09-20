@@ -6,7 +6,7 @@ export default function LeftSidebar() {
   return (
     <aside className="w-[600px]  bg-black  border-r border-white/20 ">
       <nav className="flex">
-        <ul className="text-white flex flex-col  pt-16 pl-[330px]  text-xl space-y-3 flex-end">
+        <ul className="text-second-gray flex flex-col  pt-16 pl-[330px]  text-xl space-y-3 flex-end">
           <li className="hover:bg-gray-hover p-3 rounded-full transition-colors duration-200">
             <NavLink
               className={({ isActive }) =>
