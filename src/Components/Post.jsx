@@ -32,7 +32,7 @@ export default function Post({ post }) {
 
   return (
     <article
-      className="flex p-4 pb-1 border-y border-white/20 gap-2 "
+      className="flex p-4 pb-1 border-b border-white/20 gap-2 "
       key={post.id}
     >
       <div>

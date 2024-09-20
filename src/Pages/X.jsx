@@ -14,7 +14,7 @@ export default function X() {
   }
 
   return (
-    <main className="flex min-h-screen border-t border-white/20 ">
+    <main className="flex min-h-screen ">
      <LeftSidebar />
       <section className="max-w-[600px] ml-[600px] w-full bg-black text-white">
         <Outlet />
