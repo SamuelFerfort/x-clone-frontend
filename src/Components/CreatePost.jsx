@@ -217,18 +217,6 @@ export default function CreatePost() {
 
         <div className="flex justify-between items-center">
           <div className="flex gap-2">
-            <button
-              type="button"
-              onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-            >
-              <Smile color="#1A8CD8" size={19} />
-            </button>
-            <button
-              type="button"
-              onClick={() => setShowGifPicker(!showGifPicker)}
-            >
-              <GifIcon size={19}/>
-            </button>
             <div className="flex items-center ">
               <label htmlFor="image-upload" className="cursor-pointer">
                 <ImageIcon color="#1D9BF0" size={20} />
@@ -242,10 +230,22 @@ export default function CreatePost() {
                 className="hidden"
               />
             </div>
+            <button
+              type="button"
+              onClick={() => setShowGifPicker(!showGifPicker)}
+            >
+              <GifIcon size={19} />
+            </button>
+            <button
+              type="button"
+              onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+            >
+              <Smile color="#1A8CD8" size={19} />
+            </button>
           </div>
           <div>
             {postContent.length > 0 && (
-              <span className="mr-4 text-base text-btn-blue">
+              <span className="mr-4 text-base text-btn-blue ">
                 {postContent.length}/300
               </span>
             )}
@@ -262,7 +262,7 @@ export default function CreatePost() {
         </div>
 
         {showEmojiPicker && (
-          <div className="absolute top-full z-10">
+          <div className="absolute top-full z-10 left-16">
             <Picker
               data={data}
               onEmojiSelect={addEmoji}
@@ -280,7 +280,7 @@ export default function CreatePost() {
           </div>
         )}
         {showGifPicker && (
-          <div className="absolute top-full z-10 bg-gray-900 p-4 rounded-lg w-full max-w-md">
+          <div className="absolute top-full z-10 bg-gray-900 p-4 left-8 rounded-lg w-full max-w-md">
             <input
               type="text"
               value={searchTerm}
