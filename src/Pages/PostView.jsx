@@ -1,11 +1,17 @@
-import { usePostsFeed } from "../hooks/usePosts";
+import { useParams } from "react-router-dom";
+import { usePostReplies } from "../hooks/usePosts";
 import Spinner from "../Components/Spinner";
 import useTitle from "../hooks/useTitle";
+import CreatePost from "../Components/CreatePost";
 import { Fragment } from "react";
 import Post from "../Components/Post";
-import CreatePost from "../Components/CreatePost";
 import InfiniteScrollLoader from "../Components/InfiniteScrollLoader";
-export default function Home() {
+
+export default function PostView() {
+  const { postId, handler } = useParams();
+
+
+
   const {
     status,
     fetchNextPage,
@@ -13,9 +19,9 @@ export default function Home() {
     data,
     isFetchingNextPage,
     error,
-  } = usePostsFeed();
+  } = usePostReplies(postId);
 
-  useTitle("Home / X");
+  useTitle(`${handler} post`);
 
   if (status === "loading") {
     return (
@@ -32,17 +38,21 @@ export default function Home() {
       </div>
     );
   }
+  if (!data || !data.pages) {
+    return <div>No data available</div>;
+  }
 
-  if (!data) return <div>Loading...</div>;
+  const parentPost = data.pages[0].parentPost;
 
   return (
     <>
-      <CreatePost />
+      {parentPost && <Post post={parentPost} isParentPost={true} parentPostId={parentPost.id} />}
+      <CreatePost parentId={parentPost.id} />
 
       {data.pages.map((page, i) => (
         <Fragment key={`page-${i}`}>
           {page.posts.map((post) => (
-            <Post post={post} key={post.id} />
+            <Post post={post} key={post.id} parentPostId={parentPost.id} />
           ))}
         </Fragment>
       ))}
@@ -51,7 +61,7 @@ export default function Home() {
         hasNextPage={hasNextPage}
         isFetchingNextPage={isFetchingNextPage}
         fetchNextPage={fetchNextPage}
-        noPostsText={"No more posts to load"}
+        noPostsText={"No more replies"}
       />
     </>
   );

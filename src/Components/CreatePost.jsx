@@ -11,7 +11,7 @@ import GifIcon from "./GifIcon";
 
 const gf = new GiphyFetch("kHsEVWnq4DJWsupWneBQD5gfhPENQlrO");
 
-export default function CreatePost() {
+export default function CreatePost({ parentId = undefined }) {
   const [postContent, setPostContent] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [showGifPicker, setShowGifPicker] = useState(false);
@@ -34,7 +34,12 @@ export default function CreatePost() {
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      if (parentId) {
+        queryClient.invalidateQueries({ queryKey: ["postReplies", parentId] });
+      } else {
+        queryClient.invalidateQueries({ queryKey: ["posts"] });
+      }
+
       setPostContent("");
       removeSelectedImage();
       setSelectedGif(null);
@@ -134,6 +139,10 @@ export default function CreatePost() {
     formData.append("content", postContent);
     if (fileInputRef.current && fileInputRef.current.files[0]) {
       formData.append("image", fileInputRef.current.files[0]);
+    }
+
+    if (parentId) {
+      formData.append("parentId", parentId);
     }
 
     if (selectedGif) {

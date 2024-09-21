@@ -13,6 +13,7 @@ import Profile from "./Pages/Profile";
 import Bookmarks from "./Pages/Bookmarks";
 import ErrorBoundary from "./Pages/ErrorBoundary";
 import NotFound from "./Pages/NotFound";
+import PostView from "./Pages/PostView";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,6 +30,7 @@ const router = createBrowserRouter(
           <Route path="home" element={<Home />} />
           <Route path="profile" element={<Profile />} />
           <Route path="bookmarks" element={<Bookmarks />} />
+          <Route path=":handler/status/:postId" element={<PostView />} />
         </Route>
       </Route>
 

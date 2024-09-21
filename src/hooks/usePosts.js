@@ -18,7 +18,12 @@ export const usePostReplies = (postId) => {
   return useInfiniteQuery({
     queryKey: ["postReplies", postId],
     queryFn: ({ pageParam = 1 }) => api.fetchPostReplies({ postId, pageParam }),
-    getNextPageParam: (lastPage) => lastPage.nextCursor,
+    getNextPageParam: (lastPage) => {
+      if (lastPage.currentPage < lastPage.totalPages) {
+        return lastPage.currentPage + 1;
+      }
+      return undefined;
+    },
   });
 };
 

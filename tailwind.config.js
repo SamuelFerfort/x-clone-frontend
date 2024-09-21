@@ -13,6 +13,7 @@ export default {
         "blue-hover": "#0D2739",
         "blue-bookmark": "#1A8BD6",
         "second-gray": "#e7e9ea",
+        "post-hover": "#0D0D0D",
       },
     },
   },

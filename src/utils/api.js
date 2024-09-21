@@ -7,7 +7,7 @@ export const fetchPosts = async ({ pageParam = 1, userId = null }) => {
 };
 
 export const fetchPostReplies = async ({ postId, pageParam = 1 }) => {
-  return authenticatedFetch(`/api/posts/${postId}/replies?page=${pageParam}`);
+  return authenticatedFetch(`/api/post/${postId}/replies?page=${pageParam}`);
 };
 
 export const fetchUserPosts = async ({ userId, pageParam = 1 }) => {

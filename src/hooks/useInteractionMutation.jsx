@@ -12,12 +12,15 @@ const useInteractionMutation = () => {
         method: "POST",
       });
     },
-    onMutate: async ({ postId, interactionType }) => {
+    onMutate: async ({ postId, interactionType, parentPostId, isParentPost }) => {
       await queryClient.cancelQueries({ queryKey: ["posts"] });
 
       const previousPosts = queryClient.getQueryData(["posts"]);
 
-      queryClient.setQueryData(["posts"], (old) => {
+      // Optimistically update posts, or if it is parentPost then update the parentPost
+      
+
+      /*   queryClient.setQueryData(["posts"], (old) => {
         if (!old) return old;
         return {
           ...old,
@@ -38,7 +41,7 @@ const useInteractionMutation = () => {
           })),
         };
       });
-
+ */
       return { previousPosts };
     },
     onError: (err, variables, context) => {
@@ -46,8 +49,13 @@ const useInteractionMutation = () => {
         queryClient.setQueryData(["posts"], context.previousPosts);
       }
     },
-    onSettled: () => {
+    onSettled: (data, error, variables) => {
       queryClient.invalidateQueries({ queryKey: ["posts"] });
+      if (variables.parentPostId) {
+        queryClient.invalidateQueries({
+          queryKey: ["postReplies", variables.parentPostId],
+        });
+      }
     },
   });
 };

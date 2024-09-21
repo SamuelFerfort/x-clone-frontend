@@ -7,7 +7,9 @@ export default function DeleteBtn({ postId, userId }) {
   const [showDropdown, setShowDropdown] = useState(false);
   const deleteMutation = usePostDelete();
 
-  function handleDelete() {
+  function handleDelete(e) {
+    e.preventDefault();
+    e.stopPropagation();
     deleteMutation.mutate({ postId, authorId: userId });
   }
 
@@ -15,7 +17,11 @@ export default function DeleteBtn({ postId, userId }) {
     <div className="relative ml-auto">
       <button
         className=" p-1 rounded-full hover:bg-gray-hover"
-        onClick={() => setShowDropdown(!showDropdown)}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setShowDropdown(!showDropdown);
+        }}
       >
         <MoreHorizontal
           className="text-gray-500 hover:text-gray-300"

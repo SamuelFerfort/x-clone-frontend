@@ -6,6 +6,7 @@ export default function InfiniteScrollLoader({
   hasNextPage,
   isFetchingNextPage,
   fetchNextPage,
+  noPostsText,
 }) {
   const observerTarget = useRef(null);
 
@@ -36,7 +37,7 @@ export default function InfiniteScrollLoader({
       {isFetchingNextPage && <Spinner />}
 
       {!hasNextPage && (
-        <div className="text-center  text-gray-500">No more posts to load</div>
+        <div className="text-center  text-gray-500">{noPostsText}</div>
       )}
     </div>
   );
@@ -46,4 +47,5 @@ InfiniteScrollLoader.propTypes = {
   hasNextPage: PropTypes.bool,
   isFetchingNextPage: PropTypes.bool,
   fetchNextPage: PropTypes.func,
+  noPostsText: PropTypes.string,
 };
