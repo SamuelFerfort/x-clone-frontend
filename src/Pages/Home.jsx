@@ -1,11 +1,10 @@
-import { useEffect, useRef, useCallback } from "react";
 import { usePostsFeed } from "../hooks/usePosts";
 import Spinner from "../Components/Spinner";
 import useTitle from "../hooks/useTitle";
 import { Fragment } from "react";
 import Post from "../Components/Post";
 import CreatePost from "../Components/CreatePost";
-
+import InfiniteScrollLoader from "../Components/InfiniteScrollLoader";
 export default function Home() {
   const {
     status,
@@ -18,29 +17,6 @@ export default function Home() {
 
   useTitle("Home / X");
 
-  const observerTarget = useRef(null);
-
-  const handleObserver = useCallback(
-    (entries) => {
-      const [target] = entries;
-      if (target.isIntersecting && hasNextPage && !isFetchingNextPage) {
-        fetchNextPage();
-      }
-    },
-    [fetchNextPage, hasNextPage, isFetchingNextPage]
-  );
-
-  useEffect(() => {
-    const element = observerTarget.current;
-    const option = { threshold: 1.0 };
-
-    const observer = new IntersectionObserver(handleObserver, option);
-    if (element) observer.observe(element);
-
-    return () => {
-      if (element) observer.unobserve(element);
-    };
-  }, [handleObserver]);
   if (status === "loading") {
     return (
       <div className="flex justify-center pt-20">
@@ -64,22 +40,18 @@ export default function Home() {
       <CreatePost />
 
       {data.pages.map((page, i) => (
-        <Fragment key={i}>
+        <Fragment key={`page-${i}`}>
           {page.posts.map((post) => (
             <Post post={post} key={post.id} />
           ))}
         </Fragment>
       ))}
 
-      <div ref={observerTarget} className="h-14 flex justify-center items-center">
-        {isFetchingNextPage && <Spinner />}
-
-        {!hasNextPage && (
-          <div className="text-center  text-gray-500">
-            No more posts to load
-          </div>
-        )}
-      </div>
+      <InfiniteScrollLoader
+        hasNextPage={hasNextPage}
+        isFetchingNextPage={isFetchingNextPage}
+        fetchNextPage={fetchNextPage}
+      />
     </>
   );
 }
