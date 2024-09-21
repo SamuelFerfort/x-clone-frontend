@@ -86,8 +86,6 @@ export default function CreatePost() {
     setPostContent((prevMessage) => prevMessage + emojiChar);
   };
 
-
-
   const handleImageSelect = (e) => {
     const file = e.target.files[0];
 
@@ -169,7 +167,7 @@ export default function CreatePost() {
           <textarea
             ref={textareaRef}
             className="w-full bg-transparent text-white resize-none outline-none text-xl mt-2 overflow-hidden"
-            rows="2"
+            rows="1"
             placeholder="What is happening?!"
             value={postContent}
             disabled={createPostMutation.isLoading}
@@ -223,25 +221,27 @@ export default function CreatePost() {
               type="button"
               onClick={() => setShowEmojiPicker(!showEmojiPicker)}
             >
-              <Smile color="#1A8CD8" />
+              <Smile color="#1A8CD8" size={19} />
             </button>
             <button
               type="button"
               onClick={() => setShowGifPicker(!showGifPicker)}
             >
-              <GifIcon />
+              <GifIcon size={19}/>
             </button>
-            <label htmlFor="image-upload" className="cursor-pointer">
-              <ImageIcon color="#1D9BF0" />
-            </label>
-            <input
-              id="image-upload"
-              type="file"
-              ref={fileInputRef}
-              onChange={handleImageSelect}
-              accept="image/*"
-              className="hidden"
-            />
+            <div className="flex items-center ">
+              <label htmlFor="image-upload" className="cursor-pointer">
+                <ImageIcon color="#1D9BF0" size={20} />
+              </label>
+              <input
+                id="image-upload"
+                type="file"
+                ref={fileInputRef}
+                onChange={handleImageSelect}
+                accept="image/*"
+                className="hidden"
+              />
+            </div>
           </div>
           <div>
             {postContent.length > 0 && (
@@ -250,7 +250,7 @@ export default function CreatePost() {
               </span>
             )}
             <button
-              className="bg-btn-blue px-8 py-1 rounded-full text-lg font-bold hover:bg-[#1A8CD8] text-white"
+              className="bg-btn-blue px-6 py-1 rounded-full text-base font-bold hover:bg-[#1A8CD8] text-white"
               disabled={
                 createPostMutation.isLoading ||
                 (postContent.trim() === "" && !selectedImage && !selectedGif)
