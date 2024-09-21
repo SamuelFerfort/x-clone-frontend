@@ -6,11 +6,19 @@ import AvatarIcon from "./Avatar";
 import { Smile, ImageIcon, X } from "lucide-react";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
+import { GiphyFetch } from "@giphy/js-fetch-api";
+import GifIcon from "./GifIcon";
+
+const gf = new GiphyFetch("kHsEVWnq4DJWsupWneBQD5gfhPENQlrO");
 
 export default function CreatePost() {
   const [postContent, setPostContent] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [showGifPicker, setShowGifPicker] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedGif, setSelectedGif] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [gifResults, setGifResults] = useState([]);
 
   const user = useAuth();
   const textareaRef = useRef(null);
@@ -29,6 +37,8 @@ export default function CreatePost() {
       queryClient.invalidateQueries({ queryKey: ["posts"] });
       setPostContent("");
       removeSelectedImage();
+      setSelectedGif(null);
+      setSearchTerm("")
     },
     onError: (err) => {
       console.error("Failed to create post:", err);
@@ -46,10 +56,27 @@ export default function CreatePost() {
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
-      textareaRef.current.style.height =
-        textareaRef.current.scrollHeight + "px";
+      textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
     }
   }, [postContent]);
+
+  useEffect(() => {
+    if (showGifPicker) {
+      searchGifs("trending");
+    }
+  }, [showGifPicker]);
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      if (searchTerm) {
+        searchGifs(searchTerm);
+      } else if (showGifPicker) {
+        searchGifs("trending");
+      }
+    }, 300);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm, showGifPicker]);
 
   const addEmoji = (emoji) => {
     const emojiChar = emoji.native;
@@ -64,6 +91,7 @@ export default function CreatePost() {
         URL.revokeObjectURL(selectedImage);
       }
       setSelectedImage(URL.createObjectURL(file));
+      setSelectedGif(null)
     }
   };
 
@@ -77,6 +105,25 @@ export default function CreatePost() {
     }
   };
 
+  const selectGif = (gif) => {
+    setSelectedGif(gif);
+    setShowGifPicker(false);
+    setSearchTerm("")
+    removeSelectedImage()
+
+  };
+
+  const searchGifs = async (term) => {
+    try {
+      const result = term === "trending"
+        ? await gf.trending({ limit: 9 })
+        : await gf.search(term, { limit: 9 });
+      setGifResults(result.data);
+    } catch (error) {
+      console.error("Error searching GIFs:", error);
+    }
+  };
+
   async function handlePostSubmit(e) {
     e.preventDefault();
 
@@ -86,6 +133,9 @@ export default function CreatePost() {
       formData.append("image", fileInputRef.current.files[0]);
     }
 
+    if (selectedGif) {
+      formData.append("gif", selectedGif.images.original.url);
+    }
     createPostMutation.mutate(formData);
   }
 
@@ -106,16 +156,13 @@ export default function CreatePost() {
         )}
       </div>
 
-      <form
-        onSubmit={handlePostSubmit}
-        className="flex flex-col w-full relative"
-      >
+      <form onSubmit={handlePostSubmit} className="flex flex-col w-full relative">
         <div className="flex-grow">
           <textarea
             ref={textareaRef}
             className="w-full bg-transparent text-white resize-none outline-none text-xl mt-2 overflow-hidden"
             rows="2"
-            placeholder="¡¿What's happening?!"
+            placeholder="What is happening?!"
             value={postContent}
             disabled={createPostMutation.isLoading}
             onChange={(e) => setPostContent(e.target.value)}
@@ -137,6 +184,22 @@ export default function CreatePost() {
               </button>
             </div>
           )}
+          {selectedGif && (
+            <div className="relative mt-2 mb-4">
+              <img
+                src={selectedGif.images.original.url}
+                alt="Selected GIF"
+                className="max-w-full h-auto rounded-2xl"
+              />
+              <button
+                type="button"
+                onClick={() => setSelectedGif(null)}
+                className="absolute top-2 left-2 bg-gray-900 bg-opacity-75 text-white rounded-full p-1"
+              >
+                <X size={16} />
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="flex justify-between items-center">
@@ -146,6 +209,12 @@ export default function CreatePost() {
               onClick={() => setShowEmojiPicker(!showEmojiPicker)}
             >
               <Smile color="#1A8CD8" />
+            </button>
+            <button
+              type="button"
+              onClick={() => setShowGifPicker(!showGifPicker)}
+            >
+              <GifIcon />
             </button>
             <label htmlFor="image-upload" className="cursor-pointer">
               <ImageIcon color="#1D9BF0" />
@@ -164,7 +233,7 @@ export default function CreatePost() {
             className="bg-btn-blue px-8 py-1 rounded-full text-lg font-bold hover:bg-[#1A8CD8] text-white"
             disabled={
               createPostMutation.isLoading ||
-              (postContent.trim() === "" && !selectedImage)
+              (postContent.trim() === "" && !selectedImage && !selectedGif)
             }
           >
             {createPostMutation.isLoading ? "Posting..." : "Post"}
@@ -187,6 +256,28 @@ export default function CreatePost() {
               navPosition="bottom"
               backgroundImageFn={() => "none"}
             />
+          </div>
+        )}
+        {showGifPicker && (
+          <div className="absolute top-full z-10 bg-gray-900 p-4 rounded-lg w-full max-w-md">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search GIFs"
+              className="w-full p-2 rounded bg-gray-800 text-white mb-4"
+            />
+            <div className="grid grid-cols-3 gap-2">
+              {gifResults.map((gif) => (
+                <img
+                  key={gif.id}
+                  src={gif.images.fixed_height_small.url}
+                  alt={gif.title}
+                  className="w-full h-auto cursor-pointer rounded"
+                  onClick={() => selectGif(gif)}
+                />
+              ))}
+            </div>
           </div>
         )}
       </form>

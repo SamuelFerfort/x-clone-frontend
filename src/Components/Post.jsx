@@ -6,6 +6,7 @@ import useInteractionMutation from "../hooks/useInteractionMutation";
 import DeleteBtn from "./DeleteBtn";
 import { useAuth } from "../contexts/AuthProvider";
 
+
 export default function Post({ post }) {
   const [hover, setHover] = useState({
     repost: false,
