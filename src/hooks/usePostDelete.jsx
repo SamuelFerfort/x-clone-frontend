@@ -7,7 +7,7 @@ const usePostDelete = () => {
   const { user } = useAuth();
 
   return useMutation({
-    mutationFn: ({ postId, authorId, parentPostId }) => {
+    mutationFn: ({ postId, authorId }) => {
       if (authorId !== user.id) return;
 
       return authenticatedFetch(`/api/post/${postId}/delete`, {
