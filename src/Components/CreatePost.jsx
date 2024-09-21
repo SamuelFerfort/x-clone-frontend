@@ -38,7 +38,7 @@ export default function CreatePost() {
       setPostContent("");
       removeSelectedImage();
       setSelectedGif(null);
-      setSearchTerm("")
+      setSearchTerm("");
     },
     onError: (err) => {
       console.error("Failed to create post:", err);
@@ -56,7 +56,8 @@ export default function CreatePost() {
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
-      textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
+      textareaRef.current.style.height =
+        textareaRef.current.scrollHeight + "px";
     }
   }, [postContent]);
 
@@ -79,9 +80,13 @@ export default function CreatePost() {
   }, [searchTerm, showGifPicker]);
 
   const addEmoji = (emoji) => {
+    if (postContent.length > 298) return;
+
     const emojiChar = emoji.native;
     setPostContent((prevMessage) => prevMessage + emojiChar);
   };
+
+
 
   const handleImageSelect = (e) => {
     const file = e.target.files[0];
@@ -91,7 +96,7 @@ export default function CreatePost() {
         URL.revokeObjectURL(selectedImage);
       }
       setSelectedImage(URL.createObjectURL(file));
-      setSelectedGif(null)
+      setSelectedGif(null);
     }
   };
 
@@ -108,16 +113,16 @@ export default function CreatePost() {
   const selectGif = (gif) => {
     setSelectedGif(gif);
     setShowGifPicker(false);
-    setSearchTerm("")
-    removeSelectedImage()
-
+    setSearchTerm("");
+    removeSelectedImage();
   };
 
   const searchGifs = async (term) => {
     try {
-      const result = term === "trending"
-        ? await gf.trending({ limit: 9 })
-        : await gf.search(term, { limit: 9 });
+      const result =
+        term === "trending"
+          ? await gf.trending({ limit: 9 })
+          : await gf.search(term, { limit: 9 });
       setGifResults(result.data);
     } catch (error) {
       console.error("Error searching GIFs:", error);
@@ -156,7 +161,10 @@ export default function CreatePost() {
         )}
       </div>
 
-      <form onSubmit={handlePostSubmit} className="flex flex-col w-full relative">
+      <form
+        onSubmit={handlePostSubmit}
+        className="flex flex-col w-full relative"
+      >
         <div className="flex-grow">
           <textarea
             ref={textareaRef}
@@ -165,7 +173,14 @@ export default function CreatePost() {
             placeholder="What is happening?!"
             value={postContent}
             disabled={createPostMutation.isLoading}
-            onChange={(e) => setPostContent(e.target.value)}
+            onChange={(e) => {
+              if (
+                e.target.value.length <= 300 ||
+                e.target.value.length < postContent.length
+              ) {
+                setPostContent(e.target.value);
+              }
+            }}
           />
 
           {selectedImage && (
@@ -228,16 +243,22 @@ export default function CreatePost() {
               className="hidden"
             />
           </div>
-
-          <button
-            className="bg-btn-blue px-8 py-1 rounded-full text-lg font-bold hover:bg-[#1A8CD8] text-white"
-            disabled={
-              createPostMutation.isLoading ||
-              (postContent.trim() === "" && !selectedImage && !selectedGif)
-            }
-          >
-            {createPostMutation.isLoading ? "Posting..." : "Post"}
-          </button>
+          <div>
+            {postContent.length > 0 && (
+              <span className="mr-4 text-base text-btn-blue">
+                {postContent.length}/300
+              </span>
+            )}
+            <button
+              className="bg-btn-blue px-8 py-1 rounded-full text-lg font-bold hover:bg-[#1A8CD8] text-white"
+              disabled={
+                createPostMutation.isLoading ||
+                (postContent.trim() === "" && !selectedImage && !selectedGif)
+              }
+            >
+              {createPostMutation.isLoading ? "Posting..." : "Post"}
+            </button>
+          </div>
         </div>
 
         {showEmojiPicker && (
