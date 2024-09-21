@@ -52,7 +52,7 @@ export default function Home() {
   if (status === "error") {
     return (
       <div className="flex justify-center pt-20 text-white">
-        Error fetching posts {error.message}
+        Error fetching posts: {error.message}
       </div>
     );
   }
