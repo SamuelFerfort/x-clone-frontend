@@ -2,15 +2,29 @@ import { useState } from "react";
 import { MoreHorizontal, Trash2 } from "lucide-react";
 import usePostDelete from "../hooks/usePostDelete";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
-export default function DeleteBtn({ postId, userId }) {
+export default function DeleteBtn({
+  postId,
+  userId,
+  parentPostId,
+  isParentPost,
+}) {
   const [showDropdown, setShowDropdown] = useState(false);
   const deleteMutation = usePostDelete();
 
+  const navigate = useNavigate();
   function handleDelete(e) {
     e.preventDefault();
     e.stopPropagation();
-    deleteMutation.mutate({ postId, authorId: userId });
+    deleteMutation.mutate({
+      postId,
+      authorId: userId,
+      parentPostId,
+    });
+    if (isParentPost) {
+      navigate("/home");
+    }
   }
 
   return (
@@ -47,4 +61,6 @@ export default function DeleteBtn({ postId, userId }) {
 DeleteBtn.propTypes = {
   postId: PropTypes.string,
   userId: PropTypes.string,
+  parentPostId: PropTypes.string,
+  isParentPost: PropTypes.bool,
 };

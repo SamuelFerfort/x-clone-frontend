@@ -1,10 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { authenticatedFetch } from "../utils/authenticatedFetch";
-import { useAuth } from "../contexts/AuthProvider";
 
 const useInteractionMutation = () => {
   const queryClient = useQueryClient();
-  const { user } = useAuth();
 
   return useMutation({
     mutationFn: ({ postId, interactionType }) => {
@@ -18,7 +16,7 @@ const useInteractionMutation = () => {
       const previousPosts = queryClient.getQueryData(["posts"]);
 
       // Optimistically update posts, or if it is parentPost then update the parentPost
-      
+
 
       /*   queryClient.setQueryData(["posts"], (old) => {
         if (!old) return old;

@@ -7,15 +7,18 @@ const usePostDelete = () => {
   const { user } = useAuth();
 
   return useMutation({
-    mutationFn: ({ postId, authorId }) => {
+    mutationFn: ({ postId, authorId, parentPostId }) => {
       if (authorId !== user.id) return;
 
       return authenticatedFetch(`/api/post/${postId}/delete`, {
         method: "DELETE",
       });
     },
-    onMutate: async ({ postId }) => {
+    onMutate: async ({ postId, parentPostId }) => {
       await queryClient.cancelQueries({ queryKey: ["posts"] });
+      await queryClient.cancelQueries({
+        queryKey: ["postReplies", parentPostId],
+      });
 
       const previousPosts = queryClient.getQueryData(["posts"]);
 
@@ -30,6 +33,21 @@ const usePostDelete = () => {
         };
       });
 
+      if (parentPostId) {
+        queryClient.setQueryData(["postReplies", parentPostId], (old) => {
+          if (!old) return old;
+
+          console.log;
+          return {
+            ...old,
+            pages: old.pages.map((page) => ({
+              ...page,
+              posts: page.posts.filter((p) => p.id !== postId),
+            })),
+          };
+        });
+      }
+
       return { previousPosts };
     },
     onError: (err, variables, context) => {
@@ -37,8 +55,13 @@ const usePostDelete = () => {
         queryClient.setQueryData(["posts"], context.previousPosts);
       }
     },
-    onSettled: () => {
+    onSettled: (data, error, variables) => {
       queryClient.invalidateQueries({ queryKey: ["posts"] });
+      if (variables.parentPostId) {
+        queryClient.invalidateQueries({
+          queryKey: ["postReplies", variables.parentPostId],
+        });
+      }
     },
   });
 };
