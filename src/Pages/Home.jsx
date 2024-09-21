@@ -71,13 +71,15 @@ export default function Home() {
         </Fragment>
       ))}
 
-      <div ref={observerTarget} className="h-10">
+      <div ref={observerTarget} className="h-14 flex justify-center items-center">
         {isFetchingNextPage && <Spinner />}
-      </div>
 
-      {!hasNextPage && (
-        <div className="text-center  text-gray-500">No more posts to load</div>
-      )}
+        {!hasNextPage && (
+          <div className="text-center  text-gray-500">
+            No more posts to load
+          </div>
+        )}
+      </div>
     </>
   );
 }

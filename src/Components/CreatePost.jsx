@@ -80,7 +80,7 @@ export default function CreatePost() {
   }, [searchTerm, showGifPicker]);
 
   const addEmoji = (emoji) => {
-    if (postContent.length > 298) return;
+    if ((postContent + emoji.native).length > 300) return;
 
     const emojiChar = emoji.native;
     setPostContent((prevMessage) => prevMessage + emojiChar);
