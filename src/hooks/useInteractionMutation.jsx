@@ -54,6 +54,11 @@ const useInteractionMutation = () => {
           queryKey: ["postReplies", variables.parentPostId],
         });
       }
+      if (variables.handler) {
+        queryClient.invalidateQueries({
+          queryKey: ["userPosts", variables.handler],
+        });
+      }
     },
   });
 };

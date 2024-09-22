@@ -14,7 +14,7 @@ const usePostDelete = () => {
         method: "DELETE",
       });
     },
-    onMutate: async ({ postId, parentPostId }) => {
+    onMutate: async ({ postId, parentPostId, handler }) => {
       await queryClient.cancelQueries({ queryKey: ["posts"] });
       await queryClient.cancelQueries({
         queryKey: ["postReplies", parentPostId],
@@ -48,6 +48,19 @@ const usePostDelete = () => {
         });
       }
 
+      if(handler) {
+        queryClient.setQueryData(["userPosts", handler], (old) => {
+          if (!old) return old;
+
+          return {
+            ...old,
+            pages: old.pages.map((page) => ({
+              ...page,
+              posts: page.posts.filter((p) => p.id !== postId),
+            })),
+          };
+        });
+      }
       return { previousPosts };
     },
     onError: (err, variables, context) => {
@@ -62,6 +75,12 @@ const usePostDelete = () => {
           queryKey: ["postReplies", variables.parentPostId],
         });
       }
+      if (variables.handler) {
+        queryClient.invalidateQueries({
+          queryKey: ["userPosts", variables.handler],
+        });
+      }
+      
     },
   });
 };

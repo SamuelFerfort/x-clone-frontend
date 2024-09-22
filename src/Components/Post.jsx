@@ -7,7 +7,7 @@ import useInteractionMutation from "../hooks/useInteractionMutation";
 import DeleteBtn from "./DeleteBtn";
 import { useAuth } from "../contexts/AuthProvider";
 
-export default function Post({ post, isParentPost = false, parentPostId }) {
+export default function Post({ post, isParentPost = false, parentPostId, handler }) {
   const [hover, setHover] = useState({
     repost: false,
     like: false,
@@ -26,6 +26,7 @@ export default function Post({ post, isParentPost = false, parentPostId }) {
       interactionType,
       parentPostId,
       isParentPost,
+      handler,
     });
   };
 
@@ -145,6 +146,7 @@ export default function Post({ post, isParentPost = false, parentPostId }) {
               parentPostId={parentPostId}
               isParentPost={isParentPost}
 
+
             />
           )}
         </div>
@@ -182,6 +184,7 @@ export default function Post({ post, isParentPost = false, parentPostId }) {
                 postId={post.id}
                 userId={user.id}
                 parentPostId={parentPostId}
+                handler={handler}
               />
             )}
           </span>
@@ -197,4 +200,5 @@ Post.propTypes = {
   post: PropTypes.object.isRequired,
   isParentPost: PropTypes.bool,
   parentPostId: PropTypes.string,
+  handler: PropTypes.string
 };

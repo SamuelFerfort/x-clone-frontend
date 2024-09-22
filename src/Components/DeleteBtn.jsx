@@ -9,6 +9,7 @@ export default function DeleteBtn({
   userId,
   parentPostId,
   isParentPost,
+  handler,
 }) {
   const [showDropdown, setShowDropdown] = useState(false);
   const deleteMutation = usePostDelete();
@@ -21,6 +22,7 @@ export default function DeleteBtn({
       postId,
       authorId: userId,
       parentPostId,
+      handler
     });
     if (isParentPost) {
       navigate("/home");
@@ -63,4 +65,5 @@ DeleteBtn.propTypes = {
   userId: PropTypes.string,
   parentPostId: PropTypes.string,
   isParentPost: PropTypes.bool,
+  handler: PropTypes.string
 };

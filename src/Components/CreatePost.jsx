@@ -11,7 +11,7 @@ import GifIcon from "./GifIcon";
 
 const gf = new GiphyFetch("kHsEVWnq4DJWsupWneBQD5gfhPENQlrO");
 
-export default function CreatePost({ parentId = undefined }) {
+export default function CreatePost({ parentId = undefined, placeholderText }) {
   const [postContent, setPostContent] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [showGifPicker, setShowGifPicker] = useState(false);
@@ -177,7 +177,7 @@ export default function CreatePost({ parentId = undefined }) {
             ref={textareaRef}
             className="w-full bg-transparent text-white resize-none outline-none text-xl mt-2 overflow-hidden"
             rows="1"
-            placeholder="What is happening?!"
+            placeholder={placeholderText || "What is happening?!"}
             value={postContent}
             disabled={createPostMutation.isLoading}
             onChange={(e) => {

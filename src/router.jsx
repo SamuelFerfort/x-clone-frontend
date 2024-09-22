@@ -31,6 +31,7 @@ const router = createBrowserRouter(
           <Route path="profile" element={<Profile />} />
           <Route path="bookmarks" element={<Bookmarks />} />
           <Route path=":handler/status/:postId" element={<PostView />} />
+          <Route path=":handler"  element={<Profile />}/>
         </Route>
       </Route>
 

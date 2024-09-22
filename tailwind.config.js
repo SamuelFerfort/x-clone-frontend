@@ -14,6 +14,7 @@ export default {
         "blue-bookmark": "#1A8BD6",
         "second-gray": "#e7e9ea",
         "post-hover": "#0D0D0D",
+        "gray-secondary": "#71767B"
       },
     },
   },

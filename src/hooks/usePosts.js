@@ -27,10 +27,15 @@ export const usePostReplies = (postId) => {
   });
 };
 
-export const useUserPosts = (userId) => {
+export const useUserPosts = (handler) => {
   return useInfiniteQuery({
-    queryKey: ["userPosts", userId],
-    queryFn: ({ pageParam = 1 }) => api.fetchUserPosts({ userId, pageParam }),
-    getNextPageParam: (lastPage) => lastPage.nextCursor,
+    queryKey: ["userPosts", handler],
+    queryFn: ({ pageParam = 1 }) => api.fetchUserPosts({ handler, pageParam }),
+    getNextPageParam: (lastPage) => {
+      if (lastPage.currentPage < lastPage.totalPages) {
+        return lastPage.currentPage;
+      }
+      return undefined;
+    },
   });
 };

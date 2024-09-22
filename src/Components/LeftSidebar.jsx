@@ -5,7 +5,7 @@ import { useAuth } from "../contexts/AuthProvider";
 
 export default function LeftSidebar() {
 
-  const {logout} = useAuth()
+  const {logout, user} = useAuth()
 
   return (
     <aside className="w-[600px]  bg-black  border-r border-white/20 fixed h-screen">
@@ -35,7 +35,7 @@ export default function LeftSidebar() {
               className={({ isActive }) =>
                 `flex items-center space-x-4 ${isActive ? "font-bold" : ""}`
               }
-              to="/profile"
+              to={`/${user.handler}`}
             >
               {({ isActive }) => (
                 <>

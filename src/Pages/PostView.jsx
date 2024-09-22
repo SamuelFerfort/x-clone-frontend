@@ -64,7 +64,7 @@ export default function PostView() {
           />
         )}
 
-        <CreatePost parentId={parentPost.id} />
+        <CreatePost parentId={parentPost.id} placeholderText={"Post your reply"}/>
 
         {data.pages.map((page, i) => (
           <Fragment key={`page-${i}`}>
