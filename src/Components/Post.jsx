@@ -142,8 +142,8 @@ export default function Post({
           </Link>
           <Link to={`/${post.author.handler}`}>
             <div className="flex flex-col ">
-              <span className="font-bold">{post.author.username}</span>
-              <span className="text-gray-500 text-sm ">
+              <span className="font-bold leading-tight hover:underline">{post.author.username}</span>
+              <span className="text-gray-500 text-sm leading-tight">
                 {post.author.handler}
               </span>
             </div>
@@ -185,8 +185,8 @@ export default function Post({
         <div className="flex flex-col flex-grow min-w-0">
           <span className="flex gap-1">
             <Link to={`/${post.author.handler}`}>
-              <span className="font-bold truncate">{post.author.username}</span>
-              <span className="text-gray-500 truncate">
+              <span className="font-bold truncate hover:underline">{post.author.username}</span>
+              <span className="text-gray-500 truncate ml-1">
                 {post.author.handler}
               </span>
             </Link>
