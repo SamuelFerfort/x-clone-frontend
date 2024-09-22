@@ -33,7 +33,7 @@ export const useUserPosts = (handler) => {
     queryFn: ({ pageParam = 1 }) => api.fetchUserPosts({ handler, pageParam }),
     getNextPageParam: (lastPage) => {
       if (lastPage.currentPage < lastPage.totalPages) {
-        return lastPage.currentPage;
+        return lastPage.currentPage + 1;
       }
       return undefined;
     },

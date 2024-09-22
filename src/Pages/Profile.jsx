@@ -3,18 +3,24 @@ import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, CalendarDays } from "lucide-react";
 import { useUserPosts } from "../hooks/usePosts";
 import InfiniteScrollLoader from "../Components/InfiniteScrollLoader";
-import { Fragment } from "react";
 import Spinner from "../Components/Spinner";
 import Post from "../Components/Post";
 import AvatarIcon from "../Components/Avatar";
 import { formatJoinDate } from "../utils/formatJoinDate";
 import { useAuth } from "../contexts/AuthProvider";
+import { useState } from "react";
 
 export default function Profile() {
+  const [filter, setFilter] = useState({
+    likes: false,
+    bookmarks: false,
+  });
+
   const navigate = useNavigate();
   const { handler } = useParams();
   useTitle(`${handler || "No data"}'s profile`);
   const { user } = useAuth();
+
   const {
     status,
     fetchNextPage,
@@ -47,7 +53,18 @@ export default function Profile() {
 
   const profile = data.pages[0].user;
 
+  let posts = data.pages.flatMap((p) => p.posts);
+  let NoMorePostsMessage = `You've reached the end of ${handler}'s posts`;
   const currentUser = profile.id === user.id;
+  if (filter.likes) {
+    posts = posts.filter((p) => p.likes.length > 0);
+    NoMorePostsMessage = `You've seen all the posts ${handler} has liked`;
+  }
+
+  if (filter.bookmarks) {
+    posts = posts.filter((p) => p.bookmarks.length > 0);
+    NoMorePostsMessage = `You've reached the end of ${handler}'s bookmarked posts`;
+  }
 
   return (
     <>
@@ -63,7 +80,7 @@ export default function Profile() {
             {profile.username}
           </h1>
           <span className="text-[13px] text-gray-secondary leading-tight">
-            {data.pages[0].posts.length} posts
+            {data.pages[0].totalCount} posts
           </span>
         </div>
       </header>
@@ -123,22 +140,35 @@ export default function Profile() {
               </div>
             </div>
           </section>
-          <nav className="h-10 bg-black border-b border-white/20"></nav>
+          <nav className="h-10 bg-black border-b border-white/20 flex justify-between px-10 text-center">
+            <button
+              onClick={() => setFilter({ likes: false, bookmarks: false })}
+            >
+              All
+            </button>{" "}
+            <button
+              onClick={() => setFilter({ likes: true, bookmarks: false })}
+            >
+              {" "}
+              Likes
+            </button>{" "}
+            <button
+              onClick={() => setFilter({ likes: false, bookmarks: true })}
+            >
+              Bookmarks
+            </button>
+          </nav>
         </section>
 
-        {data.pages.map((page, i) => (
-          <Fragment key={`page-${i}`}>
-            {page.posts.map((post) => (
-              <Post post={post} key={post.id} handler={profile.handler} />
-            ))}
-          </Fragment>
+        {posts.map((post) => (
+          <Post post={post} key={post.id} handler={profile.handler} />
         ))}
 
         <InfiniteScrollLoader
           hasNextPage={hasNextPage}
           isFetchingNextPage={isFetchingNextPage}
           fetchNextPage={fetchNextPage}
-          noPostsText={"No more user posts"}
+          noPostsText={NoMorePostsMessage}
         />
       </main>
     </>

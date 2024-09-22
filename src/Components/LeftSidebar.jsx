@@ -114,6 +114,11 @@ export default function LeftSidebar() {
           </li>
         </ul>
       </nav>
+    <dialog>
+
+      
+    </dialog>
+
     </aside>
   );
 }
