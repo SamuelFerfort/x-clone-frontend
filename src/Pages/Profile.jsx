@@ -1,18 +1,20 @@
 import useTitle from "../hooks/useTitle";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, CalendarDays } from "lucide-react";
 import { useUserPosts } from "../hooks/usePosts";
 import InfiniteScrollLoader from "../Components/InfiniteScrollLoader";
 import { Fragment } from "react";
 import Spinner from "../Components/Spinner";
 import Post from "../Components/Post";
 import AvatarIcon from "../Components/Avatar";
+import { formatJoinDate } from "../utils/formatJoinDate";
+import { useAuth } from "../contexts/AuthProvider";
 
 export default function Profile() {
   const navigate = useNavigate();
   const { handler } = useParams();
   useTitle(`${handler || "No data"}'s profile`);
-
+  const { user } = useAuth();
   const {
     status,
     fetchNextPage,
@@ -45,6 +47,8 @@ export default function Profile() {
 
   const profile = data.pages[0].user;
 
+  const currentUser = profile.id === user.id;
+
   return (
     <>
       <header className="pl-4 h-14 flex gap-9 items-center  fixed bg-black/40 backdrop-blur-md w-full z-10">
@@ -76,20 +80,34 @@ export default function Profile() {
               )}{" "}
             </div>
           </div>
-          <section className="bg-black flex p-2 gap-7 pl-5 flex-col h-44 border-b border-white/20 ">
+          <section className="bg-black flex p-2 gap-7 pl-5 flex-col h-44  ">
             <div className="ml-auto mr-4 mt-1">
-              <button className="ml-auto  bg-black px-4 font-bold text-[15px] text-white rounded-3xl py-[5px] border-gray-secondary border hover:bg-gray-hover">
-                Edit profile
-              </button>
+              {currentUser ? (
+                <button className="ml-auto  bg-black px-4 font-bold text-[15px] text-white rounded-3xl py-[5px] border-gray-secondary border hover:bg-gray-hover">
+                  Edit profile
+                </button>
+              ) : (
+                <button className="ml-auto  bg-black px-4 font-bold text-[15px] text-white rounded-3xl py-[5px] border-gray-secondary border hover:bg-gray-hover">
+                  Following
+                </button>
+              )}
             </div>
-            <div className="">
+            <div className="flex flex-col gap-1">
               <h1 className="text-xl font-bold leading-tight">
                 {profile.username}
               </h1>
-              <span className="text-sm text-gray-secondary leading-tight">
+              <span className="text-sm text-gray-secondary leading-tight mb">
                 {profile.handler}
               </span>
-              <div className="flex gap-2">
+              <div className="flex gap-1 items-center mt-2">
+                <CalendarDays color="#71767B" size={17} />
+
+                <span className="text-sm text-gray-secondary">
+                  {" "}
+                  {formatJoinDate(profile.createdAt)}{" "}
+                </span>
+              </div>
+              <div className="flex gap-2 nt-2">
                 <span className="font-bold">
                   {profile._count.following}{" "}
                   <span className="text-sm text-gray-secondary ml-1 font-normal">
@@ -105,7 +123,7 @@ export default function Profile() {
               </div>
             </div>
           </section>
-          <div></div>
+          <nav className="h-10 bg-black border-b border-white/20"></nav>
         </section>
 
         {data.pages.map((page, i) => (

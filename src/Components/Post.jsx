@@ -7,7 +7,12 @@ import useInteractionMutation from "../hooks/useInteractionMutation";
 import DeleteBtn from "./DeleteBtn";
 import { useAuth } from "../contexts/AuthProvider";
 
-export default function Post({ post, isParentPost = false, parentPostId, handler }) {
+export default function Post({
+  post,
+  isParentPost = false,
+  parentPostId,
+  handler,
+}) {
   const [hover, setHover] = useState({
     repost: false,
     like: false,
@@ -124,29 +129,31 @@ export default function Post({ post, isParentPost = false, parentPostId, handler
     return (
       <article className="flex flex-col p-4 border-b border-white/20">
         <div className="flex items-center gap-2 mb-2">
-          {post.author.avatar ? (
-            <img
-              src={post.author.avatar}
-              alt={`${post.author.username}'s avatar`}
-              className="w-10 h-10 rounded-full"
-            />
-          ) : (
-            <AvatarIcon size={44} />
-          )}
-          <div className="flex flex-col ">
-            <span className="font-bold">{post.author.username}</span>
-            <span className="text-gray-500 text-sm ">
-              {post.author.handler}
-            </span>
-          </div>
+          <Link to={`/${post.author.handler}`}>
+            {post.author.avatar ? (
+              <img
+                src={post.author.avatar}
+                alt={`${post.author.username}'s avatar`}
+                className="w-10 h-10 rounded-full"
+              />
+            ) : (
+              <AvatarIcon size={44} />
+            )}
+          </Link>
+          <Link to={`/${post.author.handler}`}>
+            <div className="flex flex-col ">
+              <span className="font-bold">{post.author.username}</span>
+              <span className="text-gray-500 text-sm ">
+                {post.author.handler}
+              </span>
+            </div>
+          </Link>
           {post.author.id === user.id && (
             <DeleteBtn
               postId={post.id}
               userId={user.id}
               parentPostId={parentPostId}
               isParentPost={isParentPost}
-
-
             />
           )}
         </div>
@@ -162,23 +169,27 @@ export default function Post({ post, isParentPost = false, parentPostId, handler
         className="flex p-4 pb-1 border-b border-white/20 gap-2 hover:bg-post-hover"
         key={post.id}
       >
-        <div>
-          {post.author.avatar ? (
-            <img
-              src={post.author.avatar}
-              alt={`${post.author.username}'s avatar`}
-              className="w-10 h-10 rounded-full"
-            />
-          ) : (
-            <AvatarIcon />
-          )}
-        </div>
+        <Link to={`/${post.author.handler}`}>
+          <div>
+            {post.author.avatar ? (
+              <img
+                src={post.author.avatar}
+                alt={`${post.author.username}'s avatar`}
+                className="w-10 h-10 rounded-full"
+              />
+            ) : (
+              <AvatarIcon />
+            )}
+          </div>
+        </Link>
         <div className="flex flex-col flex-grow min-w-0">
           <span className="flex gap-1">
-            <span className="font-bold truncate">{post.author.username}</span>
-            <span className="text-gray-500 truncate">
-              {post.author.handler}
-            </span>
+            <Link to={`/${post.author.handler}`}>
+              <span className="font-bold truncate">{post.author.username}</span>
+              <span className="text-gray-500 truncate">
+                {post.author.handler}
+              </span>
+            </Link>
             {post.author.id === user.id && (
               <DeleteBtn
                 postId={post.id}
@@ -200,5 +211,5 @@ Post.propTypes = {
   post: PropTypes.object.isRequired,
   isParentPost: PropTypes.bool,
   parentPostId: PropTypes.string,
-  handler: PropTypes.string
+  handler: PropTypes.string,
 };

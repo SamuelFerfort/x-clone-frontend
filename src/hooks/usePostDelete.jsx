@@ -68,6 +68,9 @@ const usePostDelete = () => {
         queryClient.setQueryData(["posts"], context.previousPosts);
       }
     },
+
+
+    
     onSettled: (data, error, variables) => {
       queryClient.invalidateQueries({ queryKey: ["posts"] });
       if (variables.parentPostId) {
