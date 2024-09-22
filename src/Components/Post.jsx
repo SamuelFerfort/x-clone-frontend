@@ -125,10 +125,44 @@ export default function Post({
     </div>
   );
 
+  const renderAuthorInfo = () => (
+    <div className="flex items-center gap-2">
+      {post.author.avatar ? (
+        <img
+          src={post.author.avatar}
+          alt={`${post.author.username}'s avatar`}
+          className="w-10 h-10 rounded-full"
+        />
+      ) : (
+        <AvatarIcon size={44} />
+      )}
+      <div className="flex flex-col">
+        <span className="font-bold leading-tight hover:underline">{post.author.username}</span>
+        <span className="text-gray-500 text-sm leading-tight">
+          {post.author.handler}
+        </span>
+      </div>
+    </div>
+  );
+
+
+  const renderDeleteButton = () => (
+    post.author.id === user.id && (
+      <DeleteBtn
+        postId={post.id}
+        userId={user.id}
+        parentPostId={parentPostId}
+        isParentPost={isParentPost}
+        handler={handler}
+      />
+    )
+  );
+
+
   if (isParentPost) {
     return (
       <article className="flex flex-col p-4 border-b border-white/20">
-        <div className="flex items-center gap-2 mb-2">
+        <div className="flex items-center gap-2 mb-4">
           <Link to={`/${post.author.handler}`}>
             {post.author.avatar ? (
               <img

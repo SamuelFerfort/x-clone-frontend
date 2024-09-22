@@ -34,7 +34,7 @@ export default function Home() {
   }
 
   if (!data) return <div>Loading...</div>;
-
+    
   return (
     <>
       <CreatePost />
