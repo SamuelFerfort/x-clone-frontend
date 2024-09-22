@@ -140,19 +140,22 @@ export default function Profile() {
               </div>
             </div>
           </section>
-          <nav className="h-10 bg-black border-b border-white/20 flex justify-between px-10 text-center">
+          <nav className="h-12 bg-black border-b border-white/20 grid grid-cols-3 text-center pt-2">
             <button
+                className={`hover:bg-gray-hover  text-gray-secondary ${!filter.likes && !filter.bookmarks &&"text-white font-bold"}`} 
               onClick={() => setFilter({ likes: false, bookmarks: false })}
             >
               All
             </button>{" "}
             <button
+              className={`hover:bg-gray-hover  text-gray-secondary ${filter.likes && "text-white font-bold"}`} 
               onClick={() => setFilter({ likes: true, bookmarks: false })}
             >
               {" "}
               Likes
             </button>{" "}
             <button
+               className={`hover:bg-gray-hover  text-gray-secondary ${filter.bookmarks && "text-white font-bold"}`} 
               onClick={() => setFilter({ likes: false, bookmarks: true })}
             >
               Bookmarks
