@@ -94,14 +94,17 @@ const EditProfileForm = ({ dialogRef }) => {
   return (
     <form onSubmit={handleFormSubmit}>
       <header className="flex justify-between items-center mt-1 h-10">
+        <div className=" p-1  hover:bg-gray-hover rounded-full hover:scale-110">
         <X
-          className="cursor-pointer rounded-full z-20 hover:bg-gray-hover"
+          className="cursor-pointer rounded-full z-20"
           color="white"
-          size={22}
+          size={20}
           onClick={() => {
             dialogRef.current?.close();
           }}
         />
+        </div>
+     
         <h1 className="text-white text-xl ml-4 font-bold mr-auto">
           Edit Profile
         </h1>

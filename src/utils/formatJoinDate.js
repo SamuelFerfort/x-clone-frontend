@@ -50,6 +50,5 @@ export function formatPostTimestamp(timestamp) {
   const dateOptions = { month: 'short', day: 'numeric', year: 'numeric' };
   const dateString = date.toLocaleString('en-US', dateOptions);
   
-  // Combine time and date
   return `${timeString} · ${dateString}`;
 }

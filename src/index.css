@@ -3,10 +3,18 @@
 @tailwind utilities;
 
 @layer base {
-    html {
-      font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-    }
+  html {
+    font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+      "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   }
+}
 
 
-  
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(0, 0, 0) transparent;
+}
+
+
+
