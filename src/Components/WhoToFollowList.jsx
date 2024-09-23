@@ -1,11 +1,17 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import Spinner from "./Spinner";
 
-const WhoToFollowList = ({ data }) => {
+const WhoToFollowList = ({ data, isLoading }) => {
   return (
     <div className="bg-black border-white/20 border rounded-xl overflow-hidden  ml-9 mt-5 max-w-80">
       <h2 className="text-xl font-bold text-white p-4">Who to follow</h2>
       <ul className="mb-3">
+        {(isLoading || !data) && (
+          <div className="flex justify-center ">
+            <Spinner />
+          </div>
+        )}
         {data?.map((u) => (
           <Link to={`/${u.handler}`} key={u.id}>
             <li className="flex items-center justify-between px-4 py-3 hover:bg-gray-hover transition-colors duration-200">

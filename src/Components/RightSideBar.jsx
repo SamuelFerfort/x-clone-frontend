@@ -35,7 +35,7 @@ export default function RightSidebar() {
         />
       </div>
 
-        <WhoToFollowList data={data} />
+      <WhoToFollowList data={data} isLoading={isLoading}/>
     </aside>
   );
 }
