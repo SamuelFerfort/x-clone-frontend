@@ -3,7 +3,6 @@ import LeftSidebar from "../Components/LeftSidebar";
 import RightSidebar from "../Components/RightSideBar";
 
 
-
 export default function X() {
   const location = useLocation();
 
