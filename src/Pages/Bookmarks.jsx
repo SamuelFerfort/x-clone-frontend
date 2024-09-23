@@ -22,7 +22,7 @@ export default function Bookmarks() {
 
   useTitle("Bookmarks / X");
 
-  if (status === "loading") {
+  if (status === "loading" || !data) {
     return (
       <div className="flex justify-center pt-20">
         <Spinner />
@@ -38,14 +38,14 @@ export default function Bookmarks() {
     );
   }
 
-  if (!data) return <div>Loading...</div>;
+  let posts = data.pages.flatMap((p) =>
+    p.posts.filter((po) => po.bookmarks.length > 0)
+  );
 
-  let posts = data.pages.flatMap((p) => p.posts.filter((po) => po.bookmarks.length > 0));
-  
-  if(filter) {
-    posts = posts.filter(p => p.content.includes(filter))
+  if (filter) {
+    posts = posts.filter((p) => p.content.includes(filter));
   }
-  console.log(posts)
+  console.log(posts);
   return (
     <>
       <header className="p-4 h-28 flex  items-center  fixed bg-black/40 backdrop-blur-md  z-10 left-[600px] w-[600px]">

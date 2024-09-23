@@ -17,7 +17,7 @@ export default function Home() {
 
   useTitle("Home / X");
 
-  if (status === "loading") {
+  if (status === "loading" || !data) {
     return (
       <div className="flex justify-center pt-20">
         <Spinner />
@@ -33,8 +33,6 @@ export default function Home() {
     );
   }
 
-  if (!data) return <div>Loading...</div>;
-    
   return (
     <>
       <CreatePost />

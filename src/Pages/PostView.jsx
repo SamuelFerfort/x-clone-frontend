@@ -23,7 +23,7 @@ export default function PostView() {
 
   useTitle(`${handler} post`);
 
-  if (status === "loading") {
+  if (status === "loading" || !data) {
     return (
       <div className="flex justify-center pt-20">
         <Spinner />
@@ -37,9 +37,6 @@ export default function PostView() {
         Error fetching posts: {error.message}
       </div>
     );
-  }
-  if (!data || !data.pages) {
-    return <div>No data available</div>;
   }
 
   const parentPost = data.pages[0].parentPost;
@@ -64,7 +61,10 @@ export default function PostView() {
           />
         )}
 
-        <CreatePost parentId={parentPost.id} placeholderText={"Post your reply"}/>
+        <CreatePost
+          parentId={parentPost.id}
+          placeholderText={"Post your reply"}
+        />
 
         {data.pages.map((page, i) => (
           <Fragment key={`page-${i}`}>

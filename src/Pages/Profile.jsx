@@ -12,7 +12,6 @@ import { useState } from "react";
 import { useRef } from "react";
 import EditProfileForm from "../Components/EditProfileForm";
 
-
 export default function Profile() {
   const [filter, setFilter] = useState({
     likes: false,
@@ -36,7 +35,7 @@ export default function Profile() {
     error,
   } = useUserPosts(handler);
 
-  if (status === "loading") {
+  if (status === "loading" || !data) {
     return (
       <div className="flex justify-center pt-20">
         <Spinner />
@@ -51,11 +50,6 @@ export default function Profile() {
       </div>
     );
   }
-  if (!data || !data.pages) {
-    return (
-      <div className="flex justify-center pt-20 text-white">User not found</div>
-    );
-  }
 
   const profile = data.pages[0].user;
 
@@ -63,12 +57,16 @@ export default function Profile() {
   let NoMorePostsMessage = `You've reached the end of ${handler}'s posts`;
   const currentUser = profile.id === user.id;
   if (filter.likes) {
-    posts = posts.filter((p) => p.likes.length > 0 && p.likes[0].userId === profile.id);
+    posts = posts.filter(
+      (p) => p.likes.length > 0 && p.likes[0].userId === profile.id
+    );
     NoMorePostsMessage = `You've seen all the posts ${handler} has liked`;
   }
 
   if (filter.bookmarks) {
-    posts = posts.filter((p) => p.bookmarks.length > 0 && p.bookmarks[0].userId === profile.id);
+    posts = posts.filter(
+      (p) => p.bookmarks.length > 0 && p.bookmarks[0].userId === profile.id
+    );
     NoMorePostsMessage = `You've reached the end of ${handler}'s bookmarked posts`;
   }
 
@@ -104,7 +102,7 @@ export default function Profile() {
             {profile.banner && (
               <img src={profile.banner} className="h-56 w-full object-cover" />
             )}
-            <div className="absolute top-[147px] left-4">
+            <div className="absolute top-[157px] left-4">
               {" "}
               {profile.avatar ? (
                 <img
