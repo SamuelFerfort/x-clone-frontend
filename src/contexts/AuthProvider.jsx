@@ -6,6 +6,7 @@ import {
   useEffect,
   useCallback,
 } from "react";
+import { authenticatedFetch } from "../utils/authenticatedFetch";
 
 const TOKEN = import.meta.env.VITE_TOKEN;
 const API_URL = import.meta.env.VITE_API_URL;
@@ -29,7 +30,6 @@ export const AuthProvider = ({ children }) => {
       });
       if (!response.ok) throw new Error("Token verification failed");
       const data = await response.json();
-      console.log(data)
       setUser(data);
     } catch (error) {
       console.error("Token verification failed:", error);
@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) => {
       }
       const { token, user } = await response.json();
       localStorage.setItem(TOKEN, token);
-      console.log(user)
+      console.log(user);
       setUser(user);
       return { success: true };
     } catch (error) {
@@ -78,6 +78,11 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem(TOKEN);
     setUser(null);
+  };
+
+  const updateUser = () => {
+    const token = localStorage.getItem(TOKEN);
+    verifyToken(token);
   };
 
   const register = async (formData) => {
@@ -114,6 +119,7 @@ export const AuthProvider = ({ children }) => {
     register,
     error,
     clearError,
+    updateUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

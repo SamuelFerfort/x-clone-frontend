@@ -9,6 +9,9 @@ import AvatarIcon from "../Components/Avatar";
 import { formatJoinDate } from "../utils/formatJoinDate";
 import { useAuth } from "../contexts/AuthProvider";
 import { useState } from "react";
+import { useRef } from "react";
+import EditProfileForm from "../Components/EditProfileForm";
+
 
 export default function Profile() {
   const [filter, setFilter] = useState({
@@ -16,10 +19,13 @@ export default function Profile() {
     bookmarks: false,
   });
 
+  const { user } = useAuth();
+
+  const dialogRef = useRef(null);
+
   const navigate = useNavigate();
   const { handler } = useParams();
   useTitle(`${handler || "No data"}'s profile`);
-  const { user } = useAuth();
 
   const {
     status,
@@ -52,6 +58,7 @@ export default function Profile() {
   }
 
   const profile = data.pages[0].user;
+  console.log(profile);
 
   let posts = data.pages.flatMap((p) => p.posts);
   let NoMorePostsMessage = `You've reached the end of ${handler}'s posts`;
@@ -75,6 +82,7 @@ export default function Profile() {
           size={20}
           onClick={() => navigate(-1)}
         />
+
         <div className="flex flex-col">
           <h1 className="font-bold text-[21px] text-white leading-tight">
             {profile.username}
@@ -84,23 +92,38 @@ export default function Profile() {
           </span>
         </div>
       </header>
-
+      <dialog
+        ref={dialogRef}
+        className=" relative px-4  pointer-events-auto  bg-black rounded-lg max-w-xl w-full h-auto max-h-[55vh] backdrop:bg-gray-secondary backdrop:bg-opacity-60  overflow-auto border-gray-600 border right-20  z-24"
+      >
+        {" "}
+        <EditProfileForm dialogRef={dialogRef} />
+      </dialog>
       <main className="mt-12">
         <section className=" bg-gray-600">
-          <div className="h-52 bg-gray-700 relative">
+          <div className="h-56 bg-gray-700 relative">
+            {profile.banner && (
+              <img src={profile.banner} className="h-56 w-full object-cover" />
+            )}
             <div className="absolute top-[147px] left-4">
               {" "}
               {profile.avatar ? (
-                <img src={profile.avatar} className="w-[120px] h-[120px]" />
+                <img
+                  src={profile.avatar}
+                  className="w-[120px] h-[120px] rounded-full object-cover"
+                />
               ) : (
                 <AvatarIcon size={120} />
               )}{" "}
             </div>
           </div>
-          <section className="bg-black flex p-2 gap-7 pl-5 flex-col h-44  ">
+          <section className="bg-black flex p-2 gap-7 pl-5 flex-col min-h-50  ">
             <div className="ml-auto mr-4 mt-1">
               {currentUser ? (
-                <button className="ml-auto  bg-black px-4 font-bold text-[15px] text-white rounded-3xl py-[5px] border-gray-secondary border hover:bg-gray-hover">
+                <button
+                  onClick={() => dialogRef.current?.showModal()}
+                  className="ml-auto  bg-black px-4 font-bold text-[15px] text-white rounded-3xl py-[5px] border-gray-secondary border hover:bg-gray-hover"
+                >
                   Edit profile
                 </button>
               ) : (
@@ -116,7 +139,10 @@ export default function Profile() {
               <span className="text-sm text-gray-secondary leading-tight mb">
                 {profile.handler}
               </span>
-              <div className="flex gap-1 items-center mt-2">
+              <span className="break-words">
+                {profile.about ? profile.about : "No status update"}
+              </span>
+              <div className="flex gap-1 items-center ">
                 <CalendarDays color="#71767B" size={17} />
 
                 <span className="text-sm text-gray-secondary">
@@ -142,20 +168,26 @@ export default function Profile() {
           </section>
           <nav className="h-12 bg-black border-b border-white/20 grid grid-cols-3 text-center pt-2">
             <button
-                className={`hover:bg-gray-hover  text-gray-secondary ${!filter.likes && !filter.bookmarks &&"text-white font-bold"}`} 
+              className={`hover:bg-gray-hover  text-gray-secondary ${
+                !filter.likes && !filter.bookmarks && "text-white font-bold"
+              }`}
               onClick={() => setFilter({ likes: false, bookmarks: false })}
             >
               All
             </button>{" "}
             <button
-              className={`hover:bg-gray-hover  text-gray-secondary ${filter.likes && "text-white font-bold"}`} 
+              className={`hover:bg-gray-hover  text-gray-secondary ${
+                filter.likes && "text-white font-bold"
+              }`}
               onClick={() => setFilter({ likes: true, bookmarks: false })}
             >
               {" "}
               Likes
             </button>{" "}
             <button
-               className={`hover:bg-gray-hover  text-gray-secondary ${filter.bookmarks && "text-white font-bold"}`} 
+              className={`hover:bg-gray-hover  text-gray-secondary ${
+                filter.bookmarks && "text-white font-bold"
+              }`}
               onClick={() => setFilter({ likes: false, bookmarks: true })}
             >
               Bookmarks

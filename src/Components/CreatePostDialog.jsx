@@ -1,5 +1,5 @@
 import { useAuth } from "../contexts/AuthProvider";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, forwardRef } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { authenticatedFetch } from "../utils/authenticatedFetch";
 import AvatarIcon from "./Avatar";
@@ -8,10 +8,11 @@ import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { GiphyFetch } from "@giphy/js-fetch-api";
 import GifIcon from "./GifIcon";
+import { useNavigate } from "react-router-dom";
 
 const gf = new GiphyFetch("kHsEVWnq4DJWsupWneBQD5gfhPENQlrO");
 
-export default function CreatePost({ parentId = undefined, placeholderText }) {
+const CreatePostDialog = forwardRef((props, ref) => {
   const [postContent, setPostContent] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [showGifPicker, setShowGifPicker] = useState(false);
@@ -19,9 +20,10 @@ export default function CreatePost({ parentId = undefined, placeholderText }) {
   const [selectedGif, setSelectedGif] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [gifResults, setGifResults] = useState([]);
-  const [loading, setLoading] = useState(false);
 
-  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const user = useAuth();
   const textareaRef = useRef(null);
   const fileInputRef = useRef(null);
 
@@ -35,16 +37,15 @@ export default function CreatePost({ parentId = undefined, placeholderText }) {
       });
     },
     onSuccess: () => {
-      if (parentId) {
-        queryClient.invalidateQueries({ queryKey: ["postReplies", parentId] });
-      } else {
-        queryClient.invalidateQueries({ queryKey: ["posts"] });
-      }
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
 
+      ref.current?.close();
+      props.setShowDialog(false);
       setPostContent("");
       removeSelectedImage();
       setSelectedGif(null);
       setSearchTerm("");
+      navigate("/home");
     },
     onError: (err) => {
       console.error("Failed to create post:", err);
@@ -135,27 +136,17 @@ export default function CreatePost({ parentId = undefined, placeholderText }) {
 
   async function handlePostSubmit(e) {
     e.preventDefault();
-    setLoading(true);
+
     const formData = new FormData();
     formData.append("content", postContent);
     if (fileInputRef.current && fileInputRef.current.files[0]) {
       formData.append("image", fileInputRef.current.files[0]);
     }
 
-    if (parentId) {
-      formData.append("parentId", parentId);
-    }
-
     if (selectedGif) {
       formData.append("gif", selectedGif.images.original.url);
     }
-    try {
-      await createPostMutation.mutateAsync(formData);
-    } catch (err) {
-      console.error("Error submitting post", err);
-    } finally {
-      setLoading(false);
-    }
+    createPostMutation.mutate(formData);
   }
 
   const customTheme = {
@@ -166,18 +157,8 @@ export default function CreatePost({ parentId = undefined, placeholderText }) {
   };
 
   return (
-    <section className="flex p-4 border-y border-white/20 gap-2 text-xl">
-      <div className="">
-        {user.avatar ? (
-          <img
-            src={user.avatar}
-            className="w-[42px] h-[42px] object-cover rounded-full"
-            alt={`${user.username}'s avatar`}
-          />
-        ) : (
-          <AvatarIcon />
-        )}
-      </div>
+    <div className="flex p-4 border-b border-white/20 gap-2 text-xl">
+     
 
       <form
         onSubmit={handlePostSubmit}
@@ -188,9 +169,9 @@ export default function CreatePost({ parentId = undefined, placeholderText }) {
             ref={textareaRef}
             className="w-full bg-black text-white resize-none outline-none text-xl mt-2 overflow-hidden"
             rows="2"
-            placeholder={placeholderText || "What is happening?!"}
+            placeholder={"What is happening?!"}
             value={postContent}
-            disabled={createPostMutation.isLoading}
+            disabled={false}
             onChange={(e) => {
               if (
                 e.target.value.length <= 300 ||
@@ -272,11 +253,11 @@ export default function CreatePost({ parentId = undefined, placeholderText }) {
             <button
               className="bg-btn-blue px-6 py-1 rounded-full text-base font-bold hover:bg-[#1A8CD8] text-white"
               disabled={
-                loading ||
+                createPostMutation.isLoading ||
                 (postContent.trim() === "" && !selectedImage && !selectedGif)
               }
             >
-              {loading ? "Posting..." : "Post"}
+              {createPostMutation.isLoading ? "Posting..." : "Post"}
             </button>
           </div>
         </div>
@@ -321,12 +302,10 @@ export default function CreatePost({ parentId = undefined, placeholderText }) {
             </div>
           </div>
         )}
-        {createPostMutation.error && (
-          <span className="text-red-500 text-sm">
-            {createPostMutation.error.message}
-          </span>
-        )}
       </form>
-    </section>
+    </div>
   );
-}
+});
+CreatePostDialog.displayName = "CreatePostDialog";
+
+export default CreatePostDialog;
