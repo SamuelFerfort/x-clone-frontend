@@ -1,5 +1,6 @@
 import { Outlet, useLocation, Navigate } from "react-router-dom";
 import LeftSidebar from "../Components/LeftSidebar";
+import RightSidebar from "../Components/RightSideBar";
 
 
 
@@ -19,7 +20,7 @@ export default function X() {
       <section className="max-w-[600px] ml-[600px] w-full bg-black text-white">
         <Outlet />
       </section>
-      <div className="w-[1200px]   bg-black border-l border-white/20 fixed left-[1200px] h-screen">hey</div>
+      <RightSidebar />
     </main>
   );
 }
