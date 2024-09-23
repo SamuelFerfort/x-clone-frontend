@@ -6,6 +6,10 @@ import AvatarIcon from "./Avatar";
 import useInteractionMutation from "../hooks/useInteractionMutation";
 import DeleteBtn from "./DeleteBtn";
 import { useAuth } from "../contexts/AuthProvider";
+import {
+  formatTimeDifference,
+  formatPostTimestamp,
+} from "../utils/formatJoinDate";
 
 export default function Post({
   post,
@@ -34,7 +38,7 @@ export default function Post({
       handler,
     });
   };
-  const isLikedByUser = post.likes.length > 0  
+  const isLikedByUser = post.likes.length > 0;
   const isRepostedByUser = post.reposts.length > 0;
   const isBookmarkedByUser = post.bookmarks.length > 0;
 
@@ -124,9 +128,6 @@ export default function Post({
     </div>
   );
 
-
-
-
   if (isParentPost) {
     return (
       <article className="flex flex-col p-4 border-b border-white/20">
@@ -144,7 +145,9 @@ export default function Post({
           </Link>
           <Link to={`/${post.author.handler}`}>
             <div className="flex flex-col ">
-              <span className="font-bold leading-tight hover:underline">{post.author.username}</span>
+              <span className="font-bold leading-tight hover:underline">
+                {post.author.username}
+              </span>
               <span className="text-gray-500 text-sm leading-tight">
                 {post.author.handler}
               </span>
@@ -159,7 +162,13 @@ export default function Post({
             />
           )}
         </div>
+
         {renderPostContent()}
+        <section className="text-sm text-gray-500 border-b border-white/20 mt-2">
+          <div className="pb-3"> {formatPostTimestamp(post.createdAt)}</div>
+          <span className="min-h-10 border-white/20 border-b"> </span>
+        </section>
+
         {renderInteractionButtons()}
       </article>
     );
@@ -185,11 +194,16 @@ export default function Post({
           </div>
         </Link>
         <div className="flex flex-col flex-grow min-w-0">
-          <span className="flex gap-1">
-            <Link to={`/${post.author.handler}`}>
-              <span className="font-bold truncate hover:underline">{post.author.username}</span>
-              <span className="text-gray-500 truncate ml-1">
+          <span className="flex gap-1 items-center">
+            <Link to={`/${post.author.handler}`} className="flex  items-center">
+              <span className="font-bold truncate hover:underline">
+                {post.author.username}
+              </span>
+              <span className="text-gray-500 truncate ml-1 text-[15px]">
                 {post.author.handler}
+              </span>
+              <span className="text-gray-500  text-[15px] truncate ml-1">
+                · {formatTimeDifference(post.createdAt)}
               </span>
             </Link>
             {post.author.id === user.id && (
