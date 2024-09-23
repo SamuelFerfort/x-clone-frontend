@@ -10,7 +10,7 @@ const EditProfileForm = ({ dialogRef }) => {
 
   const [selectedBanner, setSelectedBanner] = useState(null);
   const [selectedAvatar, setSelectedAvatar] = useState(null);
-  const [bio, setBio] = useState(user.about);
+  const [bio, setBio] = useState(user.about || "");
   const [username, setUsername] = useState(user.username);
   const [isSubmitting, setIsSubmitting] = useState(false);
 

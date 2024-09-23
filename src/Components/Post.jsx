@@ -34,8 +34,7 @@ export default function Post({
       handler,
     });
   };
-
-  const isLikedByUser = post.likes.length > 0;
+  const isLikedByUser = post.likes.length > 0  
   const isRepostedByUser = post.reposts.length > 0;
   const isBookmarkedByUser = post.bookmarks.length > 0;
 
@@ -173,7 +172,7 @@ export default function Post({
         key={post.id}
       >
         <Link to={`/${post.author.handler}`}>
-          <div>
+          <div className="min-w-10 max-h-10">
             {post.author.avatar ? (
               <img
                 src={post.author.avatar}

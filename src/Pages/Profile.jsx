@@ -58,18 +58,17 @@ export default function Profile() {
   }
 
   const profile = data.pages[0].user;
-  console.log(profile);
 
   let posts = data.pages.flatMap((p) => p.posts);
   let NoMorePostsMessage = `You've reached the end of ${handler}'s posts`;
   const currentUser = profile.id === user.id;
   if (filter.likes) {
-    posts = posts.filter((p) => p.likes.length > 0);
+    posts = posts.filter((p) => p.likes.length > 0 && p.likes[0].userId === profile.id);
     NoMorePostsMessage = `You've seen all the posts ${handler} has liked`;
   }
 
   if (filter.bookmarks) {
-    posts = posts.filter((p) => p.bookmarks.length > 0);
+    posts = posts.filter((p) => p.bookmarks.length > 0 && p.bookmarks[0].userId === profile.id);
     NoMorePostsMessage = `You've reached the end of ${handler}'s bookmarked posts`;
   }
 

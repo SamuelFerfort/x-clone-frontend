@@ -20,6 +20,7 @@ const CreatePostDialog = forwardRef((props, ref) => {
   const [selectedGif, setSelectedGif] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [gifResults, setGifResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
 
   const navigate = useNavigate();
 
@@ -136,7 +137,7 @@ const CreatePostDialog = forwardRef((props, ref) => {
 
   async function handlePostSubmit(e) {
     e.preventDefault();
-
+    setIsLoading(true)
     const formData = new FormData();
     formData.append("content", postContent);
     if (fileInputRef.current && fileInputRef.current.files[0]) {
@@ -146,7 +147,14 @@ const CreatePostDialog = forwardRef((props, ref) => {
     if (selectedGif) {
       formData.append("gif", selectedGif.images.original.url);
     }
-    createPostMutation.mutate(formData);
+
+      try {
+      await createPostMutation.mutateAsync(formData);
+    } catch (err) {
+      console.error("Error submitting post", err);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   const customTheme = {
@@ -253,13 +261,14 @@ const CreatePostDialog = forwardRef((props, ref) => {
             <button
               className="bg-btn-blue px-6 py-1 rounded-full text-base font-bold hover:bg-[#1A8CD8] text-white"
               disabled={
-                createPostMutation.isLoading ||
+                isLoading ||
                 (postContent.trim() === "" && !selectedImage && !selectedGif)
               }
             >
-              {createPostMutation.isLoading ? "Posting..." : "Post"}
+              {isLoading ? "Posting..." : "Post"}
             </button>
           </div>
+          {createPostMutation.error && <span className="text-red-500 text-sm">{createPostMutation.error.message}</span>}
         </div>
 
         {showEmojiPicker && (
