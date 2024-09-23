@@ -102,12 +102,12 @@ export default function Profile() {
             {profile.banner && (
               <img src={profile.banner} className="h-56 w-full object-cover" />
             )}
-            <div className="absolute top-[157px] left-4">
+            <div className="absolute top-[155px] left-4 bg-black rounded-full border-4 border-black">
               {" "}
               {profile.avatar ? (
                 <img
                   src={profile.avatar}
-                  className="w-[120px] h-[120px] rounded-full object-cover"
+                  className="w-[125px] h-[125px] rounded-full object-cover"
                 />
               ) : (
                 <AvatarIcon size={120} />
@@ -130,7 +130,7 @@ export default function Profile() {
               )}
             </div>
             <div className="flex flex-col gap-1">
-              <h1 className="text-xl font-bold leading-tight">
+              <h1 className="text-[22px] font-bold leading-tight">
                 {profile.username}
               </h1>
               <span className="text-sm text-gray-secondary leading-tight mb">
