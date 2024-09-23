@@ -14,7 +14,7 @@ export default function SignUp() {
 
   const [errors, setErrors] = useState({});
 
-  const { register, loading } = useAuth();
+  const { register, loading, login } = useAuth();
   useTitle("Sign Up");
 
   const handleChange = (e) => {
@@ -57,7 +57,7 @@ export default function SignUp() {
 
     const { success, error } = await register(formData);
     if (success) {
-      navigate("/login");
+      login({ email: formData.email, password: formData.password });
     } else {
       setErrors((prevErrors) => ({
         ...prevErrors,
