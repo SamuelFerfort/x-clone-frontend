@@ -5,7 +5,7 @@ import Spinner from "./Spinner";
 const WhoToFollowList = ({ data, isLoading }) => {
   return (
     <div className="bg-black border-white/20 border rounded-xl overflow-hidden  ml-9 mt-5 max-w-80">
-      <h2 className="text-xl font-bold text-white p-4">Who to follow</h2>
+      <h2 className="text-xl font-bold text-white p-4">You might like</h2>
       <ul className="mb-3">
         {(isLoading || !data) && (
           <div className="flex justify-center ">
