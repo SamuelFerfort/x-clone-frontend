@@ -51,6 +51,7 @@ const WhoToFollowList = ({ data, isLoading }) => {
 
 WhoToFollowList.propTypes = {
   data: PropTypes.array,
+  isLoading: PropTypes.bool,
 };
 
 export default WhoToFollowList;
