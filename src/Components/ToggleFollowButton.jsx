@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { authenticatedFetch } from "../utils/authenticatedFetch";
 import useLikeMutation from "../hooks/useLikeMutation";
+import PropTypes from "prop-types";
 
 const ToggleFollowButton = ({ isFollowing, user }) => {
   const [isHovering, setIsHovering] = useState(false);
@@ -9,7 +9,7 @@ const ToggleFollowButton = ({ isFollowing, user }) => {
   const handleClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     likeMutation.mutate({ userId: user.id, handler: user.handler });
   };
 
@@ -34,6 +34,11 @@ const ToggleFollowButton = ({ isFollowing, user }) => {
       {isHovering ? "Unfollow" : "Following"}
     </button>
   );
+};
+
+ToggleFollowButton.propTypes = {
+  isFollowing: PropTypes.bool,
+  user: PropTypes.object,
 };
 
 export default ToggleFollowButton;

@@ -4,7 +4,25 @@ import Spinner from "./Spinner";
 import ToggleFollowButton from "./ToggleFollowButton";
 
 const WhoToFollowList = ({ data, isLoading }) => {
-  console.log("users data ----->", data);
+  const getRandomUsers = (users, count = 6) => {
+    // Create a shallow copy to avoid mutating the original array
+    const shuffled = [...users];
+
+    // Implementing Fisher-Yates Shuffle
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      // Swap elements i and j
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+
+    // Return the first 'count' users
+    return shuffled.slice(0, count);
+  };
+
+  let users;
+  if (!isLoading && data) {
+    users = getRandomUsers(data);
+  }
 
   return (
     <div className="bg-black border-white/20 border rounded-xl overflow-hidden  ml-9 mt-5 max-w-80">
@@ -15,7 +33,7 @@ const WhoToFollowList = ({ data, isLoading }) => {
             <Spinner />
           </div>
         )}
-        {data?.map((u) => (
+        {users?.map((u) => (
           <Link to={`/${u.handler}`} key={u.id}>
             <li className="flex items-center justify-between px-4 py-3 hover:bg-gray-hover transition-colors duration-200">
               <div className="flex items-center gap-3">
