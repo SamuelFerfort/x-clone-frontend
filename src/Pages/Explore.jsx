@@ -82,43 +82,48 @@ export default function Explore() {
       </header>
 
       <main className="mt-16 ">
-        <section className="pb-3.5">
-          <h1 className="text-white font-bold text-[23px] pl-4">
-            {filter ? "Users" : "Who to follow"}
+        {filteredUsers.length > 0 && (
+          <section className="pb-3.5">
+            <h1 className="text-white font-bold text-[23px] pl-4">
+              {filter ? "Users" : "Who to follow"}
+            </h1>
+            {filteredUsers?.map((u) => (
+              <Link to={`/${u.handler}`} key={u.id}>
+                <li className="flex items-center justify-between px-4 py-3 hover:bg-gray-hover transition-colors duration-200">
+                  <div className="flex items-center gap-3">
+                    <div className="flex-shrink-0">
+                      {u.avatar ? (
+                        <img
+                          src={u.avatar}
+                          alt={u.username}
+                          className="rounded-full w-10 h-10 object-cover"
+                        />
+                      ) : (
+                        <AvatarIcon size={40} />
+                      )}
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-white font-bold text-sm hover:underline">
+                        {u.username}
+                      </span>
+                      <span className="text-gray-500 text-sm">{u.handler}</span>
+                    </div>
+                  </div>
+                  <ToggleFollowButton
+                    isFollowing={u.followers.length > 0}
+                    user={u}
+                  />
+                </li>
+              </Link>
+            ))}
+          </section>
+        )}
+
+        {posts.length > 0 && (
+          <h1 className="text-white font-bold text-[23px] pl-4 border-t border-white/20 pt-3.5">
+            Posts
           </h1>
-          {filteredUsers?.map((u) => (
-            <Link to={`/${u.handler}`} key={u.id}>
-              <li className="flex items-center justify-between px-4 py-3 hover:bg-gray-hover transition-colors duration-200">
-                <div className="flex items-center gap-3">
-                  <div className="flex-shrink-0">
-                    {u.avatar ? (
-                      <img
-                        src={u.avatar}
-                        alt={u.username}
-                        className="rounded-full w-10 h-10 object-cover"
-                      />
-                    ) : (
-                      <AvatarIcon size={40} />
-                    )}
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-white font-bold text-sm hover:underline">
-                      {u.username}
-                    </span>
-                    <span className="text-gray-500 text-sm">{u.handler}</span>
-                  </div>
-                </div>
-                <ToggleFollowButton
-                  isFollowing={u.followers.length > 0}
-                  user={u}
-                />
-              </li>
-            </Link>
-          ))}
-        </section>
-        <h1 className="text-white font-bold text-[23px] pl-4 border-t border-white/20 pt-3.5">
-          Posts
-        </h1>
+        )}
         {posts.map((post) => (
           <Post post={post} key={post.id} />
         ))}
