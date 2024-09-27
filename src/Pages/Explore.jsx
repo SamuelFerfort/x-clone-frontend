@@ -128,7 +128,7 @@ export default function Explore() {
         hasNextPage={hasNextPage}
         isFetchingNextPage={isFetchingNextPage}
         fetchNextPage={fetchNextPage}
-        noPostsText={"No more posts bookmarked"}
+        noPostsText={"No more posts found"}
       />
     </>
   );

@@ -37,7 +37,7 @@ export default function InfiniteScrollLoader({
       {isFetchingNextPage && <Spinner />}
 
       {!hasNextPage && (
-        <div className="text-center  text-gray-500">{noPostsText}</div>
+        <div className="text-center  text-gray-secondary">{noPostsText}</div>
       )}
     </div>
   );

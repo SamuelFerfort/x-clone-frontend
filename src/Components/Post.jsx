@@ -24,7 +24,7 @@ export default function Post({
     comment: false,
     post: false,
   });
-  
+
   const { user } = useAuth();
   const interactionMutation = useInteractionMutation();
 
@@ -138,7 +138,7 @@ export default function Post({
           }`}
         >
           {isRepostedByUser && (
-            <div className="  text-[13px] pl-4 gap-2 z-12    flex items-center  ">
+            <div className="  text-[13px] pl-3 gap-1 z-12  py-0.5  flex items-center  ">
               <Repeat2 color="gray" size={17} className="" />{" "}
               <span className="text-gray-secondary">You reposted</span>
             </div>
@@ -160,7 +160,7 @@ export default function Post({
                 <span className="font-bold leading-tight hover:underline">
                   {post.author.username}
                 </span>
-                <span className="text-gray-500 text-sm leading-tight">
+                <span className="text-gray-secondary text-sm leading-tight">
                   {post.author.handler}
                 </span>
               </div>
@@ -195,7 +195,7 @@ export default function Post({
     >
       {isRepostedByUser && (
         <div
-          className={`text-[13px] pl-4 gap-2 z-12 pt-1 ${
+          className={`text-[13px] pl-5 gap-1 z-12 pt-2 ${
             hover.post ? "bg-post-hover" : "bg-black"
           } -mb-3 flex items-center  `}
         >
@@ -227,10 +227,10 @@ export default function Post({
               <span className="font-bold truncate hover:underline">
                 {post.author.username}
               </span>
-              <span className="text-gray-500 truncate ml-1 text-[15px]">
+              <span className="text-gray-secondary truncate ml-1 text-[15px]">
                 {post.author.handler}
               </span>
-              <span className="text-gray-500  text-[15px] truncate ml-1">
+              <span className="text-gray-secondary  text-[15px] truncate ml-1">
                 · {formatTimeDifference(post.createdAt)}
               </span>
             </Link>
