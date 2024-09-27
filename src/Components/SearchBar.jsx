@@ -24,7 +24,7 @@ const SearchBar = ({ users }) => {
         setFilter("")
       }
     };
-    
+
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
@@ -41,6 +41,7 @@ const SearchBar = ({ users }) => {
         onFocus={() => setShowDropdown(true)}
         type="search"
         name="users"
+        autoComplete="off"
         id="users"
         value={filter}
         onChange={(e) => setFilter(e.target.value)}

@@ -43,7 +43,9 @@ export default function Bookmarks() {
   );
 
   if (filter) {
-    posts = posts.filter((p) => p.content.includes(filter));
+    posts = posts.filter((p) =>
+      p.content.toLowerCase().includes(filter.toLowerCase())
+    );
   }
   console.log(posts);
   return (
@@ -65,8 +67,7 @@ export default function Bookmarks() {
             />
             <input
               type="search"
-              name=""
-              id=""
+              autoComplete="off"
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
               placeholder="Search Bookmarks"
@@ -85,7 +86,7 @@ export default function Bookmarks() {
         hasNextPage={hasNextPage}
         isFetchingNextPage={isFetchingNextPage}
         fetchNextPage={fetchNextPage}
-        noPostsText={"No more posts bookmarked"}
+        noPostsText={"No more posts"}
       />
     </>
   );

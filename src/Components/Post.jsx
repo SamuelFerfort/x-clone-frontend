@@ -24,7 +24,7 @@ export default function Post({
     comment: false,
     post: false,
   });
-
+  
   const { user } = useAuth();
   const interactionMutation = useInteractionMutation();
 

@@ -53,7 +53,7 @@ export default function Profile() {
   }
 
   const profile = data.pages[0].user;
-  
+
   let posts = data.pages.flatMap((p) => p.posts);
   let NoMorePostsMessage = `You've reached the end of ${handler}'s posts`;
   const currentUser = profile.id === user.id;
@@ -71,7 +71,7 @@ export default function Profile() {
     NoMorePostsMessage = `You've reached the end of ${handler}'s bookmarked posts`;
   }
 
-  console.log("PROFILE",profile)
+  console.log("PROFILE", profile);
 
   return (
     <>
@@ -127,8 +127,10 @@ export default function Profile() {
                   Edit profile
                 </button>
               ) : (
-
-                <ToggleFollowButton isFollowing={profile.followers.length > 0} user={profile} />
+                <ToggleFollowButton
+                  isFollowing={profile.followers.length > 0}
+                  user={profile}
+                />
               )}
             </div>
             <div className="flex flex-col gap-1">

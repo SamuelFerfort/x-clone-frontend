@@ -21,8 +21,7 @@ const useLikeMutation = () => {
       queryClient.invalidateQueries({
         queryKey: ["userPosts", user.handler],
       });
-
-      console.log("HANDLER", variables.handler);
+      
       queryClient.invalidateQueries({ queryKey: ["allUsers"] });
     },
   });

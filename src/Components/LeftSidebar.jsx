@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { User, Bookmark, Mail, Bell, LogOut, X } from "lucide-react";
+import { User, Bookmark, Mail, Bell, LogOut, X, Search } from "lucide-react";
 import HomeSVG from "./HomeSVG";
 import { useAuth } from "../contexts/AuthProvider";
 import { useRef, useState } from "react";
@@ -45,6 +45,25 @@ export default function LeftSidebar() {
               className={({ isActive }) =>
                 `flex items-center space-x-4 ${isActive ? "font-bold" : ""}`
               }
+              to="/explore"
+            >
+              {({ isActive }) => (
+                <>
+                  <Search
+                    size={26}
+                    color={"white"}
+                    strokeWidth={isActive ? "2.9px" : "1.9px"}
+                  />
+                  <span>Explore</span>
+                </>
+              )}
+            </NavLink>
+          </li>
+          <li className="hover:bg-gray-hover p-3 rounded-full transition-colors duration-200">
+            <NavLink
+              className={({ isActive }) =>
+                `flex items-center space-x-4 ${isActive ? "font-bold" : ""}`
+              }
               to={`/${user.handler}`}
             >
               {({ isActive }) => (
@@ -73,21 +92,7 @@ export default function LeftSidebar() {
               )}
             </NavLink>
           </li>
-          <li className="hover:bg-gray-hover p-3 rounded-full transition-colors duration-200">
-            <NavLink
-              className={({ isActive }) =>
-                `flex items-center space-x-4 ${isActive ? "font-bold" : ""}`
-              }
-              to="/messages"
-            >
-              {({ isActive }) => (
-                <>
-                  <Mail className={isActive ? "fill-white" : ""} size={28} />
-                  <span>Messages</span>
-                </>
-              )}
-            </NavLink>
-          </li>
+        
           <li className="hover:bg-gray-hover p-3  rounded-full transition-colors duration-200">
             <NavLink
               className={({ isActive }) =>
@@ -140,7 +145,12 @@ export default function LeftSidebar() {
                 }}
               />
               <div className="mt-4 border-">
-                {showDialog && <CreatePostDialog ref={dialogRef}  setShowDialog={setShowDialog} />}
+                {showDialog && (
+                  <CreatePostDialog
+                    ref={dialogRef}
+                    setShowDialog={setShowDialog}
+                  />
+                )}
               </div>
             </dialog>
           </li>

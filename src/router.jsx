@@ -14,6 +14,7 @@ import Bookmarks from "./Pages/Bookmarks";
 import ErrorBoundary from "./Pages/ErrorBoundary";
 import NotFound from "./Pages/NotFound";
 import PostView from "./Pages/PostView";
+import Explore from "./Pages/Explore";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,6 +29,8 @@ const router = createBrowserRouter(
       <Route element={<ProtectedLayout />}>
         <Route path="/" element={<X />}>
           <Route path="home" element={<Home />} />
+          <Route path="explore" element={<Explore />} />
+          
           <Route path="profile" element={<Profile />} />
           <Route path="bookmarks" element={<Bookmarks />} />
           <Route path=":handler/status/:postId" element={<PostView />} />

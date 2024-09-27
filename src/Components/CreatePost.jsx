@@ -186,7 +186,7 @@ export default function CreatePost({ parentId = undefined, placeholderText }) {
         <div className="flex-grow">
           <textarea
             ref={textareaRef}
-            className="w-full bg-black text-white resize-none outline-none text-xl mt-2 overflow-hidden"
+            className="w-full bg-black text-white resize-none outline-none text-xl mt-2 overflow-hidden  placeholder-gray-secondary"
             rows="2"
             placeholder={placeholderText || "What is happening?!"}
             value={postContent}

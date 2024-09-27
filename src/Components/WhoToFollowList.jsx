@@ -2,26 +2,13 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Spinner from "./Spinner";
 import ToggleFollowButton from "./ToggleFollowButton";
+import getRandomUsers from "../utils/getRandomUsers";
+import { useEffect, useState } from "react";
 
 const WhoToFollowList = ({ data, isLoading }) => {
-  const getRandomUsers = (users, count = 6) => {
-    // Create a shallow copy to avoid mutating the original array
-    const shuffled = [...users];
-
-    // Implementing Fisher-Yates Shuffle
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      // Swap elements i and j
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-
-    // Return the first 'count' users
-    return shuffled.slice(0, count);
-  };
-
   let users;
   if (!isLoading && data) {
-    users = getRandomUsers(data);
+    users = data.slice(0, 8);
   }
 
   return (
