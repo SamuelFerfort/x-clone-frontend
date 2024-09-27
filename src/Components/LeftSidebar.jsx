@@ -1,9 +1,10 @@
-import { NavLink } from "react-router-dom";
-import { User, Bookmark,  Bell, LogOut, X, Search } from "lucide-react";
+import { NavLink, Link } from "react-router-dom";
+import { User, Bookmark, Bell, LogOut, X, Search } from "lucide-react";
 import HomeSVG from "./HomeSVG";
 import { useAuth } from "../contexts/AuthProvider";
 import { useRef, useState } from "react";
 import CreatePostDialog from "./CreatePostDialog";
+import x from "../assets/logo.jpg";
 
 export default function LeftSidebar() {
   const dialogRef = useRef(null);
@@ -20,7 +21,12 @@ export default function LeftSidebar() {
   return (
     <aside className="w-[600px]  bg-black  border-r border-white/20 fixed h-screen">
       <nav className="flex">
-        <ul className="text-second-gray flex flex-col  pt-16 pl-[330px]  text-xl space-y-3 flex-end">
+        <ul className="text-second-gray flex flex-col  pt-2 pl-[330px]  text-xl space-y-3 flex-end">
+          <li className="pl-1 ">
+            <Link to="/home">
+              <img src={x} className="w-auto h-11 object-cover " />
+            </Link>
+          </li>
           <li className="hover:bg-gray-hover p-3 rounded-full transition-colors duration-200">
             <NavLink
               className={({ isActive }) =>
@@ -92,7 +98,7 @@ export default function LeftSidebar() {
               )}
             </NavLink>
           </li>
-        
+
           <li className="hover:bg-gray-hover p-3  rounded-full transition-colors duration-200">
             <NavLink
               className={({ isActive }) =>
