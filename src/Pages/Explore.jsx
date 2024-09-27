@@ -4,15 +4,17 @@ import useTitle from "../hooks/useTitle";
 import Post from "../Components/Post";
 import InfiniteScrollLoader from "../Components/InfiniteScrollLoader";
 import { Search } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import ToggleFollowButton from "../Components/ToggleFollowButton";
 import AvatarIcon from "../Components/Avatar";
 import { authenticatedFetch } from "../utils/authenticatedFetch";
 
 export default function Explore() {
   const [filter, setFilter] = useState();
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get("search") || "";
 
   const {
     data: users,
@@ -22,6 +24,12 @@ export default function Explore() {
     queryKey: ["allUsers"],
     queryFn: () => authenticatedFetch("/api/user"),
   });
+
+  useEffect(() => {
+    if (searchQuery.length > 0) {
+      setFilter(searchQuery);
+    }
+  }, [searchQuery]);
 
   const {
     status,

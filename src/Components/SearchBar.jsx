@@ -1,10 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import { Search } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SearchBar = ({ users }) => {
   const [filter, setFilter] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
+
+
+  const navigate = useNavigate()
 
   let filteredUsers = users;
   const searchRef = useRef(null);
@@ -15,6 +18,16 @@ const SearchBar = ({ users }) => {
         u.username.toLowerCase().includes(filter.toLowerCase()) ||
         u.handler.toLowerCase().includes(filter.toLowerCase())
     );
+  }
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if(filter.length > 0) {
+      navigate(`/explore?search=${filter}`)
+
+    }
+
   }
 
   useEffect(() => {
@@ -34,6 +47,8 @@ const SearchBar = ({ users }) => {
 
   return (
     <div className=" max-w-80  mt-1 ml-9 relative" ref={searchRef}>
+      <form onSubmit={handleSubmit}>
+
       <label htmlFor="users">
         <Search size={17} className="absolute top-4 left-3" color="#71767B" />
       </label>
@@ -48,8 +63,10 @@ const SearchBar = ({ users }) => {
         placeholder="Search"
         className=" w-full px-9 bg-[#202327] outline-none text-base focus:border-btn-blue focus:bg-black border focus:border-2 rounded-full h-12 border-[#202327] placeholder:text-gray-secondary"
       />
+      </form>
+
       {showDropdown && (
-        <div className="w-full min-h-10 max-h-[80vh] absolute z-10 bg-black rounded-lg border  border-white/20  shadow-xl overflow-hidden shadow-white/20 ">
+        <div className="w-full min-h-10 max-h-[80vh] absolute z-10 bg-black rounded-lg border  border-white/20 shadow-md overflow-hidden shadow-white/20 ">
           <ul>
             {filter.length > 0 ? (
               filteredUsers.map((u) => (
@@ -90,8 +107,8 @@ const SearchBar = ({ users }) => {
                 </Link>
               ))
             ) : (
-              <span className="flex  p-5 text-gray-secondary h-24">
-                Try searching usernames or handler
+              <span className="flex text-sm p-5 text-gray-secondary h-24">
+                Try searching for people, posts, or keywords
               </span>
             )}
           </ul>
