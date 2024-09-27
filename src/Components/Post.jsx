@@ -22,6 +22,7 @@ export default function Post({
     like: false,
     bookmark: false,
     comment: false,
+    post: false,
   });
 
   const { user } = useAuth();
@@ -187,16 +188,25 @@ export default function Post({
   }
 
   return (
-    <Link to={`/${post.author.handler}/status/${post.id}`} className="group">
+    <Link to={`/${post.author.handler}/status/${post.id}`} className=""
+    onMouseOver={() => setHover((prev) => ({ ...prev, post: true }))}
+    onMouseLeave={() => setHover((prev) => ({ ...prev, post: false }))}
+    
+    >
       {isRepostedByUser && (
-        <div className="  text-[13px] pl-4 gap-2 z-12 pt-1 group-hover:bg-post-hover -mb-3 flex items-center  ">
+        <div
+          className={`text-[13px] pl-4 gap-2 z-12 pt-1 ${
+            hover.post ? "bg-post-hover" : "bg-black"
+          } -mb-3 flex items-center  `}
+        >
           <Repeat2 color="gray" size={17} className="" />{" "}
           <span className="text-gray-secondary">You reposted</span>
         </div>
       )}
       <article
-        className="flex p-4 pb-1 border-b border-white/20 gap-2 group-hover:bg-post-hover "
+        className="flex p-4 pb-1 border-b border-white/20 gap-2 hover:bg-post-hover "
         key={post.id}
+  
       >
         <Link to={`/${post.author.handler}`}>
           <div className="min-w-10 max-h-10">

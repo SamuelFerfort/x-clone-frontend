@@ -2,8 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { authenticatedFetch } from "../utils/authenticatedFetch";
 import { useState } from "react";
 import { Search } from "lucide-react";
-import AvatarIcon from "./Avatar";
-import Spinner from "./Spinner";
 import WhoToFollowList from "./WhoToFollowList";
 
 export default function RightSidebar() {

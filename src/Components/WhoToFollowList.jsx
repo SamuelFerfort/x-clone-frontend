@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Spinner from "./Spinner";
+import ToggleFollowButton from "./ToggleFollowButton";
 
 const WhoToFollowList = ({ data, isLoading }) => {
+  console.log("users data ----->", data);
+
   return (
     <div className="bg-black border-white/20 border rounded-xl overflow-hidden  ml-9 mt-5 max-w-80">
       <h2 className="text-xl font-bold text-white p-4">You might like</h2>
@@ -38,9 +41,10 @@ const WhoToFollowList = ({ data, isLoading }) => {
                   <span className="text-gray-500 text-sm">{u.handler}</span>
                 </div>
               </div>
-              <button className="bg-white text-black font-bold text-sm rounded-full px-4 py-1.5 hover:bg-gray-200 transition-colors duration-200">
-                Follow
-              </button>
+              <ToggleFollowButton
+                isFollowing={u.followers.length > 0}
+                user={u}
+              />
             </li>
           </Link>
         ))}

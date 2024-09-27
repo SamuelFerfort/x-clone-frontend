@@ -11,6 +11,7 @@ import { useAuth } from "../contexts/AuthProvider";
 import { useState } from "react";
 import { useRef } from "react";
 import EditProfileForm from "../Components/EditProfileForm";
+import ToggleFollowButton from "../Components/ToggleFollowButton";
 
 export default function Profile() {
   const [filter, setFilter] = useState({
@@ -70,6 +71,8 @@ export default function Profile() {
     NoMorePostsMessage = `You've reached the end of ${handler}'s bookmarked posts`;
   }
 
+  console.log("PROFILE",profile)
+
   return (
     <>
       <header className="pl-4 h-14 flex gap-9 items-center  fixed bg-black/40 backdrop-blur-md w-full z-10">
@@ -115,7 +118,7 @@ export default function Profile() {
             </div>
           </div>
           <section className="bg-black flex p-2 gap-7 pl-5 flex-col min-h-50  ">
-            <div className="ml-auto mr-4 mt-1">
+            <div className="ml-auto mr-4 mt-1 h-8">
               {currentUser ? (
                 <button
                   onClick={() => dialogRef.current?.showModal()}
@@ -124,9 +127,8 @@ export default function Profile() {
                   Edit profile
                 </button>
               ) : (
-                <button className="ml-auto  bg-black px-4 font-bold text-[15px] text-white rounded-3xl py-[5px] border-gray-secondary border hover:bg-gray-hover">
-                  Following
-                </button>
+
+                <ToggleFollowButton isFollowing={profile.followers.length > 0} user={profile} />
               )}
             </div>
             <div className="flex flex-col gap-1">
