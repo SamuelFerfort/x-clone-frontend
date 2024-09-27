@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { Heart, Repeat2, Bookmark, MessageCircle } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import AvatarIcon from "./Avatar";
 import useInteractionMutation from "../hooks/useInteractionMutation";
 import DeleteBtn from "./DeleteBtn";
@@ -130,54 +130,72 @@ export default function Post({
 
   if (isParentPost) {
     return (
-      <article className="flex flex-col p-4 border-b border-white/20">
-        <div className="flex items-center gap-2 mb-4">
-          <Link to={`/${post.author.handler}`}>
-            {post.author.avatar ? (
-              <img
-                src={post.author.avatar}
-                alt={`${post.author.username}'s avatar`}
-                className="w-10 h-10 rounded-full object-cover"
-              />
-            ) : (
-              <AvatarIcon size={44} />
-            )}
-          </Link>
-          <Link to={`/${post.author.handler}`}>
-            <div className="flex flex-col ">
-              <span className="font-bold leading-tight hover:underline">
-                {post.author.username}
-              </span>
-              <span className="text-gray-500 text-sm leading-tight">
-                {post.author.handler}
-              </span>
+      <>
+        <article
+          className={`flex flex-col p-4 border-b border-white/20 ${
+            isRepostedByUser && ""
+          }`}
+        >
+          {isRepostedByUser && (
+            <div className="  text-[13px] pl-4 gap-2 z-12    flex items-center  ">
+              <Repeat2 color="gray" size={17} className="" />{" "}
+              <span className="text-gray-secondary">You reposted</span>
             </div>
-          </Link>
-          {post.author.id === user.id && (
-            <DeleteBtn
-              postId={post.id}
-              userId={user.id}
-              parentPostId={parentPostId}
-              isParentPost={isParentPost}
-            />
           )}
-        </div>
+          <div className="flex items-center gap-2 mb-4">
+            <Link to={`/${post.author.handler}`}>
+              {post.author.avatar ? (
+                <img
+                  src={post.author.avatar}
+                  alt={`${post.author.username}'s avatar`}
+                  className="w-10 h-10 rounded-full object-cover"
+                />
+              ) : (
+                <AvatarIcon size={44} />
+              )}
+            </Link>
+            <Link to={`/${post.author.handler}`}>
+              <div className="flex flex-col ">
+                <span className="font-bold leading-tight hover:underline">
+                  {post.author.username}
+                </span>
+                <span className="text-gray-500 text-sm leading-tight">
+                  {post.author.handler}
+                </span>
+              </div>
+            </Link>
+            {post.author.id === user.id && (
+              <DeleteBtn
+                postId={post.id}
+                userId={user.id}
+                parentPostId={parentPostId}
+                isParentPost={isParentPost}
+              />
+            )}
+          </div>
 
-        {renderPostContent()}
-        <section className="text-sm text-gray-500 border-b border-white/20 mt-2">
-          <div className="pb-3"> {formatPostTimestamp(post.createdAt)}</div>
-          <span className="min-h-10 border-white/20 border-b"> </span>
-        </section>
+          {renderPostContent()}
+          <section className="text-sm text-gray-500 border-b border-white/20 mt-2">
+            <div className="pb-3"> {formatPostTimestamp(post.createdAt)}</div>
+            <span className="min-h-10 border-white/20 border-b"> </span>
+          </section>
 
-        {renderInteractionButtons()}
-      </article>
+          {renderInteractionButtons()}
+        </article>
+      </>
     );
   }
 
   return (
-    <Link to={`/${post.author.handler}/status/${post.id}`}>
+    <Link to={`/${post.author.handler}/status/${post.id}`} className="group">
+      {isRepostedByUser && (
+        <div className="  text-[13px] pl-4 gap-2 z-12 pt-1 group-hover:bg-post-hover -mb-3 flex items-center  ">
+          <Repeat2 color="gray" size={17} className="" />{" "}
+          <span className="text-gray-secondary">You reposted</span>
+        </div>
+      )}
       <article
-        className="flex p-4 pb-1 border-b border-white/20 gap-2 hover:bg-post-hover"
+        className="flex p-4 pb-1 border-b border-white/20 gap-2 group-hover:bg-post-hover "
         key={post.id}
       >
         <Link to={`/${post.author.handler}`}>

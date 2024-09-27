@@ -10,6 +10,8 @@ export const fetchPostReplies = async ({ postId, pageParam = 1 }) => {
   return authenticatedFetch(`/api/post/${postId}/replies?page=${pageParam}`);
 };
 
+
+
 export const fetchUserPosts = async ({ handler, pageParam = 1 }) => {
   return authenticatedFetch(`/api/post/user/${handler}?page=${pageParam}`);
 };
