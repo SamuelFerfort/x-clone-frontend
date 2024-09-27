@@ -9,6 +9,7 @@ const ToggleFollowButton = ({ isFollowing, user }) => {
   const handleClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
+    
     likeMutation.mutate({ userId: user.id, handler: user.handler });
   };
 

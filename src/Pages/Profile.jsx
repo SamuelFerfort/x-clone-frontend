@@ -53,7 +53,7 @@ export default function Profile() {
   }
 
   const profile = data.pages[0].user;
-
+  
   let posts = data.pages.flatMap((p) => p.posts);
   let NoMorePostsMessage = `You've reached the end of ${handler}'s posts`;
   const currentUser = profile.id === user.id;
