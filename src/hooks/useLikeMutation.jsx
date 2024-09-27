@@ -6,7 +6,7 @@ const useLikeMutation = () => {
   const queryClient = useQueryClient();
   const { user } = useAuth();
   return useMutation({
-    onMutate: ({ userId, handler }) => {
+    onMutate: ({ userId }) => {
       return authenticatedFetch(`/api/user/${userId}/follow`, {
         method: "POST",
       });

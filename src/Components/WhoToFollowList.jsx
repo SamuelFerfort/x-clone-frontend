@@ -2,8 +2,6 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Spinner from "./Spinner";
 import ToggleFollowButton from "./ToggleFollowButton";
-import getRandomUsers from "../utils/getRandomUsers";
-import { useEffect, useState } from "react";
 
 const WhoToFollowList = ({ data, isLoading }) => {
   let users;

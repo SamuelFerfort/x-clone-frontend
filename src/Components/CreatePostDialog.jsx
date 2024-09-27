@@ -2,7 +2,6 @@ import { useAuth } from "../contexts/AuthProvider";
 import { useRef, useEffect, useState, forwardRef } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { authenticatedFetch } from "../utils/authenticatedFetch";
-import AvatarIcon from "./Avatar";
 import { Smile, ImageIcon, X } from "lucide-react";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
@@ -24,7 +23,6 @@ const CreatePostDialog = forwardRef((props, ref) => {
 
   const navigate = useNavigate();
 
-  const user = useAuth();
   const textareaRef = useRef(null);
   const fileInputRef = useRef(null);
 

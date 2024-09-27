@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { User, Bookmark, Mail, Bell, LogOut, X, Search } from "lucide-react";
+import { User, Bookmark,  Bell, LogOut, X, Search } from "lucide-react";
 import HomeSVG from "./HomeSVG";
 import { useAuth } from "../contexts/AuthProvider";
 import { useRef, useState } from "react";

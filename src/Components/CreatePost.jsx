@@ -8,6 +8,7 @@ import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { GiphyFetch } from "@giphy/js-fetch-api";
 import GifIcon from "./GifIcon";
+import PropTypes from "prop-types";
 
 const gf = new GiphyFetch("kHsEVWnq4DJWsupWneBQD5gfhPENQlrO");
 
@@ -330,3 +331,8 @@ export default function CreatePost({ parentId = undefined, placeholderText }) {
     </section>
   );
 }
+
+CreatePost.propTypes = {
+  parentId: PropTypes.string || PropTypes.undefined,
+  placeholderText: PropTypes.string || PropTypes.undefined,
+};
