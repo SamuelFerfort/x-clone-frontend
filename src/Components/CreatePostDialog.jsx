@@ -19,7 +19,7 @@ const CreatePostDialog = forwardRef((props, ref) => {
   const [selectedGif, setSelectedGif] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [gifResults, setGifResults] = useState([]);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -135,7 +135,7 @@ const CreatePostDialog = forwardRef((props, ref) => {
 
   async function handlePostSubmit(e) {
     e.preventDefault();
-    setIsLoading(true)
+    setIsLoading(true);
     const formData = new FormData();
     formData.append("content", postContent);
     if (fileInputRef.current && fileInputRef.current.files[0]) {
@@ -146,7 +146,7 @@ const CreatePostDialog = forwardRef((props, ref) => {
       formData.append("gif", selectedGif.images.original.url);
     }
 
-      try {
+    try {
       await createPostMutation.mutateAsync(formData);
     } catch (err) {
       console.error("Error submitting post", err);
@@ -164,8 +164,6 @@ const CreatePostDialog = forwardRef((props, ref) => {
 
   return (
     <div className="flex p-4 border-b border-white/20 gap-2 text-xl">
-     
-
       <form
         onSubmit={handlePostSubmit}
         className="flex flex-col w-full relative"
@@ -239,13 +237,19 @@ const CreatePostDialog = forwardRef((props, ref) => {
             </div>
             <button
               type="button"
-              onClick={() => setShowGifPicker(!showGifPicker)}
+              onClick={() => {
+                setShowGifPicker(!showGifPicker);
+                setShowEmojiPicker(false);
+              }}
             >
               <GifIcon size={19} />
             </button>
             <button
               type="button"
-              onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+              onClick={() => {
+                setShowEmojiPicker(!showEmojiPicker);
+                setShowGifPicker(false);
+              }}
             >
               <Smile color="#1A8CD8" size={19} />
             </button>
@@ -266,7 +270,11 @@ const CreatePostDialog = forwardRef((props, ref) => {
               {isLoading ? "Posting..." : "Post"}
             </button>
           </div>
-          {createPostMutation.error && <span className="text-red-500 text-sm">{createPostMutation.error.message}</span>}
+          {createPostMutation.error && (
+            <span className="text-red-500 text-sm">
+              {createPostMutation.error.message}
+            </span>
+          )}
         </div>
 
         {showEmojiPicker && (

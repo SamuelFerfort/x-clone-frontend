@@ -91,6 +91,7 @@ export default function CreatePost({ parentId = undefined, placeholderText }) {
 
     const emojiChar = emoji.native;
     setPostContent((prevMessage) => prevMessage + emojiChar);
+    setShowEmojiPicker(false);
   };
 
   const handleImageSelect = (e) => {
@@ -253,13 +254,19 @@ export default function CreatePost({ parentId = undefined, placeholderText }) {
             </div>
             <button
               type="button"
-              onClick={() => setShowGifPicker(!showGifPicker)}
+              onClick={() => {
+                setShowGifPicker(!showGifPicker);
+                setShowEmojiPicker(false);
+              }}
             >
               <GifIcon size={19} />
             </button>
             <button
               type="button"
-              onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+              onClick={() => {
+                setShowEmojiPicker(!showEmojiPicker);
+                setShowGifPicker(false);
+              }}
             >
               <Smile color="#1A8CD8" size={19} />
             </button>
