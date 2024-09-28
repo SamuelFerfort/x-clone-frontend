@@ -126,7 +126,7 @@ export default function LeftSidebar() {
               {({ isActive }) => (
                 <>
                   <LogOut className={isActive ? "fill-white" : ""} size={28} />
-                  <span>Logout</span>
+                  <span>Sign out</span>
                 </>
               )}
             </NavLink>

@@ -70,12 +70,7 @@ export default function Profile() {
       (p) => p.bookmarks.length > 0 && p.bookmarks[0].userId === profile.id
     );
     NoMorePostsMessage = `You've reached the end of ${handler}'s bookmarked posts`;
-  } else {
-    posts = posts.filter(
-      (p) => p.reposts.length > 0 || p.authorId === profile.id
-    );
-  }
-
+  } 
 
   return (
     <>
