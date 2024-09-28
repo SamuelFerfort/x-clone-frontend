@@ -47,7 +47,6 @@ export default function Bookmarks() {
       p.content.toLowerCase().includes(filter.toLowerCase())
     );
   }
-  console.log(posts);
   return (
     <>
       <header className="p-4 h-28 flex  items-center  fixed bg-black/40 backdrop-blur-md  z-10 left-[600px] w-[600px] ">

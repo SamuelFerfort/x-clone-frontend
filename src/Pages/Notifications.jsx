@@ -15,8 +15,6 @@ export default function Notifications() {
     queryFn: () => authenticatedFetch("/api/user"),
   });
 
-
-  
   const { user } = useAuth();
 
   const {
@@ -56,12 +54,15 @@ export default function Notifications() {
         </div>
       </header>
       <main className="mt-14">
-
-        {notifications.length > 0 ? notifications.map((n) => (
-          <Notification n={n} key={n.id} users={users} />
-        ))
-        : <div className="text-center text-second-gray pt-10 ">No notifications found :( </div>
-    }
+        {notifications.length > 0 ? (
+          notifications.map((n) => (
+            <Notification n={n} key={n.id} users={users} />
+          ))
+        ) : (
+          <div className="text-center text-second-gray pt-10 ">
+            No notifications found :({" "}
+          </div>
+        )}
       </main>
     </>
   );

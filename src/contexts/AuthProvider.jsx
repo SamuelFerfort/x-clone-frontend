@@ -63,7 +63,6 @@ export const AuthProvider = ({ children }) => {
       }
       const { token, user } = await response.json();
       localStorage.setItem(TOKEN, token);
-      console.log(user);
       setUser(user);
       return { success: true };
     } catch (error) {

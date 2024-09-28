@@ -37,7 +37,6 @@ const usePostDelete = () => {
         queryClient.setQueryData(["postReplies", parentPostId], (old) => {
           if (!old) return old;
 
-          console.log;
           return {
             ...old,
             pages: old.pages.map((page) => ({
