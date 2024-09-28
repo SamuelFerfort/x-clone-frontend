@@ -13,16 +13,16 @@ export default function Notification({ n, users }) {
 
   const renderIcon = (type) => {
     if (type === "LIKE") {
-      return <Heart stroke="#F91880" fill="#F91880" size={30} />;
+      return <Heart stroke="#F91880" fill="#F91880" size={26} />;
     }
     if (type === "REPOST") {
-      return <Repeat2 stroke="#00BA7C" size={30} />;
+      return <Repeat2 stroke="#00BA7C" size={28} />;
     }
     if (type === "FOLLOW") {
-      return <UserPlus stroke="#1A8BD6" fill="#1A8BD6" size={30} />;
+      return <UserPlus stroke="#1A8BD6" fill="#1A8BD6" size={28} />;
     }
     if (type === "REPLY") {
-      return <Heart stroke="#F91880" fill="#F91880" size={30} />;
+      return <Heart stroke="#F91880" fill="#F91880" size={28} />;
     }
   };
 
@@ -46,7 +46,7 @@ export default function Notification({ n, users }) {
             <AvatarIcon size={40} />
           )}
         </div>
-        <div className="pl-16 text-second-gray">{n.content}</div>
+        <div className="pl-16 text-second-gray text-[15px]">{n.content}</div>
       </article>
     </Link>
   );
