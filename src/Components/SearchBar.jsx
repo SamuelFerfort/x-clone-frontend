@@ -46,7 +46,7 @@ const SearchBar = ({ users }) => {
     <div className=" max-w-80  mt-1 ml-9 relative" ref={searchRef}>
       <form onSubmit={handleSubmit}>
         <label htmlFor="users">
-          <Search size={17} className="absolute top-4 left-3" color="#71767B" />
+          <Search size={17} className="absolute top-4 left-3" color={showDropdown ? "#1d9bf0" : "#71767B"} />
         </label>
         <input
           onFocus={() => setShowDropdown(true)}

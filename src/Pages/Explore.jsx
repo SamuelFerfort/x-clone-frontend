@@ -79,6 +79,8 @@ export default function Explore() {
         <div className="w-full relative  ">
           <Search size={16} className="absolute top-3 left-3" color="#71767B" />
           <input
+
+            
             type="search"
             autoComplete="off"
             value={filter}
