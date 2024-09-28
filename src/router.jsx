@@ -15,6 +15,7 @@ import ErrorBoundary from "./Pages/ErrorBoundary";
 import NotFound from "./Pages/NotFound";
 import PostView from "./Pages/PostView";
 import Explore from "./Pages/Explore";
+import Notifications from "./Pages/Notifications";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,11 +31,13 @@ const router = createBrowserRouter(
         <Route path="/" element={<X />}>
           <Route path="home" element={<Home />} />
           <Route path="explore" element={<Explore />} />
-          
+
           <Route path="profile" element={<Profile />} />
           <Route path="bookmarks" element={<Bookmarks />} />
+          <Route path="notifications" element={<Notifications />} />
+
           <Route path=":handler/status/:postId" element={<PostView />} />
-          <Route path=":handler"  element={<Profile />}/>
+          <Route path=":handler" element={<Profile />} />
         </Route>
       </Route>
 

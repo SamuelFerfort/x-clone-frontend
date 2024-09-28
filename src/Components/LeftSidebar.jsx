@@ -65,21 +65,22 @@ export default function LeftSidebar() {
               )}
             </NavLink>
           </li>
-          <li className="hover:bg-gray-hover p-3 rounded-full transition-colors duration-200">
+          <li className="hover:bg-gray-hover p-3  rounded-full transition-colors duration-200">
             <NavLink
               className={({ isActive }) =>
                 `flex items-center space-x-4 ${isActive ? "font-bold" : ""}`
               }
-              to={`/${user.handler}`}
+              to="/notifications"
             >
               {({ isActive }) => (
                 <>
-                  <User className={isActive ? "fill-white" : ""} size={28} />
-                  <span>Profile</span>
+                  <Bell className={isActive ? "fill-white" : ""} size={28} />
+                  <span>Notifications</span>
                 </>
               )}
             </NavLink>
           </li>
+
           <li className="hover:bg-gray-hover p-3 rounded-full transition-colors duration-200">
             <NavLink
               className={({ isActive }) =>
@@ -98,22 +99,22 @@ export default function LeftSidebar() {
               )}
             </NavLink>
           </li>
-
-          <li className="hover:bg-gray-hover p-3  rounded-full transition-colors duration-200">
+          <li className="hover:bg-gray-hover p-3 rounded-full transition-colors duration-200">
             <NavLink
               className={({ isActive }) =>
                 `flex items-center space-x-4 ${isActive ? "font-bold" : ""}`
               }
-              to="/notifications"
+              to={`/${user.handler}`}
             >
               {({ isActive }) => (
                 <>
-                  <Bell className={isActive ? "fill-white" : ""} size={28} />
-                  <span>Notifications</span>
+                  <User className={isActive ? "fill-white" : ""} size={28} />
+                  <span>Profile</span>
                 </>
               )}
             </NavLink>
           </li>
+
           <li className="hover:bg-gray-hover p-3  rounded-full transition-colors duration-200">
             <NavLink
               className={({ isActive }) =>

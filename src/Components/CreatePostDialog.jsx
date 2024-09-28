@@ -1,4 +1,3 @@
-import { useAuth } from "../contexts/AuthProvider";
 import { useRef, useEffect, useState, forwardRef } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { authenticatedFetch } from "../utils/authenticatedFetch";
@@ -141,6 +140,8 @@ const CreatePostDialog = forwardRef((props, ref) => {
     if (fileInputRef.current && fileInputRef.current.files[0]) {
       formData.append("image", fileInputRef.current.files[0]);
     }
+
+
 
     if (selectedGif) {
       formData.append("gif", selectedGif.images.original.url);
