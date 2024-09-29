@@ -91,7 +91,7 @@ export default function SignUp() {
               type="text"
               name="handler"
               id="handler"
-              placeholder="Bob"
+              placeholder="@Bob"
               onChange={handleChange}
               value={formData.handler}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
