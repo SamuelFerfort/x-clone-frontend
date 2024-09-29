@@ -1,7 +1,7 @@
 import { useAuth } from "../contexts/AuthProvider";
 import { useState, useRef } from "react";
 import useEditUserProfile from "../hooks/useEditUserProfile";
-import { X, Camera } from "lucide-react";
+import { X, Camera, Loader2 } from "lucide-react";
 import AvatarIcon from "./Avatar";
 import StyledFormInput from "./StyledFormInput";
 
@@ -111,9 +111,15 @@ const EditProfileForm = ({ dialogRef }) => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="  bg-white hover:bg-white/80 font-bold text-sm rounded-full px-5 py-[5px]  "
+          className="  bg-white hover:bg-white/80 font-bold text-sm rounded-full px-5 py-[5px] flex items-center gap-2"
         >
-          {isSubmitting ? "Saving..." : "Save"}
+          {isSubmitting ? 
+          <>
+          {"Saving"}
+          <Loader2 className=" h-3.5 w-3.5 animate-spin" />
+
+          </>
+           : "Save"}
         </button>
       </header>
       <main>

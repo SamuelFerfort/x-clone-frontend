@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState, forwardRef } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { authenticatedFetch } from "../utils/authenticatedFetch";
-import { Smile, ImageIcon, X } from "lucide-react";
+import { Smile, ImageIcon, X, Loader2 } from "lucide-react";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { GiphyFetch } from "@giphy/js-fetch-api";
@@ -261,14 +261,22 @@ const CreatePostDialog = forwardRef((props, ref) => {
                 {postContent.length}/300
               </span>
             )}
-            <button
-              className="bg-btn-blue px-6 py-1 rounded-full text-base font-bold hover:bg-[#1A8CD8] text-white"
+             <button
+              className="bg-btn-blue px-6 py-1 rounded-full text-base font-bold hover:bg-[#1A8CD8] text-white flex items-center gap-2 text-center"
               disabled={
                 isLoading ||
                 (postContent.trim() === "" && !selectedImage && !selectedGif)
               }
             >
-              {isLoading ? "Posting..." : "Post"}
+              {isLoading ? (
+                <>
+                  {"Posting"}
+                  <Loader2 className=" h-4 w-4 animate-spin" />
+
+                </>
+              ) : (
+                "Post"
+              )}
             </button>
           </div>
           {createPostMutation.error && (

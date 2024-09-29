@@ -9,8 +9,9 @@ const ActionButton = ({ loading, idleText, loadingText }) => (
   >
     {loading ? (
       <>
-        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
         {loadingText || "Loading..."}
+        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+
       </>
     ) : (
       idleText

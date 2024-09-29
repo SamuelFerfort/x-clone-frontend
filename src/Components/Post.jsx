@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import { Heart, Repeat2, Bookmark, MessageCircle } from "lucide-react";
+import { Heart, Repeat2, Bookmark, MessageCircle, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import AvatarIcon from "./Avatar";
 import useInteractionMutation from "../hooks/useInteractionMutation";
