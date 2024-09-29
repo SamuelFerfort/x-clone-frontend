@@ -3,6 +3,8 @@ import { useAuth } from "../contexts/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import useTitle from "../hooks/useTitle";
 import ActionButton from "../Components/ActionButton";
+import img from "../assets/logo.jpg"
+
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -32,7 +34,6 @@ export default function SignUp() {
     }
   };
 
-  const navigate = useNavigate();
 
   const validateForm = () => {
     const newErrors = {};
@@ -66,17 +67,24 @@ export default function SignUp() {
     }
   };
   return (
-    <main className="flex  justify-center items-center bg-gray-900  min-h-screen  bg-gradient-to-r from-green-300 via-green-500 to-green-700">
+    <main className="flex  justify-center items-center bg-black  min-h-screen gap-10  ">
+          <div className="mr-20" >
+        <img src={img} alt="X logo" className="w-[600px] h-auto" />
+
+      </div>
+
+      <div className="w-full max-w-md">
+        <h1 className="text-white  text-7xl font-bold w-full text-nowrap mb-10">Happening now</h1>
+        <h3 className="text-white  text-3xl font-bold w-full text-nowrap mb-10">Join today.</h3>
       <form
-        className="bg-white shadow-green-600 shadow-lg rounded px-8 pt-6 pb-8 mb-4 max-w-md w-full"
+        className=" text-white bg-black  pr-10 pt-6 pb-8 mb-4 max-w-md w-full"
         method="post"
         onSubmit={handleSubmit}
       >
-        <h1 className="text-2xl font-bold mb-6 text-center">Sign Up</h1>
 
         <div className="mb-4 flex gap-10">
           <div className="w-1/2">
-            <label htmlFor="handler" className="block font-bold text-sm">
+            <label htmlFor="handler" className="block font-bold text-sm mb-2">
               Handler
             </label>
             <input
@@ -95,7 +103,7 @@ export default function SignUp() {
             )}
           </div>
           <div className="w-1/2">
-            <label htmlFor="username" className="block font-bold text-sm">
+            <label htmlFor="username" className="block font-bold text-sm mb-2">
               Username
             </label>
             <input
@@ -116,7 +124,7 @@ export default function SignUp() {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="email" className="block font-bold text-sm">
+          <label htmlFor="email" className="block font-bold text-sm mb-2">
             Email
           </label>
           <input
@@ -136,7 +144,7 @@ export default function SignUp() {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="password" className="block font-bold text-sm">
+          <label htmlFor="password" className="block font-bold text-sm mb-2">
             Password
           </label>
           <input
@@ -173,12 +181,14 @@ export default function SignUp() {
           Already have an account?{" "}
           <Link
             to="/login"
-            className="font-bold text-sm  text-green-500 hover:text-green-700"
+            className="font-bold text-sm  text-blue-bookmark hover:text-blue-500"
           >
             Log in
           </Link>
         </p>
       </form>
+     </div>
+
     </main>
   );
 }

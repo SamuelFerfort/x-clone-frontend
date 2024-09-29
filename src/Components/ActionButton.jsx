@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const ActionButton = ({ loading, idleText, loadingText }) => (
   <button
     type="submit"
-    className={`w-full bg-green-500 text-white p-2 rounded hover:bg-green-600 transition duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed `}
+    className={`w-full bg-blue-bookmark hover:bg-blue-600 text-white p-2 rounded transition duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed `}
     disabled={loading}
   >
     {loading ? (

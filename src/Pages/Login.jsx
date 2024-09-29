@@ -4,6 +4,7 @@ import { useAuth } from "../contexts/AuthProvider";
 import { validateLoginForm } from "../utils/loginValidation";
 import useTitle from "../hooks/useTitle";
 import ActionButton from "../Components/ActionButton";
+import img from "../assets/logo.jpg";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -39,16 +40,31 @@ export default function Login() {
     }
   }
 
+  function handleDemoLogin() {
+
+
+
+  }
+
+
   return (
-    <main className="flex justify-center items-center min-h-screen bg-gradient-to-r from-green-200 via-green-400 to-green-600 login">
+    <main className="flex justify-center items-center min-h-screen bg-black gap-10 ">
+      <div className="mr-20">
+        <img src={img} alt="X logo" className="w-[600px] h-auto" />
+      </div>
+
       <div className="w-full max-w-md">
+        <h1 className="text-white  text-7xl font-bold w-full text-nowrap mb-10">
+          Happening now
+        </h1>
+        <h3 className="text-white  text-3xl font-bold w-full text-nowrap mb-10">
+          Join today.
+        </h3>
+
         <form
           onSubmit={handleSubmit}
-          className="bg-white  rounded px-8 pt-6 pb-8 mb-4"
+          className="bg-black text-white  rounded pr-10 pt-6 pb-8 mb-4"
         >
-          <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">
-            Log in
-          </h1>
           <div className="mb-4">
             <label className="block text-sm font-bold mb-2" htmlFor="email">
               Email
@@ -92,16 +108,25 @@ export default function Login() {
               loadingText={"Logging in..."}
               idleText={"Log in"}
             />
-
-            <div className="mt-2">
-              No account?{" "}
-              <Link
-                className="inline-block align-baseline font-bold text-sm text-green-500 hover:text-green-700"
-                to="/sign-up"
-              >
-                Sign up
-              </Link>
-            </div>
+          </div>{" "}
+          <div className="flex flex-col items-center justify-between">
+            <button
+              type="button"
+              className={`w-full mt-3 bg-blue-bookmark hover:bg-blue-600 text-white p-2 rounded transition duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed `}
+              disabled={loading}
+              onClick={handleDemoLogin}
+            >
+              Try demo account
+            </button>
+          </div>{" "}
+          <div className="mt-2 text-center">
+            No account?{" "}
+            <Link
+              className="inline-block align-baseline font-bold text-sm text-blue-bookmark hover:text-blue-600"
+              to="/sign-up"
+            >
+              Sign up
+            </Link>
           </div>
         </form>
       </div>

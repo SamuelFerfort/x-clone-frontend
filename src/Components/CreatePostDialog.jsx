@@ -255,7 +255,7 @@ const CreatePostDialog = forwardRef((props, ref) => {
               <Smile color="#1A8CD8" size={19} />
             </button>
           </div>
-          <div>
+          <div className="flex items-center">
             {postContent.length > 0 && (
               <span className="mr-4 text-base text-btn-blue ">
                 {postContent.length}/300
