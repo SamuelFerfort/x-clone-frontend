@@ -17,6 +17,7 @@ export default function Profile() {
   const [filter, setFilter] = useState({
     likes: false,
     bookmarks: false,
+    media: false,
   });
 
   const { user } = useAuth();
@@ -59,7 +60,8 @@ export default function Profile() {
   let NoMorePostsMessage = `You've reached the end of ${handler}'s posts`;
   const currentUser = profile.id === user.id;
 
-  
+  console.log("POSTS", posts);
+
   if (filter.likes) {
     posts = posts.filter(
       (p) => p.likes.length > 0 && p.likes[0].userId === profile.id
@@ -70,7 +72,13 @@ export default function Profile() {
       (p) => p.bookmarks.length > 0 && p.bookmarks[0].userId === profile.id
     );
     NoMorePostsMessage = `You've reached the end of ${handler}'s bookmarked posts`;
-  } 
+  } else if (filter.media) {
+    posts = posts.filter(
+      (p) => p.media.length > 0 && p.authorId === profile.id
+    );
+
+    NoMorePostsMessage = `You've reached the end of ${handler}'s posts with media`;
+  }
 
   return (
     <>
@@ -166,12 +174,14 @@ export default function Profile() {
               </div>
             </div>
           </section>
-          <nav className="h-12 bg-black border-b border-white/20 grid grid-cols-3 text-center pt-2">
+          <nav className="h-12 bg-black border-b border-white/20 grid grid-cols-4 text-center pt-2">
             <button
               className={`hover:bg-gray-hover  text-gray-secondary ${
-                !filter.likes && !filter.bookmarks && "text-white font-bold"
+                !filter.likes && !filter.bookmarks && !filter.media && "text-white font-bold"
               }`}
-              onClick={() => setFilter({ likes: false, bookmarks: false })}
+              onClick={() =>
+                setFilter({ likes: false, bookmarks: false, media: false })
+              }
             >
               All
             </button>{" "}
@@ -179,7 +189,9 @@ export default function Profile() {
               className={`hover:bg-gray-hover  text-gray-secondary ${
                 filter.likes && "text-white font-bold"
               }`}
-              onClick={() => setFilter({ likes: true, bookmarks: false })}
+              onClick={() =>
+                setFilter({ likes: true, media: false, bookmarks: false })
+              }
             >
               {" "}
               Likes
@@ -188,9 +200,21 @@ export default function Profile() {
               className={`hover:bg-gray-hover  text-gray-secondary ${
                 filter.bookmarks && "text-white font-bold"
               }`}
-              onClick={() => setFilter({ likes: false, bookmarks: true })}
+              onClick={() =>
+                setFilter({ likes: false, media: false, bookmarks: true })
+              }
             >
               Bookmarks
+            </button>
+            <button
+              className={`hover:bg-gray-hover  text-gray-secondary ${
+                filter.media && "text-white font-bold"
+              }`}
+              onClick={() =>
+                setFilter({ likes: false, bookmarks: false, media: true })
+              }
+            >
+              Media
             </button>
           </nav>
         </section>
