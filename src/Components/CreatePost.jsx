@@ -279,7 +279,7 @@ export default function CreatePost({ parentId = undefined, placeholderText }) {
               </span>
             )}
             <button
-              className="bg-btn-blue px-6 py-1 rounded-full text-base font-bold hover:bg-[#1A8CD8] text-white flex items-center gap-2 text-center"
+              className="bg-btn-blue px-6 py-1 rounded-full text-base font-bold hover:bg-[#1A8CD8] text-white flex items-center justify-center gap-2 text-center"
               disabled={
                 loading ||
                 (postContent.trim() === "" && !selectedImage && !selectedGif)
@@ -287,7 +287,7 @@ export default function CreatePost({ parentId = undefined, placeholderText }) {
             >
               {loading ? (
                 <>
-                  {"Posting"}
+                  {"Posting..."}
                   <Loader2 className=" h-4 w-4 animate-spin" />
 
                 </>

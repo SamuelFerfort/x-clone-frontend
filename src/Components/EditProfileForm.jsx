@@ -13,7 +13,7 @@ const EditProfileForm = ({ dialogRef }) => {
   const [bio, setBio] = useState(user.about || "");
   const [username, setUsername] = useState(user.username);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const [error, setError] = useState(null)
   const bannerFileRef = useRef(null);
   const avatarFileRef = useRef(null);
 
@@ -22,7 +22,14 @@ const EditProfileForm = ({ dialogRef }) => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null)
     const formData = new FormData();
+
+    if(username.length === 0) {
+      setIsSubmitting(false)
+      setError("Username required")
+      return
+    }
 
     if (selectedBanner) {
       formData.append("banner", bannerFileRef.current.files[0]);
@@ -32,7 +39,7 @@ const EditProfileForm = ({ dialogRef }) => {
       formData.append("avatar", avatarFileRef.current.files[0]);
     }
 
-    if (username !== user.username) {
+    if (username !== user.username ) {
       formData.append("username", username);
     }
 
@@ -111,11 +118,11 @@ const EditProfileForm = ({ dialogRef }) => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="  bg-white hover:bg-white/80 font-bold text-sm rounded-full px-5 py-[5px] flex items-center gap-2"
+          className="  bg-white hover:bg-white/80 font-bold text-sm rounded-full px-5 py-[5px] flex items-center justify-center gap-2"
         >
           {isSubmitting ? 
           <>
-          {"Saving"}
+          {"Saving..."}
           <Loader2 className=" h-3.5 w-3.5 animate-spin" />
 
           </>
@@ -199,7 +206,9 @@ const EditProfileForm = ({ dialogRef }) => {
           value={username}
           onChange={setUsername}
           maxLength={40}
+          error={error}
         />
+        {error && <span className="text-red-500 text-sm italic">{error}</span>}
         <StyledFormInput
           label="Bio"
           value={bio}
@@ -208,7 +217,7 @@ const EditProfileForm = ({ dialogRef }) => {
           isTextArea
         />
         {profileMutation.error && (
-          <span className="text-red-500">{profileMutation.error.message}</span>
+          <span className="text-red-500 text-sm italic">{profileMutation.error.message}</span>
         )}
       </main>
     </form>

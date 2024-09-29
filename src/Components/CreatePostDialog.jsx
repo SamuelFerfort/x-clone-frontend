@@ -262,7 +262,7 @@ const CreatePostDialog = forwardRef((props, ref) => {
               </span>
             )}
              <button
-              className="bg-btn-blue px-6 py-1 rounded-full text-base font-bold hover:bg-[#1A8CD8] text-white flex items-center gap-2 text-center"
+              className="bg-btn-blue px-6 py-1 rounded-full text-base font-bold hover:bg-[#1A8CD8] text-white flex items-center justify-center gap-2 text-center"
               disabled={
                 isLoading ||
                 (postContent.trim() === "" && !selectedImage && !selectedGif)
@@ -270,7 +270,7 @@ const CreatePostDialog = forwardRef((props, ref) => {
             >
               {isLoading ? (
                 <>
-                  {"Posting"}
+                  {"Posting..."}
                   <Loader2 className=" h-4 w-4 animate-spin" />
 
                 </>

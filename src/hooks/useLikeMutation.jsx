@@ -17,7 +17,6 @@ const useLikeMutation = () => {
         queryKey: ["userPosts", variables.handler],
       });
 
-      // In case im in my own profile
       queryClient.invalidateQueries({
         queryKey: ["userPosts", user.handler],
       });
