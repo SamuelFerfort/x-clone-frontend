@@ -188,10 +188,11 @@ export default function Post({
   }
 
   return (
-    <Link to={`/${post.author.handler}/status/${post.id}`} className=""
-    onMouseOver={() => setHover((prev) => ({ ...prev, post: true }))}
-    onMouseLeave={() => setHover((prev) => ({ ...prev, post: false }))}
-    
+    <Link
+      to={`/${post.author.handler}/status/${post.id}`}
+      className=""
+      onMouseOver={() => setHover((prev) => ({ ...prev, post: true }))}
+      onMouseLeave={() => setHover((prev) => ({ ...prev, post: false }))}
     >
       {isRepostedByUser && (
         <div
@@ -206,10 +207,9 @@ export default function Post({
       <article
         className="flex p-4 pb-1 border-b border-white/20 gap-2 hover:bg-post-hover "
         key={post.id}
-  
       >
-        <Link to={`/${post.author.handler}`}>
-          <div className="min-w-10 max-h-10">
+        <div className="min-w-10 max-h-10">
+          <Link to={`/${post.author.handler}`}>
             {post.author.avatar ? (
               <img
                 src={post.author.avatar}
@@ -219,8 +219,8 @@ export default function Post({
             ) : (
               <AvatarIcon />
             )}
-          </div>
-        </Link>
+          </Link>
+        </div>
         <div className="flex flex-col flex-grow min-w-0">
           <span className="flex gap-1 items-center">
             <Link to={`/${post.author.handler}`} className="flex  items-center">

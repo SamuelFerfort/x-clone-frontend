@@ -6,6 +6,8 @@ import { useRef, useState } from "react";
 import CreatePostDialog from "./CreatePostDialog";
 import x from "../assets/logo.jpg";
 
+const SIZE = 28
+
 export default function LeftSidebar() {
   const dialogRef = useRef(null);
   const { logout, user } = useAuth();
@@ -37,7 +39,7 @@ export default function LeftSidebar() {
               {({ isActive }) => (
                 <>
                   <HomeSVG
-                    size={28}
+                    size={SIZE}
                     color={isActive ? "white" : "black"}
                     isActive={isActive}
                   />
@@ -56,7 +58,7 @@ export default function LeftSidebar() {
               {({ isActive }) => (
                 <>
                   <Search
-                    size={26}
+                    size={SIZE - 1}
                     color={"white"}
                     strokeWidth={isActive ? "2.9px" : "1.9px"}
                   />
@@ -74,7 +76,7 @@ export default function LeftSidebar() {
             >
               {({ isActive }) => (
                 <>
-                  <Bell className={isActive ? "fill-white" : ""} size={28} />
+                  <Bell className={isActive ? "fill-white" : ""} size={SIZE} />
                   <span>Notifications</span>
                 </>
               )}
@@ -92,7 +94,7 @@ export default function LeftSidebar() {
                 <>
                   <Bookmark
                     className={isActive ? "fill-white" : ""}
-                    size={28}
+                    size={SIZE}
                   />
                   <span>Bookmarks</span>
                 </>
@@ -108,7 +110,7 @@ export default function LeftSidebar() {
             >
               {({ isActive }) => (
                 <>
-                  <User className={isActive ? "fill-white" : ""} size={28} />
+                  <User className={isActive ? "fill-white" : ""} size={SIZE} />
                   <span>Profile</span>
                 </>
               )}
@@ -125,7 +127,7 @@ export default function LeftSidebar() {
             >
               {({ isActive }) => (
                 <>
-                  <LogOut className={isActive ? "fill-white" : ""} size={28} />
+                  <LogOut className={isActive ? "fill-white" : ""} size={SIZE} />
                   <span>Sign out</span>
                 </>
               )}
