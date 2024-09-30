@@ -173,7 +173,7 @@ export default function Profile() {
                   {formatJoinDate(profile.createdAt)}{" "}
                 </span>
               </div>
-              <div className="flex gap-2 nt-2">
+              <div className="flex gap-2 ">
                 <span className="font-bold">
                   {profile._count.following}{" "}
                   <span className="text-sm text-gray-secondary ml-1 font-normal">
@@ -189,7 +189,7 @@ export default function Profile() {
               </div>
             </div>
           </section>
-          <nav className="h-12 bg-black border-b border-white/20 grid grid-cols-4 text-center pt-2">
+          <nav className="h-12 bg-black border-b border-white/20 grid grid-cols-4 text-center pt-2 text-[15px]">
             <button
               className={`hover:bg-gray-hover  text-gray-secondary ${
                 !filter.likes &&
