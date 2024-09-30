@@ -5,13 +5,21 @@ import { useAuth } from "../contexts/AuthProvider";
 import { useRef, useState } from "react";
 import CreatePostDialog from "./CreatePostDialog";
 import x from "../assets/logo.jpg";
-
-const SIZE = 28
+import { useQuery } from "@tanstack/react-query";
+import { authenticatedFetch } from "../utils/authenticatedFetch";
+const SIZE = 28;
 
 export default function LeftSidebar() {
   const dialogRef = useRef(null);
   const { logout, user } = useAuth();
   const [showDialog, setShowDialog] = useState();
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["notifications", user.id],
+    queryFn: () => authenticatedFetch("/api/user/notifications"),
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    refetchInterval: 1000 * 30, // every 30 seconds
+  });
 
   function handleClick() {
     setShowDialog(true);
@@ -19,6 +27,8 @@ export default function LeftSidebar() {
       dialogRef.current.showModal();
     }
   }
+
+  
 
   return (
     <aside className="w-[600px]  bg-black  border-r border-white/20 fixed h-screen">
@@ -67,7 +77,7 @@ export default function LeftSidebar() {
               )}
             </NavLink>
           </li>
-          <li className="hover:bg-gray-hover p-3  rounded-full transition-colors duration-200">
+          <li className="hover:bg-gray-hover p-3  rounded-full transition-colors duration-200 relative">
             <NavLink
               className={({ isActive }) =>
                 `flex items-center space-x-4 ${isActive ? "font-bold" : ""}`
@@ -78,6 +88,9 @@ export default function LeftSidebar() {
                 <>
                   <Bell className={isActive ? "fill-white" : ""} size={SIZE} />
                   <span>Notifications</span>
+                  {!isLoading && !error && data?.allRead === false && (
+                    <span className="w-3 h-3 rounded-full bg-blue-bookmark absolute bottom-8"></span>
+                  )}
                 </>
               )}
             </NavLink>
@@ -127,7 +140,10 @@ export default function LeftSidebar() {
             >
               {({ isActive }) => (
                 <>
-                  <LogOut className={isActive ? "fill-white" : ""} size={SIZE} />
+                  <LogOut
+                    className={isActive ? "fill-white" : ""}
+                    size={SIZE}
+                  />
                   <span>Sign out</span>
                 </>
               )}

@@ -4,6 +4,8 @@ import Notification from "../Components/Notification";
 import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "../contexts/AuthProvider";
 import { authenticatedFetch } from "../utils/authenticatedFetch";
+import useNotificationsMutation from "../hooks/useNotificationsMutation";
+import { useEffect } from "react";
 
 export default function Notifications() {
   const {
@@ -14,11 +16,13 @@ export default function Notifications() {
     queryKey: ["allUsers"],
     queryFn: () => authenticatedFetch("/api/user"),
   });
-
+  useTitle("Notifications / X");
   const { user } = useAuth();
+  const notificationsMutation = useNotificationsMutation()
+
 
   const {
-    data: notifications,
+    data,
     isLoading,
     error,
   } = useQuery({
@@ -26,9 +30,15 @@ export default function Notifications() {
     queryFn: () => authenticatedFetch("/api/user/notifications"),
   });
 
-  useTitle("Notifications / X");
+  useEffect(() => {
+    if (!isLoading && !error && data && !data.allRead) {
+      notificationsMutation.mutate();
+    }
+  }, [isLoading, error, data, notificationsMutation]);
 
-  if (isLoading || !notifications || !users || usersLoading) {
+
+
+  if (isLoading || !data || !users || usersLoading) {
     return (
       <div className="flex justify-center pt-20">
         <Spinner />
@@ -43,6 +53,8 @@ export default function Notifications() {
       </div>
     );
   }
+  const notifications = data.notifications
+
 
   return (
     <>
