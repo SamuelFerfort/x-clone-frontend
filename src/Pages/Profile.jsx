@@ -60,7 +60,6 @@ export default function Profile() {
   let NoMorePostsMessage = `You've reached the end of ${handler}'s posts`;
   const currentUser = profile.id === user.id;
 
-
   if (filter.likes) {
     posts = posts.filter(
       (p) =>
@@ -95,14 +94,16 @@ export default function Profile() {
   return (
     <>
       <header className="pl-2 h-14 flex gap-9 items-center  fixed bg-black/40 backdrop-blur-md w-full z-10">
-      <button type="button" className="cursor-pointer hover:scale-110 p-2 hover:bg-gray-hover rounded-full">
-        <ArrowLeft
-          color="white"
-          className="cursor-pointer "
-          size={20}
-
-          onClick={() => navigate(-1)}
-        />
+        <button
+          type="button"
+          className="cursor-pointer hover:scale-110 p-2 hover:bg-gray-hover rounded-full"
+        >
+          <ArrowLeft
+            color="white"
+            className="cursor-pointer "
+            size={20}
+            onClick={() => navigate(-1)}
+          />
         </button>
 
         <div className="flex flex-col">
@@ -155,13 +156,14 @@ export default function Profile() {
                 />
               )}
             </div>
-            <div className="flex flex-col gap-1">
-              <h1 className="text-[22px] font-bold leading-tight">
-                {profile.username}
-              </h1>
-              <span className="text-sm text-gray-secondary leading-tight mb">
-                {profile.handler}
-              </span>
+            <div className="flex flex-col gap-2">
+              <div className="leading-tight">
+                <h1 className="text-[22px] font-bold ">{profile.username}</h1>
+                <span className="text-[15px] text-gray-secondary  ">
+                  {profile.handler}
+                </span>
+              </div>
+
               <span className="break-words">
                 {profile.about ? profile.about : "No status update"}
               </span>
