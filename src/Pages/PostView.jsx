@@ -44,12 +44,16 @@ export default function PostView() {
   return (
     <>
       <header className="pl-4 h-14 flex gap-9 items-center  fixed bg-black/40 backdrop-blur-md w-full z-10">
+        <button type="button" className="cursor-pointer hover:scale-110 p-2 hover:bg-gray-hover rounded-full">
         <ArrowLeft
           color="white"
-          className="cursor-pointer"
+          className="cursor-pointer "
           size={20}
+
           onClick={() => navigate(-1)}
         />
+        </button>
+       
         <h1 className="font-bold text-[21px] text-white">Post</h1>
       </header>
       <main className="mt-12">
