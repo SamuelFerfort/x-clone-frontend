@@ -43,7 +43,6 @@ export default function Login() {
 
   async function handleDemoLogin() {
     const accounts = [
-      "text@example.com",
       "JohnDoe@example.com",
       "test@example2.com",
     ];
@@ -94,6 +93,7 @@ export default function Login() {
               type="email"
               name="email"
               id="email"
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
             />
@@ -109,6 +109,7 @@ export default function Login() {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               type="password"
               name="password"
+              value={password}
               id="password"
               onChange={(e) => setPassword(e.target.value)}
               placeholder="******************"
