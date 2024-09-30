@@ -185,7 +185,7 @@ export default function LeftSidebar() {
         </ul>
      
       </nav>
-      <div className=" p-3  flex w-52 rounded-full hover:bg-gray-hover overflow-hidden mt-[410px] ml-[330px] text-white z-10 ">
+      <div className=" p-3  flex w-52 rounded-full hover:bg-gray-hover overflow-hidden mt-[40vh] ml-[330px] text-white z-10 ">
             <Link
             to={`/${user.handler}`}
               className="flex items-center justify-center gap-2"
