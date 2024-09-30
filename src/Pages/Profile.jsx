@@ -60,16 +60,19 @@ export default function Profile() {
   let NoMorePostsMessage = `You've reached the end of ${handler}'s posts`;
   const currentUser = profile.id === user.id;
 
-  console.log("POSTS", posts);
 
   if (filter.likes) {
     posts = posts.filter(
-      (p) => p.likes.length > 0 && p.likes[0].userId === profile.id
+      (p) =>
+        p.likes.length > 0 && p.likes.some((like) => like.userId === profile.id)
     );
+
     NoMorePostsMessage = `You've seen all the posts ${handler} has liked`;
   } else if (filter.bookmarks) {
     posts = posts.filter(
-      (p) => p.bookmarks.length > 0 && p.bookmarks[0].userId === profile.id
+      (p) =>
+        p.bookmarks.length > 0 &&
+        p.bookmarks.some((bm) => bm.userId === profile.id)
     );
     NoMorePostsMessage = `You've reached the end of ${handler}'s bookmarked posts`;
   } else if (filter.media) {
@@ -78,6 +81,15 @@ export default function Profile() {
     );
 
     NoMorePostsMessage = `You've reached the end of ${handler}'s posts with media`;
+  } else {
+    posts = posts.filter((post) => {
+      if (post.authorId === profile.id) return true;
+
+      return (
+        post.reposts.length > 0 &&
+        post.reposts.some((r) => r.userId === profile.id)
+      );
+    });
   }
 
   return (
@@ -177,13 +189,16 @@ export default function Profile() {
           <nav className="h-12 bg-black border-b border-white/20 grid grid-cols-4 text-center pt-2">
             <button
               className={`hover:bg-gray-hover  text-gray-secondary ${
-                !filter.likes && !filter.bookmarks && !filter.media && "text-white font-bold"
+                !filter.likes &&
+                !filter.bookmarks &&
+                !filter.media &&
+                "text-white font-bold"
               }`}
               onClick={() =>
                 setFilter({ likes: false, bookmarks: false, media: false })
               }
             >
-              All
+              Posts
             </button>{" "}
             <button
               className={`hover:bg-gray-hover  text-gray-secondary ${
@@ -220,7 +235,12 @@ export default function Profile() {
         </section>
 
         {posts.map((post) => (
-          <Post post={post} key={post.id} handler={profile.handler} />
+          <Post
+            post={post}
+            key={post.id}
+            handler={profile.handler}
+            profile={profile}
+          />
         ))}
 
         <InfiniteScrollLoader

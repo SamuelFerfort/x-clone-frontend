@@ -16,6 +16,7 @@ export default function Post({
   isParentPost = false,
   parentPostId,
   handler,
+  profile,
 }) {
   const [hover, setHover] = useState({
     repost: false,
@@ -39,9 +40,16 @@ export default function Post({
       handler,
     });
   };
-  const isLikedByUser = post.likes.length > 0;
-  const isRepostedByUser = post.reposts.length > 0;
-  const isBookmarkedByUser = post.bookmarks.length > 0;
+
+  const isLikedByUser =
+    post.likes.length > 0 && post.likes.some(l => l.userId === user.id)
+  const isRepostedByUser =
+    post.reposts.length > 0 && post.reposts.some(r =>  r.userId === user.id)
+  const isBookmarkedByUser =
+    post.bookmarks.length > 0 && post.bookmarks.some(p =>  p.userId === user.id)
+  const isRepostedByProfileUser =
+    post.reposts.length > 0 &&
+    post.reposts.some((r) => r.userId === profile?.id);
 
   const renderPostContent = () => (
     <>
@@ -194,16 +202,21 @@ export default function Post({
       onMouseOver={() => setHover((prev) => ({ ...prev, post: true }))}
       onMouseLeave={() => setHover((prev) => ({ ...prev, post: false }))}
     >
-      {isRepostedByUser && (
+      {(isRepostedByUser || isRepostedByProfileUser) && (
         <div
           className={`text-[13px] pl-5 gap-1 z-12 pt-2 ${
             hover.post ? "bg-post-hover" : "bg-black"
           } -mb-3 flex items-center  `}
         >
           <Repeat2 color="gray" size={17} className="" />{" "}
-          <span className="text-gray-secondary">You reposted</span>
+          <span className="text-gray-secondary">
+            {isRepostedByProfileUser
+              ? `${profile.username} reposted`
+              : "You reposted"}
+          </span>
         </div>
       )}
+
       <article
         className="flex p-4 pb-1 border-b border-white/20 gap-2 hover:bg-post-hover "
         key={post.id}
@@ -255,5 +268,6 @@ Post.propTypes = {
   post: PropTypes.object.isRequired,
   isParentPost: PropTypes.bool,
   parentPostId: PropTypes.string,
+  profile: PropTypes.object,
   handler: PropTypes.string,
 };
