@@ -5,7 +5,8 @@ import useTitle from "../hooks/useTitle";
 import ActionButton from "../Components/ActionButton";
 import img from "../assets/logo.jpg"
 
-
+const logoURL =
+  "https://res.cloudinary.com/dy0av590l/image/upload/v1727663361/logo_pez8p2.jpg";
 export default function SignUp() {
   const [formData, setFormData] = useState({
     username: "",
@@ -69,7 +70,7 @@ export default function SignUp() {
   return (
     <main className="flex  justify-center items-center bg-black  min-h-screen gap-10  ">
           <div className="mr-20" >
-        <img src={img} alt="X logo" className="w-[600px] h-auto" />
+        <img src={logoURL} alt="X logo" className="w-[600px] h-auto" />
 
       </div>
 
