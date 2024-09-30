@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthProvider";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useTitle from "../hooks/useTitle";
 import ActionButton from "../Components/ActionButton";
 import img from "../assets/logo.jpg"

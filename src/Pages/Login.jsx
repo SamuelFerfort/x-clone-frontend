@@ -5,6 +5,8 @@ import { validateLoginForm } from "../utils/loginValidation";
 import useTitle from "../hooks/useTitle";
 import ActionButton from "../Components/ActionButton";
 import img from "../assets/logo.jpg";
+const logoURL =
+  "https://res.cloudinary.com/dy0av590l/image/upload/v1727663361/logo_pez8p2.jpg";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -49,7 +51,7 @@ export default function Login() {
 
     const randomEmail = accounts[Math.floor(Math.random() * accounts.length)];
 
-    console.log(randomEmail)
+    console.log(randomEmail);
     setEmail(randomEmail);
     setPassword("12345678");
 
@@ -69,7 +71,7 @@ export default function Login() {
   return (
     <main className="flex justify-center items-center min-h-screen bg-black gap-10 ">
       <div className="mr-20">
-        <img src={img} alt="X logo" className="w-[600px] h-auto" />
+        <img src={logoURL} alt="X logo" className="w-[600px] h-auto" />
       </div>
 
       <div className="w-full max-w-md">
@@ -141,7 +143,7 @@ export default function Login() {
           <div className="mt-2 text-center">
             No account?{" "}
             <Link
-              className="inline-block align-baseline font-bold text-sm text-blue-bookmark hover:text-blue-600"
+              className="inline-block align-baseline font-bold text-sm text-blue-bookmark hover:text-blue-500"
               to="/sign-up"
             >
               Sign up
