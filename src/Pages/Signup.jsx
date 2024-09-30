@@ -3,7 +3,6 @@ import { useAuth } from "../contexts/AuthProvider";
 import { Link } from "react-router-dom";
 import useTitle from "../hooks/useTitle";
 import ActionButton from "../Components/ActionButton";
-import img from "../assets/logo.jpg"
 
 const logoURL =
   "https://res.cloudinary.com/dy0av590l/image/upload/v1727663361/logo_pez8p2.jpg";
