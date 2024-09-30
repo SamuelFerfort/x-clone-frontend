@@ -83,7 +83,7 @@ export default function Post({
         <img
           src={post.media[0].url}
           alt="Post media"
-          className="max-w-full h-auto rounded-2xl mt-3"
+          className="max-w-full h-auto max-h-[60vh] rounded-2xl mt-3"
           onClick={handleImgClick}
         />
       )}
