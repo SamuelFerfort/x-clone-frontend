@@ -43,7 +43,7 @@ export default function PostView() {
 
   return (
     <>
-      <header className="pl-4 h-14 flex gap-9 items-center  fixed bg-black/40 backdrop-blur-md w-full z-10">
+      <header className="pl-2 h-14 flex gap-9 items-center  fixed bg-black/40 backdrop-blur-md w-full z-10">
         <button type="button" className="cursor-pointer hover:scale-110 p-2 hover:bg-gray-hover rounded-full">
         <ArrowLeft
           color="white"
