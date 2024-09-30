@@ -8,13 +8,11 @@ const useNotificationsMutation = () => {
 
   return useMutation({
     mutationFn: () => {
-      console.log("Mutation function called");
       return authenticatedFetch("/api/user/notifications", {
         method: "POST",
       });
     },
     onMutate: async () => {
-      console.log("onMutate called");
       await queryClient.cancelQueries(["notifications", user.id]);
 
       const previousNotifications = queryClient.getQueryData([
@@ -36,7 +34,6 @@ const useNotificationsMutation = () => {
       return { previousNotifications };
     },
     onError: (err, variables, context) => {
-      console.log("onError called", err);
       if (context?.previousNotifications) {
         queryClient.setQueryData(
           ["notifications", user.id],
@@ -45,7 +42,6 @@ const useNotificationsMutation = () => {
       }
     },
     onSettled: () => {
-      console.log("onSettled called");
       queryClient.invalidateQueries(["notifications", user.id]);
     },
   });
