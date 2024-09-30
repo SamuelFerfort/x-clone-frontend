@@ -7,6 +7,8 @@ import CreatePostDialog from "./CreatePostDialog";
 import x from "../assets/logo.jpg";
 import { useQuery } from "@tanstack/react-query";
 import { authenticatedFetch } from "../utils/authenticatedFetch";
+import AvatarIcon from "./Avatar";
+
 const SIZE = 28;
 
 export default function LeftSidebar() {
@@ -33,7 +35,7 @@ export default function LeftSidebar() {
   return (
     <aside className="w-[600px]  bg-black  border-r border-white/20 fixed h-screen">
       <nav className="flex">
-        <ul className="text-second-gray flex flex-col  pt-2 pl-[330px]  text-xl space-y-3 flex-end">
+        <ul className="text-second-gray flex flex-col  pt-2 pl-[330px]  text-xl space-y-3">
           <li className="pl-1 ">
             <Link to="/home">
               <img src={x} className="w-auto h-11 object-cover " />
@@ -179,8 +181,32 @@ export default function LeftSidebar() {
               </div>
             </dialog>
           </li>
+     
         </ul>
+     
       </nav>
+      <div className=" p-3  flex w-52 rounded-full hover:bg-gray-hover overflow-hidden mt-[410px] ml-[330px] text-white z-10 ">
+            <Link
+            to={`/${user.handler}`}
+              className="flex items-center justify-center gap-2"
+            >
+              <div>
+                {user.avatar ? <img src={user.avatar} alt={user.username} className="w-10 h-10 rounded-full" />
+                
+                : <AvatarIcon  size={40} />
+              }
+
+
+              </div>
+              
+              <div className="flex flex-col leading-tight ">
+                <span className="text-sm font-bold">{user.username}</span>
+                <span className="text-gray-secondary text-sm">{user.handler}</span>
+              </div>
+
+              
+            </Link>
+          </div>
     </aside>
   );
 }
