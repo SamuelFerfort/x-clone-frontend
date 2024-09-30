@@ -205,7 +205,7 @@ const EditProfileForm = ({ dialogRef }) => {
           label="Username"
           value={username}
           onChange={setUsername}
-          maxLength={40}
+          maxLength={30}
           error={error}
         />
         {error && <span className="text-red-500 text-sm italic">{error}</span>}

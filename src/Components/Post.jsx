@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { Heart, Repeat2, Bookmark, MessageCircle, Loader2 } from "lucide-react";
+import { Heart, Repeat2, Bookmark, MessageCircle, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import AvatarIcon from "./Avatar";
 import useInteractionMutation from "../hooks/useInteractionMutation";
@@ -25,7 +25,7 @@ export default function Post({
     comment: false,
     post: false,
   });
-
+  const dialogRef = useRef(null);
   const { user } = useAuth();
   const interactionMutation = useInteractionMutation();
 
@@ -41,24 +41,50 @@ export default function Post({
     });
   };
 
+  const handleImgClick = (e) => {
+    if (post.media[0].type !== "IMAGE") return;
+
+    e.preventDefault();
+    e.stopPropagation();
+    dialogRef?.current.showModal();
+  };
+
+  const handleCloseClick = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    dialogRef?.current.close();
+  };
+
   const isLikedByUser =
-    post.likes.length > 0 && post.likes.some(l => l.userId === user.id)
+    post.likes.length > 0 && post.likes.some((l) => l.userId === user.id);
   const isRepostedByUser =
-    post.reposts.length > 0 && post.reposts.some(r =>  r.userId === user.id)
+    post.reposts.length > 0 && post.reposts.some((r) => r.userId === user.id);
   const isBookmarkedByUser =
-    post.bookmarks.length > 0 && post.bookmarks.some(p =>  p.userId === user.id)
+    post.bookmarks.length > 0 &&
+    post.bookmarks.some((p) => p.userId === user.id);
   const isRepostedByProfileUser =
     post.reposts.length > 0 &&
     post.reposts.some((r) => r.userId === profile?.id);
 
   const renderPostContent = () => (
     <>
+      <dialog ref={dialogRef} className="backdrop:bg-black/60">
+        <button onClick={handleCloseClick} className="cursor-pointer bg-black/40 p-2 rounded-full hover:scale-105 absolute">
+          <X color="white" size={30}/>
+        </button>
+        <img
+          src={post.media.length > 0 && post.media[0].url}
+          alt="Full screen post media"
+          className="w-full h-full z-50 max-w-full max-h-[90vh]"
+        />
+      </dialog>
       <p className="break-words text-second-gray">{post.content}</p>
       {post.media.length > 0 && (
         <img
           src={post.media[0].url}
           alt="Post media"
           className="max-w-full h-auto rounded-2xl mt-3"
+          onClick={handleImgClick}
         />
       )}
     </>
