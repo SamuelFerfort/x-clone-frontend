@@ -68,7 +68,7 @@ export default function Login() {
   }
 
   return (
-    <main className="flex justify-center items-center min-h-screen bg-black gap-10 ">
+    <main className="flex justify-center items-center min-h-screen bg-black  ">
       <div className="mr-20">
         <img src={logoURL} alt="X logo" className="w-[600px] h-auto" />
       </div>
@@ -77,7 +77,7 @@ export default function Login() {
         <h1 className="text-white  text-7xl font-bold w-full text-nowrap mb-10">
           Happening now
         </h1>
-        <h3 className="text-white  text-3xl font-bold w-full text-nowrap mb-10">
+        <h3 className="text-white  text-3xl font-bold w-full text-nowrap mb-4">
           Join today.
         </h3>
 

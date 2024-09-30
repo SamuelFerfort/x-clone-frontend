@@ -67,7 +67,7 @@ export default function SignUp() {
     }
   };
   return (
-    <main className="flex  justify-center items-center bg-black  min-h-screen gap-10  ">
+    <main className="flex  justify-center items-center bg-black  min-h-screen  ">
           <div className="mr-20" >
         <img src={logoURL} alt="X logo" className="w-[600px] h-auto" />
 
@@ -75,7 +75,7 @@ export default function SignUp() {
 
       <div className="w-full max-w-md">
         <h1 className="text-white  text-7xl font-bold w-full text-nowrap mb-10">Happening now</h1>
-        <h3 className="text-white  text-3xl font-bold w-full text-nowrap mb-10">Join today.</h3>
+        <h3 className="text-white  text-3xl font-bold w-full text-nowrap mb-4">Join today.</h3>
       <form
         className=" text-white bg-black  pr-10 pt-6 pb-8 mb-4 max-w-md w-full"
         method="post"
