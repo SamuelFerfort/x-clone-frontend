@@ -46,7 +46,15 @@ export default function Notification({ n, users }) {
             <AvatarIcon size={40} />
           )}
         </div>
+
+     
         <div className="pl-16 text-second-gray text-[15px]">{n.content}</div>
+        {n.post?.content && (
+          <div className="text-gray-secondary text-sm pl-16 break-words pr-16">
+            {n.post.content}
+          </div>
+        )}
+
       </article>
     </Link>
   );
