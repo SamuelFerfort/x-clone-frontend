@@ -40,12 +40,31 @@ export default function Login() {
     }
   }
 
-  function handleDemoLogin() {
+  async function handleDemoLogin() {
+    const accounts = [
+      "text@example.com",
+      "JohnDoe@example.com",
+      "test@example2.com",
+    ];
 
+    const randomEmail = accounts[Math.floor(Math.random() * accounts.length)];
 
+    console.log(randomEmail)
+    setEmail(randomEmail);
+    setPassword("12345678");
 
+    const credentials = { email: randomEmail, password: "12345678" };
+    const result = await login(credentials);
+
+    if (result.success) {
+      return navigate("/home", { replace: true });
+    } else {
+      setError((prev) => ({
+        ...prev,
+        general: result.error || "Failed to log in. Please try again.",
+      }));
+    }
   }
-
 
   return (
     <main className="flex justify-center items-center min-h-screen bg-black gap-10 ">
