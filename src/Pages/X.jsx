@@ -11,8 +11,8 @@ import {
   Search,
   House,
 } from "lucide-react";
-import HomeSVG from "../Components/HomeSVG";
 import { useAuth } from "../contexts/AuthProvider";
+import MobileNav from "../Components/MobileNav";
 
 export default function X() {
   const location = useLocation();
@@ -43,10 +43,7 @@ export default function X() {
         }
         if (Icon === House) {
           return (
-            <Icon
-              className={isActive ? "fill-white" : ""}
-              strokeWidth={2}
-            />
+            <Icon className={isActive ? "fill-white" : ""} strokeWidth={2} />
           );
         }
         return <Icon className={isActive ? "fill-white" : ""} />;
@@ -61,19 +58,7 @@ export default function X() {
         <Outlet />
       </section>
       {!isMobile && <RightSidebar />}
-      {isMobile && (
-        <nav className="fixed bottom-0 left-0 right-0 bg-black border-t border-white/20 flex justify-around py-2 text-white">
-          <NavIcon icon={House} to="/home" />
-
-          <NavIcon icon={Search} to="/explore" />
-          <NavIcon icon={Bell} to="/notifications" />
-          <NavIcon icon={Bookmark} to="/bookmarks" />
-          <NavIcon icon={User} to={`/${user.handler}`} />
-          <button onClick={logout} className="text-gray-500">
-            <LogOut />
-          </button>
-        </nav>
-      )}
+      {isMobile && <MobileNav />}
     </main>
   );
 }
