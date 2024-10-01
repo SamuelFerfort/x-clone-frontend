@@ -1,9 +1,8 @@
-import { Outlet, useLocation, Navigate, NavLink } from "react-router-dom";
+import { Outlet, useLocation, Navigate } from "react-router-dom";
 import LeftSidebar from "../Components/LeftSidebar";
 import RightSidebar from "../Components/RightSideBar";
 import { useEffect, useState } from "react";
 
-import { useAuth } from "../contexts/AuthProvider";
 import MobileNav from "../Components/MobileNav";
 
 export default function X() {
