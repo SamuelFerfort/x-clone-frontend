@@ -90,6 +90,8 @@ export default function Post({
     </>
   );
 
+  
+
   const renderInteractionButtons = () => (
     <div className="flex items-center justify-between mt-2">
       {/* Comment button */}

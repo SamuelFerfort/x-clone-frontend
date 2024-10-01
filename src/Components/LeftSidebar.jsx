@@ -30,10 +30,8 @@ export default function LeftSidebar() {
     }
   }
 
-  
-
   return (
-    <aside className="w-[600px]  bg-black  border-r border-white/20 fixed h-screen">
+    <aside className="w-[600px]  bg-black  border-r border-white/20 fixed h-screen flex flex-col justify-between">
       <nav className="flex">
         <ul className="text-second-gray flex flex-col  pt-2 pl-[330px]  text-xl space-y-3">
           <li className="pl-1 ">
@@ -181,32 +179,31 @@ export default function LeftSidebar() {
               </div>
             </dialog>
           </li>
-     
         </ul>
-     
       </nav>
-      <div className=" p-3  flex w-52 rounded-full hover:bg-gray-hover overflow-hidden mt-[40vh] ml-[330px] text-white z-10 transition-colors duration-200 ">
-            <Link
-            to={`/${user.handler}`}
-              className="flex items-center justify-center gap-2"
-            >
-              <div>
-                {user.avatar ? <img src={user.avatar} alt={user.username} className="w-10 h-10 rounded-full" />
-                
-                : <AvatarIcon  size={40} />
-              }
-
-
-              </div>
-              
-              <div className="flex flex-col leading-tight ">
-                <span className="text-sm font-bold">{user.username}</span>
-                <span className="text-gray-secondary text-sm">{user.handler}</span>
-              </div>
-
-              
-            </Link>
+      <div className=" p-3  flex w-52 rounded-full hover:bg-gray-hover overflow-hidden  ml-[330px] text-white z-10 transition-colors duration-200 ">
+        <Link
+          to={`/${user.handler}`}
+          className="flex items-center justify-center gap-2"
+        >
+          <div>
+            {user.avatar ? (
+              <img
+                src={user.avatar}
+                alt={user.username}
+                className="w-10 h-10 rounded-full object-cover"
+              />
+            ) : (
+              <AvatarIcon size={40} />
+            )}
           </div>
+
+          <div className="flex flex-col leading-tight ">
+            <span className="text-sm font-bold">{user.username}</span>
+            <span className="text-gray-secondary text-sm">{user.handler}</span>
+          </div>
+        </Link>
+      </div>
     </aside>
   );
 }

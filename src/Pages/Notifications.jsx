@@ -54,7 +54,7 @@ export default function Notifications() {
     );
   }
   const notifications = data.notifications
-
+  
 
   return (
     <>
