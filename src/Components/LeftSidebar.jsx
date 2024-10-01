@@ -50,7 +50,7 @@ export default function LeftSidebar() {
                 <>
                   <HomeSVG
                     size={SIZE}
-                    color={isActive ? "white" : "black"}
+                    color={"white"}
                     isActive={isActive}
                   />
                   <span>Home</span>

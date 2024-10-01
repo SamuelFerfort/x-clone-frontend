@@ -8,7 +8,7 @@ const HomeSVG = ({
   isActive = false,
   ...props
 }) => {
-  const activeColor = isActive ? color : "white";
+  const activeColor = color
   const inactiveColor = isActive ? "transparent" : "black";
 
   return (
