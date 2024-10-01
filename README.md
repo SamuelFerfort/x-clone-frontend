@@ -2,6 +2,11 @@
 
 An X-clone application built with modern React technologies, enabling users to interact through posts, follows, and media uploads.
 
+## 🔗 Links
+
+- **Live Demo:** [https://x-social-media.vercel.app](https://x-social-media.vercel.app)
+- **Backend Repository:** [https://github.com/SamuelFerfort/x-clone-backend](https://github.com/SamuelFerfort/x-clone-backend)
+
 ## 🚀 Technologies
 
 - **Frontend:** React, Vite
@@ -42,8 +47,9 @@ An X-clone application built with modern React technologies, enabling users to i
    VITE_TOKEN=your_token_here
 
    ```
+
 4. **Run the Development Server:**
-   
+
    ```bash
 
    npm run dev
@@ -52,4 +58,4 @@ An X-clone application built with modern React technologies, enabling users to i
 
 ## 🎯 Goals
 
-Designed as a portfolio project to demonstrate proficiency in React, state management with React Query, custom hooks for authentication, and building  interactive user interfaces.
+Designed as a portfolio project to demonstrate proficiency in React, state management with React Query, custom hooks for authentication, and building interactive user interfaces.
