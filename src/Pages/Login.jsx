@@ -68,13 +68,13 @@ export default function Login() {
   }
 
   return (
-    <main className="flex justify-center items-center min-h-screen bg-black  ">
-      <div className="mr-20">
-        <img src={logoURL} alt="X logo" className="w-[600px] h-auto" />
+    <main className="flex justify-center items-center min-h-screen flex-col sm:flex-row bg-black  ">
+      <div className="mr-20 ">
+        <img src={logoURL} alt="X logo" className="sm:w-[600px] w-48 h-auto" />
       </div>
 
       <div className="w-full max-w-md">
-        <h1 className="text-white  text-7xl font-bold w-full text-nowrap mb-10">
+        <h1 className="text-white  sm:text-7xl  text-5xl  font-bold w-full text-nowrap mb-10">
           Happening now
         </h1>
         <h3 className="text-white  text-3xl font-bold w-full text-nowrap mb-4">

@@ -49,7 +49,7 @@ export default function Bookmarks() {
   }
   return (
     <>
-      <header className="p-4 h-28 flex  items-center  fixed bg-black/40 backdrop-blur-md  z-10 left-[600px] w-[600px] ">
+      <header className="p-4 h-28 flex  items-center w-full fixed bg-black/40 backdrop-blur-md  z-10 sm:left-[600px] sm:w-[600px] ">
         <div className="flex flex-col w-full">
           <h1 className="font-bold text-[21px] text-white leading-tight">
             Bookmarks

@@ -75,7 +75,7 @@ export default function Explore() {
 
   return (
     <>
-      <header className="p-4 h-16 flex  items-center  fixed bg-black/40 backdrop-blur-md  z-10 left-[600px] w-[600px] ">
+      <header className="p-4 h-16 flex  items-center w-full fixed bg-black/40 backdrop-blur-md  z-10 sm:left-[600px] sm:w-[600px] ">
         <div className="w-full relative  ">
           <Search size={16} className="absolute top-3 left-3" color="#71767B" />
           <input

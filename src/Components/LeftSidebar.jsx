@@ -31,7 +31,7 @@ export default function LeftSidebar() {
   }
 
   return (
-    <aside className="w-[600px]  bg-black  border-r border-white/20 fixed h-screen flex flex-col justify-between">
+    <aside className="w-[600px]  bg-black  border-r border-white/20 fixed h-screen  flex-col justify-between hidden sm:flex">
       <nav className="flex">
         <ul className="text-second-gray flex flex-col  pt-2 pl-[330px]  text-xl space-y-3">
           <li className="pl-1 ">
@@ -152,7 +152,7 @@ export default function LeftSidebar() {
           <li className="pt-2">
             <button
               onClick={handleClick}
-              className="bg-btn-blue  py-3 rounded-full   w-full text-lg font-bold hover:bg-blue-500 text-center"
+              className="bg-btn-blue  py-3 rounded-full   w-48 text-lg font-bold hover:bg-blue-500 text-center"
             >
               Post
             </button>
