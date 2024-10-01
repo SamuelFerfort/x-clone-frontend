@@ -1,8 +1,50 @@
-# React + Vite
+# X-Clone App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An X-clone application built with modern React technologies, enabling users to interact through posts, follows, and media uploads.
 
-Currently, two official plugins are available:
+## 🚀 Technologies
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frontend:** React, Vite
+- **Data Management:** React Query (Infinite Queries & Mutations)
+- **Authentication:** Custom Auth Provider hook using JWT
+- **Styling:** TailwindCSS
+
+## 🌟 Features
+
+- **User Authentication:** Secure login and registration with JWT.
+- **Infinite Feed:** Smooth, endless scrolling of posts using React Query’s InfiniteQuery.
+- **Post Creation:** Users can create, upload images and GIFs, and delete their posts.
+- **Follow System:** Follow and unfollow other users to customize your feed.
+- **Real-time Updates:** Instant UI updates with React Query’s useMutation.
+- **Responsive Design:** Optimized for both desktop and mobile devices.
+
+## 🔧 Setup
+
+1. **Clone the Repository:**
+
+   ```bash
+   git clone https://github.com/yourusername/x-clone.git
+   cd x-clone
+
+   ```
+
+2. **Install Dependencies**
+
+   ```bash
+   npm install
+
+   ```
+
+3. **Configure Environment Variables:** Create a .env file in the root directory and add the following variables:
+
+   ```bash
+   VITE_API_URL=your_api_url_here
+   VITE_TOKEN=your_token_here
+
+   ```
+4. **Run the Development Server:**
+
+
+## 🎯 Goals
+
+Designed as a portfolio project to demonstrate proficiency in React, state management with React Query, custom hooks for authentication, and building  interactive user interfaces.
