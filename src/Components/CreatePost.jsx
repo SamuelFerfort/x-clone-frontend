@@ -184,7 +184,7 @@ export default function CreatePost({ parentId = undefined, placeholderText }) {
 
       <form
         onSubmit={handlePostSubmit}
-        className="flex flex-col w-full relative"
+        className="flex flex-col w-full relative "
       >
         <div className="flex-grow">
           <textarea
@@ -209,7 +209,7 @@ export default function CreatePost({ parentId = undefined, placeholderText }) {
               <img
                 src={selectedImage}
                 alt="Selected"
-                className="max-w-full h-auto rounded-2xl"
+                className="max-w-full h-auto max-h-[60vh]  rounded-2xl"
               />
               <button
                 type="button"

@@ -192,7 +192,7 @@ const CreatePostDialog = forwardRef((props, ref) => {
               <img
                 src={selectedImage}
                 alt="Selected"
-                className="max-w-full h-auto rounded-2xl"
+                className="max-w-full h-auto rounded-2xl max-h-[60vh]"
               />
               <button
                 type="button"
