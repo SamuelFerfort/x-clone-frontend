@@ -159,8 +159,13 @@ export default function Profile() {
             <div className="flex flex-col gap-2">
               <div className="leading-tight">
                 <h1 className="text-[22px] font-bold ">{profile.username}</h1>
-                <span className="text-[15px] text-gray-secondary  ">
-                  {profile.handler}
+                <span className="text-[15px] text-gray-secondary flex items-center gap-1 ">
+                  {profile.handler}{" "}
+                  {!currentUser && profile.followers.length > 0 && (
+                    <span className="text-[11.5px] bg-[#202327] p-0.5 text-gray-500 rounded-sm">
+                      Follows you{" "}
+                    </span>
+                  )}
                 </span>
               </div>
 
