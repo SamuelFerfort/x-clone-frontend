@@ -54,7 +54,7 @@ export default function Profile() {
   }
 
   const profile = data.pages[0].user;
-
+  
   let posts = data.pages.flatMap((p) => p.posts);
 
   let NoMorePostsMessage = `You've reached the end of ${handler}'s posts`;
@@ -161,7 +161,7 @@ export default function Profile() {
                 <h1 className="text-[22px] font-bold ">{profile.username}</h1>
                 <span className="text-[15px] text-gray-secondary flex items-center gap-1 ">
                   {profile.handler}{" "}
-                  {!currentUser && profile.followers.length > 0 && (
+                  {!currentUser && profile.following.length > 0 && (
                     <span className="text-[11.5px] bg-[#202327] p-0.5 text-gray-500 rounded-sm">
                       Follows you{" "}
                     </span>
