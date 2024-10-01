@@ -55,7 +55,7 @@ export default function X() {
   );
 
   return (
-    <main className="flex min-h-screen ">
+    <main className="flex min-h-screen bg-black">
       <LeftSidebar />
       <section className="sm:max-w-[600px] sm:ml-[600px] w-full flex-grow bg-black text-white">
         <Outlet />

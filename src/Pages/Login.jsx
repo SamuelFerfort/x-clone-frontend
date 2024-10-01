@@ -45,7 +45,7 @@ export default function Login() {
     const accounts = [
       "JohnDoe@example.com",
       "test@example2.com",
-      "bob@ross.com"
+      "bob@ross.com",
     ];
 
     const randomEmail = accounts[Math.floor(Math.random() * accounts.length)];
@@ -68,7 +68,7 @@ export default function Login() {
   }
 
   return (
-    <main className="flex justify-center items-center min-h-screen flex-col sm:flex-row bg-black  ">
+    <main className="flex justify-center items-center min-h-screen flex-col sm:flex-row bg-black px-4 sm:px-0 py-8  sm:py-0">
       <div className="mr-20 ">
         <img src={logoURL} alt="X logo" className="sm:w-[600px] w-48 h-auto" />
       </div>

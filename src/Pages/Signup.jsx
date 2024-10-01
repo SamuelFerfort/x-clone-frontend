@@ -67,7 +67,7 @@ export default function SignUp() {
     }
   };
   return (
-    <main className="flex flex-col justify-center items-center sm:flex-row bg-black  min-h-screen  ">
+    <main className="flex flex-col justify-center items-center sm:flex-row bg-black  min-h-screen   px-4 sm:px-0 py-8  sm:py-0 ">
           <div className="mr-20" >
         <img src={logoURL} alt="X logo" className="sm:w-[600px] w-48  h-auto" />
 
