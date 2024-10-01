@@ -69,7 +69,7 @@ export default function Login() {
 
   return (
     <main className="flex justify-center items-center min-h-screen flex-col sm:flex-row bg-black px-4 sm:px-0 py-8  sm:py-0">
-      <div className="mr-20 ">
+      <div className="sm:mr-20 ">
         <img src={logoURL} alt="X logo" className="sm:w-[600px] w-48 h-auto" />
       </div>
 
@@ -83,9 +83,9 @@ export default function Login() {
 
         <form
           onSubmit={handleSubmit}
-          className="bg-black text-white  rounded pr-10 pt-6 pb-8 mb-4"
+          className="bg-black text-white w-full  rounded sm:pr-10 pt-6 pb-8 mb-4"
         >
-          <div className="mb-4">
+          <div className="mb-4 ">
             <label className="block text-sm font-bold mb-2" htmlFor="email">
               Email
             </label>

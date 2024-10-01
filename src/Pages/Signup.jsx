@@ -68,16 +68,16 @@ export default function SignUp() {
   };
   return (
     <main className="flex flex-col justify-center items-center sm:flex-row bg-black  min-h-screen   px-4 sm:px-0 py-8  sm:py-0 ">
-          <div className="mr-20" >
+          <div className="sm:mr-20" >
         <img src={logoURL} alt="X logo" className="sm:w-[600px] w-48  h-auto" />
 
       </div>
 
-      <div className="w-full max-w-md ">
+      <div className="w-full sm:max-w-md ">
         <h1 className="text-white text-5xl  sm:text-7xl font-bold w-full text-nowrap mb-10">Happening now</h1>
         <h3 className="text-white  text-3xl font-bold w-full text-nowrap mb-4">Join today.</h3>
       <form
-        className=" text-white bg-black  pr-10 pt-6 pb-8 mb-4 max-w-md w-full"
+        className=" text-white bg-black  sm:pr-10 pt-6 pb-8 mb-4 sm:max-w-md w-full"
         method="post"
         onSubmit={handleSubmit}
       >
@@ -94,7 +94,7 @@ export default function SignUp() {
               placeholder="@Bob"
               onChange={handleChange}
               value={formData.handler}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full py-2 sm:px-3 text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
             />
             {errors.handler && (
               <span className="text-red-500 text-xs mb-2 italic">
