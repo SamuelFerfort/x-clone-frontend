@@ -37,7 +37,15 @@ export default function Profile() {
     error,
   } = useUserPosts(handler);
 
-  if (status === "loading" || !data) {
+
+  if (status === "error"  ) {
+    return (
+      <div className="flex justify-center pt-20 text-white">
+        Error fetching posts: {error.message}
+      </div>
+    );
+  }
+  if (status === "pending" || !data) {
     return (
       <div className="flex justify-center pt-20">
         <Spinner />
@@ -45,16 +53,9 @@ export default function Profile() {
     );
   }
 
-  if (status === "error") {
-    return (
-      <div className="flex justify-center pt-20 text-white">
-        Error fetching posts: {error.message}
-      </div>
-    );
-  }
 
   const profile = data.pages[0].user;
-  
+
   let posts = data.pages.flatMap((p) => p.posts);
 
   let NoMorePostsMessage = `You've reached the end of ${handler}'s posts`;
