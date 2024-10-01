@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { User, Bookmark, Bell, LogOut, Search, X, Feather } from "lucide-react";
 import { useAuth } from "../contexts/AuthProvider";
 import HomeSVG from "./HomeSVG";
@@ -9,6 +9,10 @@ import CreatePostDialog from "./CreatePostDialog";
 export default function MobileNav() {
   const [showDialog, setShowDialog] = useState(false);
   const dialogRef = useRef(null);
+
+
+  const location = useLocation()
+
 
   const { user, logout } = useAuth();
 
@@ -54,9 +58,9 @@ export default function MobileNav() {
         <LogOut />
       </button>
     
-    <button className="bg-blue-bookmark rounded-full p-3 absolute right-2 bottom-14" onClick={handleClick}>
+  {location.pathname !== "/home" &&  <button className="bg-blue-bookmark rounded-full p-3 absolute right-2 bottom-14" onClick={handleClick}>
         <Feather />
-    </button>
+    </button>}
 
       <dialog
         ref={dialogRef}
