@@ -23,7 +23,7 @@ An X-clone application built with modern React technologies, enabling users to i
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/yourusername/x-clone-frontend.git
+   git clone https://github.com/SamuelFerfort/x-clone-frontend.git
    cd x-clone-frontend
 
    ```
