@@ -45,6 +45,7 @@ export default function Login() {
     const accounts = [
       "JohnDoe@example.com",
       "test@example2.com",
+      "bob@ross.com"
     ];
 
     const randomEmail = accounts[Math.floor(Math.random() * accounts.length)];
