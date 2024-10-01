@@ -100,7 +100,7 @@ const EditProfileForm = ({ dialogRef }) => {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <header className="flex justify-between items-center mt-1 h-10">
+      <header className="flex justify-between items-center  ">
         <div className=" p-1  hover:bg-gray-hover rounded-full hover:scale-110">
         <X
           className="cursor-pointer rounded-full z-20"

@@ -118,7 +118,7 @@ export default function Profile() {
       </header>
       <dialog
         ref={dialogRef}
-        className=" relative px-4  pointer-events-auto  bg-black rounded-lg max-w-xl w-full h-auto max-h-[55vh] backdrop:bg-gray-secondary backdrop:bg-opacity-60  overflow-auto border-gray-600 border right-20  z-24"
+        className="  p-4 bg-black rounded-lg max-w-xl w-full  backdrop:bg-gray-secondary backdrop:bg-opacity-60   border-gray-600 border right-20  z-24"
       >
         {" "}
         <EditProfileForm dialogRef={dialogRef} />
