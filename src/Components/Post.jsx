@@ -78,7 +78,7 @@ export default function Post({
           className="w-full h-full z-50 max-w-full max-h-[90vh]"
         />
       </dialog>
-      <p className="break-words text-second-gray text-[15.5px]">{post.content}</p>
+      <p className="break-words text-second-gray font-thin text-[15.5px]">{post.content}</p>
       {post.media.length > 0 && (
         <img
           src={post.media[0].url}
@@ -265,10 +265,10 @@ export default function Post({
         <div className="flex flex-col flex-grow min-w-0">
           <span className="flex gap-1 items-center">
             <Link to={`/${post.author.handler}`} className="flex  items-center">
-              <span className="font-bold truncate hover:underline ">
+              <span className="font-medium truncate hover:underline ">
                 {post.author.username}
               </span>
-              <span className="text-gray-secondary truncate ml-1 ">
+              <span className="text-gray-secondary text-[15px] truncate ml-1 ">
                 {post.author.handler}
               </span>
               <span className="text-gray-secondary text-[15px]  truncate ml-1">
