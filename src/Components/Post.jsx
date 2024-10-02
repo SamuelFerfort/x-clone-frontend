@@ -78,7 +78,7 @@ export default function Post({
           className="w-full h-full z-50 max-w-full max-h-[90vh]"
         />
       </dialog>
-      <p className="break-words text-second-gray font-thin text-[15.5px]">{post.content}</p>
+      <p className="break-words  text-second-gray text-[15.5px]">{post.content}</p>
       {post.media.length > 0 && (
         <img
           src={post.media[0].url}
