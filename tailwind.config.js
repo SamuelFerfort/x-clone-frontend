@@ -16,6 +16,7 @@ export default {
         "post-hover": "#0D0D0D",
         "gray-secondary": "#71767B"
       },
+    
     },
   },
   plugins: [],
