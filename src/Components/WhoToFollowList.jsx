@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Spinner from "./Spinner";
 import ToggleFollowButton from "./ToggleFollowButton";
+import AvatarIcon from "./Avatar";
 
 const WhoToFollowList = ({ data, isLoading }) => {
   let users;
@@ -30,11 +31,7 @@ const WhoToFollowList = ({ data, isLoading }) => {
                       className="rounded-full w-10 h-10 object-cover"
                     />
                   ) : (
-                    <div className="rounded-full w-10 h-10 bg-gray-700 flex items-center justify-center">
-                      <span className="text-gray-400 text-xl">
-                        {u.username[0]}
-                      </span>
-                    </div>
+                    <AvatarIcon size={40} />
                   )}
                 </div>
                 <div className="flex flex-col">
