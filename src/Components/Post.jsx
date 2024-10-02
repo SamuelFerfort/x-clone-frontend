@@ -265,13 +265,13 @@ export default function Post({
         <div className="flex flex-col flex-grow min-w-0">
           <span className="flex gap-1 items-center">
             <Link to={`/${post.author.handler}`} className="flex  items-center">
-              <span className="font-bold truncate hover:underline">
+              <span className="font-bold truncate hover:underline ">
                 {post.author.username}
               </span>
-              <span className="text-gray-secondary truncate ml-1 text-[15px]">
+              <span className="text-gray-secondary truncate ml-1 ">
                 {post.author.handler}
               </span>
-              <span className="text-gray-secondary  text-[15px] truncate ml-1">
+              <span className="text-gray-secondary text-[15px]  truncate ml-1">
                 · {formatTimeDifference(post.createdAt)}
               </span>
             </Link>
