@@ -226,7 +226,7 @@ export default function Post({
   return (
     <Link
       to={`/${post.author.handler}/status/${post.id}`}
-      className=""
+      className="antialiased"
       onMouseOver={() => setHover((prev) => ({ ...prev, post: true }))}
       onMouseLeave={() => setHover((prev) => ({ ...prev, post: false }))}
     >
