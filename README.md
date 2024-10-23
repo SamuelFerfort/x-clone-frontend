@@ -65,3 +65,7 @@ An X-clone application built with modern React technologies, enabling users to i
 ## 🎯 Goals
 
 Designed as a portfolio project to demonstrate proficiency in React, state management with React Query, custom hooks for authentication, and building interactive user interfaces.
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
