@@ -20,17 +20,10 @@ An X-clone application built with modern React technologies, enabling users to i
 - **Live Demo:** [https://x-social-media.vercel.app](https://x-social-media.vercel.app)
 - **Backend Repository:** [https://github.com/SamuelFerfort/x-clone-backend](https://github.com/SamuelFerfort/x-clone-backend)
 
-## 🚀 Technologies
-
-- **Frontend:** React, Vite
-- **Data Management:** React Query (Infinite Queries & Mutations)
-- **Authentication:** Custom Auth Provider hook using JWT
-- **Styling:** TailwindCSS
-
 ## 🌟 Features
 
 - **User Authentication:** Secure login and registration with JWT.
-- **Infinite Feed:** Smooth, endless scrolling of posts using React Query’s InfiniteQuery.
+- **Infinite Feed:** Endless scrolling of posts using React Query’s InfiniteQuery.
 - **Post Creation:** Users can create, upload images and GIFs, and delete their posts.
 - **Follow System:** Follow and unfollow other users to customize your feed.
 - **Real-time Updates:** Instant UI updates with React Query’s useMutation.
