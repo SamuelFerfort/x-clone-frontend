@@ -1,11 +1,11 @@
 import { usePostsFeed } from "../hooks/usePosts";
-import Spinner from "../Components/Spinner";
 import useTitle from "../hooks/useTitle";
 import Post from "../Components/Post";
 import InfiniteScrollLoader from "../Components/InfiniteScrollLoader";
 import { useAuth } from "../contexts/AuthProvider";
 import { Search } from "lucide-react";
 import { useState } from "react";
+import PostSkeletonLoader from "../Components/LoadingSkeleton";
 
 export default function Bookmarks() {
   const [filter, setFilter] = useState();
@@ -22,14 +22,6 @@ export default function Bookmarks() {
 
   useTitle("Bookmarks / X");
 
-  if (status === "loading" || !data) {
-    return (
-      <div className="flex justify-center pt-20">
-        <Spinner />
-      </div>
-    );
-  }
-
   if (status === "error") {
     return (
       <div className="flex justify-center pt-20 text-white">
@@ -37,10 +29,12 @@ export default function Bookmarks() {
       </div>
     );
   }
-
-  let posts = data.pages.flatMap((p) =>
-    p.posts.filter((po) => po.bookmarks.length > 0)
-  );
+  let posts;
+  if (data) {
+    posts = data.pages.flatMap((p) =>
+      p.posts.filter((po) => po.bookmarks.length > 0)
+    );
+  }
 
   if (filter) {
     posts = posts.filter((p) =>
@@ -76,17 +70,19 @@ export default function Bookmarks() {
         </div>
       </header>
       <main className="mt-28">
-        {posts.map((post) => (
-          <Post post={post} key={post.id} />
-        ))}
-      </main>
+        {status === "loading" || !data ? (
+          <PostSkeletonLoader />
+        ) : (
+          posts.map((post) => <Post post={post} key={post.id} />)
+        )}
 
-      <InfiniteScrollLoader
-        hasNextPage={hasNextPage}
-        isFetchingNextPage={isFetchingNextPage}
-        fetchNextPage={fetchNextPage}
-        noPostsText={"No more posts"}
-      />
+        <InfiniteScrollLoader
+          hasNextPage={hasNextPage}
+          isFetchingNextPage={isFetchingNextPage}
+          fetchNextPage={fetchNextPage}
+          noPostsText={"No more posts"}
+        />
+      </main>
     </>
   );
 }

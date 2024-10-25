@@ -12,6 +12,7 @@ import { useState } from "react";
 import { useRef } from "react";
 import EditProfileForm from "../Components/EditProfileForm";
 import ToggleFollowButton from "../Components/ToggleFollowButton";
+import PostSkeletonLoader from "../Components/LoadingSkeleton";
 
 export default function Profile() {
   const [filter, setFilter] = useState({
@@ -37,8 +38,7 @@ export default function Profile() {
     error,
   } = useUserPosts(handler);
 
-
-  if (status === "error"  ) {
+  if (status === "error") {
     return (
       <div className="flex justify-center pt-20 text-white">
         Error fetching posts: {error.message}
@@ -52,8 +52,7 @@ export default function Profile() {
       </div>
     );
   }
-
-
+  
   const profile = data.pages[0].user;
 
   let posts = data.pages.flatMap((p) => p.posts);
@@ -245,14 +244,18 @@ export default function Profile() {
           </nav>
         </section>
 
-        {posts.map((post) => (
-          <Post
-            post={post}
-            key={post.id}
-            handler={profile.handler}
-            profile={profile}
-          />
-        ))}
+        {status === "loading" || !data ? (
+          <PostSkeletonLoader />
+        ) : (
+          posts.map((post) => (
+            <Post
+              post={post}
+              key={post.id}
+              handler={profile.handler}
+              profile={profile}
+            />
+          ))
+        )}
 
         <InfiniteScrollLoader
           hasNextPage={hasNextPage}
