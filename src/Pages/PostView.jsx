@@ -24,7 +24,11 @@ export default function PostView() {
   useTitle(`${handler} post`);
 
   if (status === "loading" || !data) {
-    return <Spinner />
+    return (
+      <div className="flex justify-center pt-20">
+        <Spinner />
+      </div>
+    );
   }
 
   if (status === "error") {
