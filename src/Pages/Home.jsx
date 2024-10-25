@@ -1,8 +1,8 @@
 import { usePostsFeed } from "../hooks/usePosts";
-import Spinner from "../Components/Spinner";
 import useTitle from "../hooks/useTitle";
 import { Fragment } from "react";
 import Post from "../Components/Post";
+import PostSkeletonLoader from "../Components/LoadingSkeleton";
 import CreatePost from "../Components/CreatePost";
 import InfiniteScrollLoader from "../Components/InfiniteScrollLoader";
 export default function Home() {
@@ -17,13 +17,7 @@ export default function Home() {
 
   useTitle("Home / X");
 
-  if (status === "loading" || !data) {
-    return (
-      <div className="flex justify-center pt-20">
-        <Spinner />
-      </div>
-    );
-  }
+
 
   if (status === "error") {
     return (
@@ -36,14 +30,18 @@ export default function Home() {
   return (
     <>
       <CreatePost />
-
-      {data.pages.map((page, i) => (
-        <Fragment key={`page-${i}`}>
-          {page.posts.map((post) => (
-            <Post post={post} key={post.id} />
-          ))}
-        </Fragment>
-      ))}
+      {status === "loading" || !data ? (
+        <PostSkeletonLoader />
+      ) : (
+        data.pages.map((page, i) => (
+          <Fragment key={`page-${i}`}>
+            {page.posts.map((post) => (
+              <Post post={post} key={post.id} />
+            ))}
+          </Fragment>
+        ))
+      )}
+      {}
 
       <InfiniteScrollLoader
         hasNextPage={hasNextPage}

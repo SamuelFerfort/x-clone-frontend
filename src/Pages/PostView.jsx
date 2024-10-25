@@ -1,12 +1,12 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { usePostReplies } from "../hooks/usePosts";
-import Spinner from "../Components/Spinner";
 import useTitle from "../hooks/useTitle";
 import CreatePost from "../Components/CreatePost";
 import { Fragment } from "react";
 import Post from "../Components/Post";
 import InfiniteScrollLoader from "../Components/InfiniteScrollLoader";
 import { ArrowLeft } from "lucide-react";
+import PostSkeletonLoader from "../Components/LoadingSkeleton";
 
 export default function PostView() {
   const { postId, handler } = useParams();
@@ -24,11 +24,7 @@ export default function PostView() {
   useTitle(`${handler} post`);
 
   if (status === "loading" || !data) {
-    return (
-      <div className="flex justify-center pt-20">
-        <Spinner />
-      </div>
-    );
+    return <PostSkeletonLoader />;
   }
 
   if (status === "error") {
@@ -44,16 +40,18 @@ export default function PostView() {
   return (
     <>
       <header className="pl-2 h-14 flex gap-9 items-center  fixed bg-black/40 backdrop-blur-md w-full z-10">
-        <button type="button" className="cursor-pointer hover:scale-110 p-2 hover:bg-gray-hover rounded-full">
-        <ArrowLeft
-          color="white"
-          className="cursor-pointer "
-          size={20}
-
-          onClick={() => navigate(-1)}
-        />
+        <button
+          type="button"
+          className="cursor-pointer hover:scale-110 p-2 hover:bg-gray-hover rounded-full"
+        >
+          <ArrowLeft
+            color="white"
+            className="cursor-pointer "
+            size={20}
+            onClick={() => navigate(-1)}
+          />
         </button>
-       
+
         <h1 className="font-bold text-[21px] text-white">Post</h1>
       </header>
       <main className="mt-12">

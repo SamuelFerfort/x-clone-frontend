@@ -1,5 +1,4 @@
 import { usePostsFeed } from "../hooks/usePosts";
-import Spinner from "../Components/Spinner";
 import useTitle from "../hooks/useTitle";
 import Post from "../Components/Post";
 import InfiniteScrollLoader from "../Components/InfiniteScrollLoader";
@@ -10,6 +9,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import ToggleFollowButton from "../Components/ToggleFollowButton";
 import AvatarIcon from "../Components/Avatar";
 import { authenticatedFetch } from "../utils/authenticatedFetch";
+import PostSkeletonLoader from "../Components/LoadingSkeleton";
 
 export default function Explore() {
   const [filter, setFilter] = useState();
@@ -44,9 +44,28 @@ export default function Explore() {
 
   if (status === "loading" || !data || !users || isUsersLoading) {
     return (
-      <div className="flex justify-center pt-20">
-        <Spinner />
-      </div>
+      <>
+        <header className="p-4 h-16 flex  items-center  fixed bg-black/40 backdrop-blur-md  z-10 left-[600px] w-[600px]  ">
+          <div className="w-full relative  ">
+            <Search
+              size={16}
+              className="absolute top-3 left-3"
+              color="#71767B"
+            />
+            <input
+              type="search"
+              autoComplete="off"
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+              placeholder="Search users or posts"
+              className=" w-full px-9 bg-black outline-none text-sm focus:border-btn-blue border focus:border-2 rounded-full h-10 border-gray-secondary placeholder:text-gray-secondary"
+            />
+          </div>
+        </header>
+        <main className="mt-16">
+          <PostSkeletonLoader />;
+        </main>
+      </>
     );
   }
 
@@ -57,6 +76,7 @@ export default function Explore() {
       </div>
     );
   }
+  
   const LIMIT = 5;
   let posts = data.pages.flatMap((p) => p.posts);
   let filteredUsers = users.slice(0, LIMIT);
@@ -79,8 +99,6 @@ export default function Explore() {
         <div className="w-full relative  ">
           <Search size={16} className="absolute top-3 left-3" color="#71767B" />
           <input
-
-            
             type="search"
             autoComplete="off"
             value={filter}
