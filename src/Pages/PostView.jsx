@@ -6,7 +6,7 @@ import { Fragment } from "react";
 import Post from "../Components/Post";
 import InfiniteScrollLoader from "../Components/InfiniteScrollLoader";
 import { ArrowLeft } from "lucide-react";
-import PostSkeletonLoader from "../Components/LoadingSkeleton";
+import Spinner from "../Components/Spinner";
 
 export default function PostView() {
   const { postId, handler } = useParams();
@@ -24,7 +24,7 @@ export default function PostView() {
   useTitle(`${handler} post`);
 
   if (status === "loading" || !data) {
-    return <PostSkeletonLoader />;
+    return <Spinner />
   }
 
   if (status === "error") {
