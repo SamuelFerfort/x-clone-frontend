@@ -47,8 +47,9 @@ export default function Profile() {
     );
   }
   if (status === "pending" || !data) {
-    return <ProfileSkeletonLoader  />
-    ;
+
+    return <ProfileSkeletonLoader />
+
   }
   
   const profile = data.pages[0].user;

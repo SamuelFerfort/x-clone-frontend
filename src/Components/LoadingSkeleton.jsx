@@ -117,7 +117,9 @@ const ProfileHeaderSkeleton = () => {
 export const ProfileSkeletonLoader = () => {
   return (
     <div>
+
       <ProfileHeaderSkeleton  />
+
       <div className="flex flex-col divide-y divide-white/20">
         {[...Array(5)].map((_, index) => (
           <PostSkeleton key={index} />
