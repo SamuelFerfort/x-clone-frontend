@@ -13,6 +13,7 @@ import { useRef } from "react";
 import EditProfileForm from "../Components/EditProfileForm";
 import ToggleFollowButton from "../Components/ToggleFollowButton";
 import PostSkeletonLoader from "../Components/LoadingSkeleton";
+import { ProfileSkeletonLoader } from "../Components/LoadingSkeleton";
 
 export default function Profile() {
   const [filter, setFilter] = useState({
@@ -46,11 +47,8 @@ export default function Profile() {
     );
   }
   if (status === "pending" || !data) {
-    return (
-      <div className="flex justify-center pt-20">
-        <Spinner />
-      </div>
-    );
+    return <ProfileSkeletonLoader />
+    ;
   }
   
   const profile = data.pages[0].user;
