@@ -6,7 +6,10 @@ const SIZE = 28;
 import { useState, useRef } from "react";
 import CreatePostDialog from "./CreatePostDialog";
 
+
+
 export default function MobileNav() {
+
   const [showDialog, setShowDialog] = useState(false);
   const dialogRef = useRef(null);
 

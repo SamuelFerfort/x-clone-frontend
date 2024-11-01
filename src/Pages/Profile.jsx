@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, CalendarDays } from "lucide-react";
 import { useUserPosts } from "../hooks/usePosts";
 import InfiniteScrollLoader from "../Components/InfiniteScrollLoader";
-import Spinner from "../Components/Spinner";
 import Post from "../Components/Post";
 import AvatarIcon from "../Components/Avatar";
 import { formatJoinDate } from "../utils/formatJoinDate";
