@@ -45,8 +45,8 @@ export default function Explore() {
   if (status === "loading" || !data || !users || isUsersLoading) {
     return (
       <>
-        <header className="p-4 h-16 flex  items-center  fixed bg-black/40 backdrop-blur-md  z-10 left-[600px] w-[600px]  ">
-          <div className="w-full relative  ">
+        <header className="p-4 h-16 flex  items-center  fixed bg-black/40 backdrop-blur-md  z-10 xl:left-[600px] w-full xl:w-[600px]  ">
+          <div className="w-full relative sm:w-[600px] ">
             <Search
               size={16}
               className="absolute top-3 left-3"
@@ -76,27 +76,27 @@ export default function Explore() {
       </div>
     );
   }
-  
+
   const LIMIT = 5;
   let posts = data.pages.flatMap((p) => p.posts);
   let filteredUsers = users.slice(0, LIMIT);
   if (filter) {
     posts = posts.filter((p) =>
-      p.content.toLowerCase().includes(filter.toLowerCase())
+      p.content.toLowerCase().includes(filter.toLowerCase()),
     );
     filteredUsers = users
       .filter(
         (u) =>
           u.username.toLowerCase().includes(filter.toLowerCase()) ||
-          u.handler.toLowerCase().includes(filter.toLowerCase())
+          u.handler.toLowerCase().includes(filter.toLowerCase()),
       )
       .slice(0, LIMIT);
   }
 
   return (
     <>
-      <header className="p-4 h-16 flex  items-center w-full fixed bg-black/40 backdrop-blur-md  z-10 sm:left-[600px] sm:w-[600px] ">
-        <div className="w-full relative  ">
+      <header className="p-4 h-16 flex  items-center w-full fixed bg-black/40 backdrop-blur-md  z-10 xl:left-[600px] xl:w-[600px] ">
+        <div className="w-full sm:w-[600px] relative  ">
           <Search size={16} className="absolute top-3 left-3" color="#71767B" />
           <input
             type="search"

@@ -18,14 +18,9 @@ export default function Notifications() {
   });
   useTitle("Notifications / X");
   const { user } = useAuth();
-  const notificationsMutation = useNotificationsMutation()
+  const notificationsMutation = useNotificationsMutation();
 
-
-  const {
-    data,
-    isLoading,
-    error,
-  } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["notifications", user.id],
     queryFn: () => authenticatedFetch("/api/user/notifications"),
   });
@@ -35,8 +30,6 @@ export default function Notifications() {
       notificationsMutation.mutate();
     }
   }, [isLoading, error, data, notificationsMutation]);
-
-
 
   if (isLoading || !data || !users || usersLoading) {
     return (
@@ -53,13 +46,12 @@ export default function Notifications() {
       </div>
     );
   }
-  const notifications = data.notifications
-  
+  const notifications = data.notifications;
 
   return (
     <>
-      <header className="p-4 h-14 border-b border-white/20 flex  items-center w-full fixed bg-black/40 backdrop-blur-md  z-10 sm:left-[600px] sm:w-[600px] ">
-        <div className="flex flex-col w-full">
+      <header className="p-4 h-14 border-b border-white/20 flex  items-center w-full fixed bg-black/40 backdrop-blur-md  z-10 xl:left-[600px] xl:w-[600px] ">
+        <div className="flex flex-col w-full sm:w-[600px]">
           <h1 className="font-bold text-[21px] text-white leading-tight">
             Notifications
           </h1>

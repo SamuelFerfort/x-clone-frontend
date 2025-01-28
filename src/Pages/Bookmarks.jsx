@@ -32,19 +32,19 @@ export default function Bookmarks() {
   let posts;
   if (data) {
     posts = data.pages.flatMap((p) =>
-      p.posts.filter((po) => po.bookmarks.length > 0)
+      p.posts.filter((po) => po.bookmarks.length > 0),
     );
   }
 
   if (filter) {
     posts = posts.filter((p) =>
-      p.content.toLowerCase().includes(filter.toLowerCase())
+      p.content.toLowerCase().includes(filter.toLowerCase()),
     );
   }
   return (
     <>
-      <header className="p-4 h-28 flex  items-center w-full fixed bg-black/40 backdrop-blur-md  z-10 sm:left-[600px] sm:w-[600px] ">
-        <div className="flex flex-col w-full">
+      <header className="p-4 h-28 flex  items-center w-full fixed bg-black/40 backdrop-blur-md  z-10 xl:left-[600px] xl:w-[600px] ">
+        <div className="flex flex-col w-full sm:w-[600px]">
           <h1 className="font-bold text-[21px] text-white leading-tight">
             Bookmarks
           </h1>
