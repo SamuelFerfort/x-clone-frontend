@@ -11,7 +11,7 @@ export default function X() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 640);
     };
 
     window.addEventListener("resize", handleResize);
@@ -25,7 +25,7 @@ export default function X() {
   return (
     <main className="flex min-h-screen bg-black ">
       <LeftSidebar />
-      <section className="sm:max-w-[600px] sm:ml-[600px] w-full flex-grow bg-black text-white">
+      <section className="xl:max-w-[600px] xl:ml-[600px] max-w-[950px] sm:ml-[250px] w-full flex-grow bg-black text-white">
         <Outlet />
       </section>
       {isMobile ? <MobileNav /> : <RightSidebar />}

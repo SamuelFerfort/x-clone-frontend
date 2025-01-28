@@ -31,9 +31,9 @@ export default function LeftSidebar() {
   }
 
   return (
-    <aside className="w-[600px]  bg-black  border-r border-white/20 fixed h-screen  flex-col justify-between hidden sm:flex">
+    <aside className="xl:w-[600px] w-[250px] bg-black  border-r border-white/20 fixed h-screen  flex-col justify-between hidden sm:flex">
       <nav className="flex">
-        <ul className="text-second-gray flex flex-col  pt-2 pl-[330px]  text-xl space-y-3">
+        <ul className="text-second-gray flex flex-col  pt-2 xl:pl-[330px] pl-[5px]  text-xl gap-3">
           <li className="pl-1 ">
             <Link to="/home">
               <img src={x} className="w-auto h-11 object-cover " />
@@ -42,17 +42,13 @@ export default function LeftSidebar() {
           <li className="hover:bg-gray-hover p-3 rounded-full transition-colors duration-200">
             <NavLink
               className={({ isActive }) =>
-                `flex items-center space-x-4 ${isActive ? "font-bold" : ""}`
+                `flex items-center  gap-4 ${isActive ? "font-bold" : ""}`
               }
               to="/home"
             >
               {({ isActive }) => (
                 <>
-                  <HomeSVG
-                    size={SIZE}
-                    color={"white"}
-                    isActive={isActive}
-                  />
+                  <HomeSVG size={SIZE} color={"white"} isActive={isActive} />
                   <span>Home</span>
                 </>
               )}
@@ -181,7 +177,7 @@ export default function LeftSidebar() {
           </li>
         </ul>
       </nav>
-      <div className=" p-3  flex w-52 rounded-full hover:bg-gray-hover overflow-hidden  ml-[330px] text-white z-10 transition-colors duration-200 ">
+      <div className=" p-3  flex w-52 rounded-full hover:bg-gray-hover overflow-hidden  xl:ml-[330px] text-white z-10 transition-colors duration-200 ">
         <Link
           to={`/${user.handler}`}
           className="flex items-center justify-center gap-2"

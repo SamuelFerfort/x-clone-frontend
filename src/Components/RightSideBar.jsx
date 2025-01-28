@@ -15,12 +15,11 @@ export default function RightSidebar() {
   }
 
   return (
-    <aside className="w-[1200px]   bg-black border-l border-white/20 fixed left-[1200px] z-20 h-screen text-white">
+    <aside className="w-[1200px]   bg-black border-l border-white/20 fixed  left-[1200px] z-20 h-screen text-white">
       <SearchBar users={data} />
 
       <WhoToFollowList data={data} isLoading={isLoading} />
       <Footer />
- 
     </aside>
   );
 }
