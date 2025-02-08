@@ -92,7 +92,7 @@ export default function Post({
           alt="Full screen post media"
           className="w-full h-full z-50 max-w-full max-h-[90vh]"
           onClick={(e) => {
-            e.stopPropagation();
+            e.preventDefault();
             e.stopPropagation();
           }}
         />
