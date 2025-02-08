@@ -91,7 +91,10 @@ export default function Post({
           src={post.media.length > 0 && post.media[0].url}
           alt="Full screen post media"
           className="w-full h-full z-50 max-w-full max-h-[90vh]"
-          onClick={(e) => e.stopPropagation()}
+          onClick={(e) => {
+            e.stopPropagation();
+            e.stopPropagation();
+          }}
         />
       </dialog>
       <p className="break-words  text-second-gray text-[15.5px]">
