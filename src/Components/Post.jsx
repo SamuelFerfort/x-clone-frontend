@@ -41,6 +41,14 @@ export default function Post({
     });
   };
 
+  const handleDialogClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    // if backdrop click, close dialog
+    if (e.target === dialogRef.current) {
+      handleCloseClick(e);
+    }
+  };
   const handleImgClick = (e) => {
     if (post.media[0].type !== "IMAGE") return;
 
@@ -50,8 +58,8 @@ export default function Post({
   };
 
   const handleCloseClick = (e) => {
-    e.preventDefault()
-    e.stopPropagation()
+    e.preventDefault();
+    e.stopPropagation();
     dialogRef?.current.close();
   };
 
@@ -68,17 +76,27 @@ export default function Post({
 
   const renderPostContent = () => (
     <>
-      <dialog ref={dialogRef} className="backdrop:bg-black/60">
-        <button onClick={handleCloseClick} className="cursor-pointer bg-black/40 p-2 rounded-full hover:scale-105 absolute">
-          <X color="white" size={30}/>
+      <dialog
+        ref={dialogRef}
+        onClick={handleDialogClick}
+        className="backdrop:bg-black/60"
+      >
+        <button
+          onClick={handleCloseClick}
+          className="cursor-pointer bg-black/40 p-2 rounded-full hover:scale-105 absolute"
+        >
+          <X color="white" size={30} />
         </button>
         <img
           src={post.media.length > 0 && post.media[0].url}
           alt="Full screen post media"
           className="w-full h-full z-50 max-w-full max-h-[90vh]"
+          onClick={(e) => e.stopPropagation()}
         />
       </dialog>
-      <p className="break-words  text-second-gray text-[15.5px]">{post.content}</p>
+      <p className="break-words  text-second-gray text-[15.5px]">
+        {post.content}
+      </p>
       {post.media.length > 0 && (
         <img
           src={post.media[0].url}
@@ -89,8 +107,6 @@ export default function Post({
       )}
     </>
   );
-
-  
 
   const renderInteractionButtons = () => (
     <div className="flex items-center justify-between mt-2">
