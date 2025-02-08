@@ -138,7 +138,7 @@ export default function Login() {
               disabled={loading}
               onClick={handleDemoLogin}
             >
-              Try demo account
+              Try Demo (Random Account)
             </button>
           </div>{" "}
           <div className="mt-2 text-center">
