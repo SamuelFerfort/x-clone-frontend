@@ -96,7 +96,7 @@ export default function Login() {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
+              placeholder="email@example.com"
             />
             {error.email && (
               <p className="text-red-500 text-xs italic mt-1">Invalid Email</p>
