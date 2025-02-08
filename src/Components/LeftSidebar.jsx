@@ -36,7 +36,12 @@ export default function LeftSidebar() {
         <ul className="text-second-gray flex flex-col  pt-2 xl:pl-[330px] pl-[5px]  text-xl gap-3">
           <li className="pl-1 ">
             <Link to="/home">
-              <img src={x} className="w-auto h-11 object-cover " />
+              <img
+                src={
+                  "https://res.cloudinary.com/dy0av590l/image/upload/v1739053449/logo_m3rhkt.jpg"
+                }
+                className="w-auto h-11 object-cover "
+              />
             </Link>
           </li>
           <li className="hover:bg-gray-hover p-3 rounded-full transition-colors duration-200">
