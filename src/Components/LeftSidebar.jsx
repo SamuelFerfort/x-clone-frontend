@@ -4,7 +4,6 @@ import HomeSVG from "./HomeSVG";
 import { useAuth } from "../contexts/AuthProvider";
 import { useRef, useState } from "react";
 import CreatePostDialog from "./CreatePostDialog";
-import x from "../assets/logo.jpg";
 import { useQuery } from "@tanstack/react-query";
 import { authenticatedFetch } from "../utils/authenticatedFetch";
 import AvatarIcon from "./Avatar";
