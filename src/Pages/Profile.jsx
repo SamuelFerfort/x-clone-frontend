@@ -22,7 +22,6 @@ export default function Profile() {
   });
 
   const { user } = useAuth();
-
   const dialogRef = useRef(null);
 
   const navigate = useNavigate();
@@ -46,11 +45,9 @@ export default function Profile() {
     );
   }
   if (status === "pending" || !data) {
-
-    return <ProfileSkeletonLoader />
-
+    return <ProfileSkeletonLoader />;
   }
-  
+
   const profile = data.pages[0].user;
 
   let posts = data.pages.flatMap((p) => p.posts);
@@ -61,7 +58,8 @@ export default function Profile() {
   if (filter.likes) {
     posts = posts.filter(
       (p) =>
-        p.likes.length > 0 && p.likes.some((like) => like.userId === profile.id)
+        p.likes.length > 0 &&
+        p.likes.some((like) => like.userId === profile.id),
     );
 
     NoMorePostsMessage = `You've seen all the posts ${handler} has liked`;
@@ -69,12 +67,12 @@ export default function Profile() {
     posts = posts.filter(
       (p) =>
         p.bookmarks.length > 0 &&
-        p.bookmarks.some((bm) => bm.userId === profile.id)
+        p.bookmarks.some((bm) => bm.userId === profile.id),
     );
     NoMorePostsMessage = `You've reached the end of ${handler}'s bookmarked posts`;
   } else if (filter.media) {
     posts = posts.filter(
-      (p) => p.media.length > 0 && p.authorId === profile.id
+      (p) => p.media.length > 0 && p.authorId === profile.id,
     );
 
     NoMorePostsMessage = `You've reached the end of ${handler}'s posts with media`;

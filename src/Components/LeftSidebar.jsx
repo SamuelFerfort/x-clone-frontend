@@ -152,7 +152,7 @@ export default function LeftSidebar() {
           <li className="pt-2">
             <button
               onClick={handleClick}
-              className="bg-btn-blue  py-3 rounded-full   w-48 text-lg font-bold hover:bg-blue-500 text-center"
+              className="bg-x-white  py-3 rounded-full  text-black  w-48 text-lg font-bold hover:x-white/80 text-center"
             >
               Post
             </button>

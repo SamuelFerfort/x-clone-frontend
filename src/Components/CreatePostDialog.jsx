@@ -141,8 +141,6 @@ const CreatePostDialog = forwardRef((props, ref) => {
       formData.append("image", fileInputRef.current.files[0]);
     }
 
-
-
     if (selectedGif) {
       formData.append("gif", selectedGif.images.original.url);
     }
@@ -261,8 +259,8 @@ const CreatePostDialog = forwardRef((props, ref) => {
                 {postContent.length}/300
               </span>
             )}
-             <button
-              className="bg-btn-blue px-6 py-1 rounded-full text-base font-bold hover:bg-[#1A8CD8] text-white flex items-center justify-center gap-2 text-center"
+            <button
+              className="bg-x-white px-6 py-1 rounded-full text-base font-bold hover:bg-x-white/80 text-black flex items-center justify-center gap-2 text-center"
               disabled={
                 isLoading ||
                 (postContent.trim() === "" && !selectedImage && !selectedGif)
@@ -272,7 +270,6 @@ const CreatePostDialog = forwardRef((props, ref) => {
                 <>
                   {"Posting..."}
                   <Loader2 className=" h-4 w-4 animate-spin" />
-
                 </>
               ) : (
                 "Post"

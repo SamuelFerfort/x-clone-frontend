@@ -13,7 +13,7 @@ const EditProfileForm = ({ dialogRef }) => {
   const [bio, setBio] = useState(user.about || "");
   const [username, setUsername] = useState(user.username);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState(null)
+  const [error, setError] = useState(null);
   const bannerFileRef = useRef(null);
   const avatarFileRef = useRef(null);
 
@@ -22,13 +22,13 @@ const EditProfileForm = ({ dialogRef }) => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setError(null)
+    setError(null);
     const formData = new FormData();
 
-    if(username.length === 0) {
-      setIsSubmitting(false)
-      setError("Username required")
-      return
+    if (username.length === 0) {
+      setIsSubmitting(false);
+      setError("Username required");
+      return;
     }
 
     if (selectedBanner) {
@@ -39,7 +39,7 @@ const EditProfileForm = ({ dialogRef }) => {
       formData.append("avatar", avatarFileRef.current.files[0]);
     }
 
-    if (username !== user.username ) {
+    if (username !== user.username) {
       formData.append("username", username);
     }
 
@@ -102,31 +102,32 @@ const EditProfileForm = ({ dialogRef }) => {
     <form onSubmit={handleFormSubmit}>
       <header className="flex justify-between items-center  ">
         <div className=" p-1  hover:bg-gray-hover rounded-full hover:scale-110">
-        <X
-          className="cursor-pointer rounded-full z-20"
-          color="white"
-          size={20}
-          onClick={() => {
-            dialogRef.current?.close();
-          }}
-        />
+          <X
+            className="cursor-pointer rounded-full z-20"
+            color="white"
+            size={20}
+            onClick={() => {
+              dialogRef.current?.close();
+            }}
+          />
         </div>
-     
+
         <h1 className="text-white text-xl ml-4 font-bold mr-auto">
           Edit Profile
         </h1>
         <button
           type="submit"
           disabled={isSubmitting}
-          className="  bg-white hover:bg-white/80 font-bold text-sm rounded-full px-5 py-[5px] flex items-center justify-center gap-2"
+          className="  bg-x-white hover:bg-x-white/80 font-bold text-sm rounded-full px-5 py-[5px] flex items-center justify-center gap-2"
         >
-          {isSubmitting ? 
-          <>
-          {"Saving..."}
-          <Loader2 className=" h-3.5 w-3.5 animate-spin" />
-
-          </>
-           : "Save"}
+          {isSubmitting ? (
+            <>
+              {"Saving..."}
+              <Loader2 className=" h-3.5 w-3.5 animate-spin" />
+            </>
+          ) : (
+            "Save"
+          )}
         </button>
       </header>
       <main>
@@ -217,7 +218,9 @@ const EditProfileForm = ({ dialogRef }) => {
           isTextArea
         />
         {profileMutation.error && (
-          <span className="text-red-500 text-sm italic">{profileMutation.error.message}</span>
+          <span className="text-red-500 text-sm italic">
+            {profileMutation.error.message}
+          </span>
         )}
       </main>
     </form>

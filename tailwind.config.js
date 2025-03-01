@@ -9,8 +9,10 @@ export default {
       xl: "1280px",
       "2xl": "1536px",
     },
+
     extend: {
       colors: {
+        "x-white": "#EFF3F4",
         "btn-blue": "#1D9BF0",
         "gray-hover": "#181818",
         "red-like": "#F91880",
